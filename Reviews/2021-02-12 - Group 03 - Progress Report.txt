@@ -1,0 +1,8 @@
+This week we expected to be able to think ideas for the topic of the database.
+=========================================
+This week we did a brainstorm of topics and thought better about one of them, a Hospital Database.
+---------------------
+We thought about the big quantity of prymary keys that a hospital database can have, such as doctor, specialist, patient, surgeon, contract, operation, other worker...
+========================
+Next weeks we will define the features and start with the UML, following the suggested progress.
+========================
