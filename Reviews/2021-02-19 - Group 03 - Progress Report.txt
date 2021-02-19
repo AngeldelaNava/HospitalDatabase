@@ -1,8 +1,8 @@
 This week we expected to define the features and start with the UML, following the suggested progress.
 =========================================
-This week we did the UML schema, the UML tables and started the case diagram.
+This week we did the UML schema, the UML tables, created the repository and started the case diagram.
 ------------------------
 We stablished the base of our project as well as the 5 main clases. However, we didn't have time to define the features.
 ========================
-Next weeks we will define the features, create the repository, add all the Progress Reports and all the schemas, finish the case diagram and learn how to use GitHub.
+Next weeks we will define the features,  add all the Progress Reports and all the schemas and finish the case diagram.
 ========================
