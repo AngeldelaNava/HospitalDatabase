@@ -1,0 +1,7 @@
+This week we expected to define the features, add all the Progress Reports and all the schemas and finish the case diagram.
+============================
+This week we finished the E-R diagram, revised and did it again, start the new tables and finished the use-case diagram
+---------------------------------
+We had problems with the heritance, so we had to make big changes.
+===================
+Next weeks we will finish all tables and start with the SQL for the table.
