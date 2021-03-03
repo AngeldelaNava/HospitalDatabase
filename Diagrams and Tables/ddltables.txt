@@ -26,12 +26,13 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 diseaseName TEXT NOT NULL,
 prescription TEXT NOT NULL)
 
-CREATE TABLE Operation(
+CREATE TABLE Appointment(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 patientId INTEGER REFERENCES Patient(id) ON UPDATE CASCADE ON DELETE CASCADE,
-intervention TEXT NOT NULL,
+type TEXT NOT NULL,
+intervention TEXT,
 dateAndTimeStart DATE NOT NULL,
-success BOOLEAN NOT NULL)
+success BOOLEAN)
 
 CREATE TABLE PatientDisease(
 patientId REFERENCES Patient(id),
@@ -43,7 +44,7 @@ patientId REFERENCES Patient(id),
 workerId REFERENCES Worker(id),
 PRIMARY KEY(patientId, workerId))
 
-CREATE TABLE OperationWorker(
-operationId REFERENCES Operation(id),
+CREATE TABLE AppointmentWorker(
+appointmentId REFERENCES Appointment(id),
 workerId REFERENCES Worker(id),
-PRIMARY KEY(operationId, workerId))
+PRIMARY KEY(appointmentId, workerId))
