@@ -1,0 +1,49 @@
+CREATE TABLE Worker(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+type TEXT NOT NULL,
+jobInTheHospital TEXT,
+diseaseThatInvestigates TEXT,
+externCompany TEXT,
+project TEXT)
+
+CREATE TABLE Contract(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+salary INTEGER NOT NULL,
+hireDate DATE NOT NULL,
+dateOfEnd DATE NOT NULL,
+staffId INTEGER REFERENCES Worker(id) ON UPDATE CASCADE ON DELETE CASCADE)
+
+CREATE TABLE Patient(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+name TEXT NOT NULL,
+gender TEXT NOT NULL,
+bloodGroup TEXT NOT NULL,
+roomNumber INTEGER)
+
+CREATE TABLE Disease(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+diseaseName TEXT NOT NULL,
+prescription TEXT NOT NULL)
+
+CREATE TABLE Operation(
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+patientId INTEGER REFERENCES Patient(id) ON UPDATE CASCADE ON DELETE CASCADE,
+intervention TEXT NOT NULL,
+dateAndTimeStart DATE NOT NULL,
+success BOOLEAN NOT NULL)
+
+CREATE TABLE PatientDisease(
+patientId REFERENCES Patient(id),
+diseaseId REFERENCES Disease(id),
+PRIMARY KEY(patientId, diseaseId))
+
+CREATE TABLE PatientWorker(
+patientId REFERENCES Patient(id),
+workerId REFERENCES Worker(id),
+PRIMARY KEY(patientId, workerId))
+
+CREATE TABLE OperationWorker(
+operationId REFERENCES Operation(id),
+workerId REFERENCES Worker(id),
+PRIMARY KEY(operationId, workerId))
