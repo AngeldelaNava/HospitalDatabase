@@ -32,6 +32,7 @@ patientId INTEGER REFERENCES Patient(id) ON UPDATE CASCADE ON DELETE CASCADE,
 type TEXT NOT NULL,
 intervention TEXT,
 dateAndTimeStart DATE NOT NULL,
+duration INTEGER,
 success BOOLEAN)
 
 CREATE TABLE PatientDisease(
