@@ -1,0 +1,5 @@
+This week we expected to finish all tables and start with the SQL for the table.
+============================
+This week we finished all tables, create the DDL code (not try), start pojos and make the menu.
+===================
+Next weeks we will try de DDL and start proggraming.
