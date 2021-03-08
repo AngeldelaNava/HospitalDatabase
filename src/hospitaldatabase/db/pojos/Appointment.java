@@ -10,7 +10,7 @@ public class Appointment implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1077803972062837560L;
-	private int id;
+	private Integer id;
 	private String type;
 	private String intervention;
 	private Date dateAndTimeStart;

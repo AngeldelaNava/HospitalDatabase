@@ -9,7 +9,7 @@ public class Contract implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1077803972062837560L;
-	private int id;
+	private Integer id;
 	private int salary;
 	private Date hireDate;
 	private Date dateOfEnd;
