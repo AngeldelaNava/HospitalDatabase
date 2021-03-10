@@ -9,7 +9,7 @@ public class Disease implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1077803972062837560L;
-	private int id;
+	private Integer id;
 	private String diseaseName;
 	private String prescripition;
 	private List<Worker> workers;
