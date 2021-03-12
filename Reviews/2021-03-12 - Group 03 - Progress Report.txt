@@ -1,0 +1,7 @@
+This week we expected to try thee DDL and start proggraming.
+============================
+This week we tried the tables in DB Browser with success, made the GUI-MOCKUP and fixed pojos classes.
+-------------------
+We changed all pojos id ints to Integers.
+===================
+Next weeks we expect to prepare the midterm presentation and think about UML class diagram.
