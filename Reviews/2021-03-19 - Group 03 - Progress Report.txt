@@ -1,0 +1,5 @@
+This week we expected to prepare the midterm presentation and think about UML class diagram.
+============================
+This week we prepared the midterm presentation power point, finished and fixed previous steps, since we made some corrections in the tables, the menu and G-mock up.
+===================
+Next weeks we expect to do the UML diagram as well as the DML code.
