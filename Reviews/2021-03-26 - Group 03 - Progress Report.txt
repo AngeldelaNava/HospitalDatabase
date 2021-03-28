@@ -1,0 +1,5 @@
+This week we expected to do the UML diagram as well as the DML code.
+============================
+This week we finished the midterm presentation power point and fixed previous steps.
+===================
+Next week we expect to do the UML diagram as well as the DML code.
