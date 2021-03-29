@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
+import hospitaldatabase.db.pojos.Appointment;
+import hospitaldatabase.db.pojos.Contract;
+import hospitaldatabase.db.pojos.Patient;
+import hospitaldatabase.db.pojos.Worker;
 
 public class HospitalJDBCManager implements HospitalDBManager {
 
@@ -98,6 +103,66 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void addWorker(Worker w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Worker getWorker(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Worker> searchWorkerByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addContract(Contract c) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Contract getContract(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addPatient(Patient p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Patient getPatient(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Patient> searchPatientByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addAppointment(Appointment a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Appointment getAppointment(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
