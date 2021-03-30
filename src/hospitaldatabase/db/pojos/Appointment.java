@@ -2,6 +2,7 @@ package hospitaldatabase.db.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public class Appointment implements Serializable{
@@ -13,28 +14,30 @@ public class Appointment implements Serializable{
 	private Integer id;
 	private String type;
 	private String intervention;
-	private Date dateAndTimeStart;
+	private Date dateStart;
+	private Time timeStart;
 	private int duration;
 	private boolean success;
 	private Patient patient;
 	private List<Worker> workers;
-	public Appointment(int id, String type, String intervention, Date dateAndTimeStart, int duration, boolean success,
+	public Appointment(int id, String type, String intervention, Date dateStart, Time timeStart, int duration, boolean success,
 			Patient patient, List<Worker> workers) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.intervention = intervention;
-		this.dateAndTimeStart = dateAndTimeStart;
+		this.dateStart = dateStart;
+		this.timeStart = timeStart;
 		this.duration = duration;
 		this.success = success;
 		this.patient = patient;
 		this.workers = workers;
 	}
-	public Appointment(int id, String type, Date dateAndTimeStart, Patient patient, List<Worker> workers) {
+	public Appointment(int id, String type, Date dateStart, Patient patient, List<Worker> workers) {
 		super();
 		this.id = id;
 		this.type = type;
-		this.dateAndTimeStart = dateAndTimeStart;
+		this.dateStart = dateStart;
 		this.patient = patient;
 		this.workers = workers;
 	}
@@ -56,11 +59,17 @@ public class Appointment implements Serializable{
 	public void setIntervention(String intervention) {
 		this.intervention = intervention;
 	}
-	public Date getDateAndTimeStart() {
-		return dateAndTimeStart;
+	public Date getDateStart() {
+		return dateStart;
 	}
-	public void setDateAndTimeStart(Date dateAndTimeStart) {
-		this.dateAndTimeStart = dateAndTimeStart;
+	public void setDateStart(Date dateStart) {
+		this.dateStart = dateStart;
+	}
+	public Time getTimeStart() {
+		return timeStart;
+	}
+	public void setTimeStart(Time timeStart) {
+		this.timeStart = timeStart;
 	}
 	public int getDuration() {
 		return duration;
@@ -88,8 +97,8 @@ public class Appointment implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Appointment [id=" + id + ", type=" + type + ", intervention=" + intervention + ", dateAndTimeStart="
-				+ dateAndTimeStart + ", duration=" + duration + ", success=" + success + ", patient=" + patient
+		return "Appointment [id=" + id + ", type=" + type + ", intervention=" + intervention + ", dateStart="
+				+ dateStart + ", timeStart="+ timeStart + ", duration=" + duration + ", success=" + success + ", patient=" + patient
 				+ ", workers=" + workers + "]";
 	}
 	

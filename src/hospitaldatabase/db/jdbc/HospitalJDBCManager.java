@@ -1,14 +1,17 @@
 package hospitaldatabase.db.jdbc;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.util.List;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.pojos.Appointment;
 import hospitaldatabase.db.pojos.Contract;
+import hospitaldatabase.db.pojos.Disease;
 import hospitaldatabase.db.pojos.Patient;
 import hospitaldatabase.db.pojos.Worker;
 
@@ -70,7 +73,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " patientId INTEGER REFERENCES Patient(id) ON UPDATE CASCADE ON DELETE CASCADE, "
 					+ " type TEXT NOT NULL, "
 					+ " intervention TEXT, "
-					+ " dateAndTimeStart DATE NOT NULL, "
+					+ " dateStart DATE NOT NULL, "
+					+ " timeStart TIME NOT NULL, "
 					+ " duration INTEGER, "
 					+ " success BOOLEAN)";
 			stmnt.executeUpdate(sql);
@@ -163,6 +167,126 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	public Appointment getAppointment(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void setWorker(Worker w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteWorker(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Patient> checkListOfPatients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setPatient(Patient p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deletePatient(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Appointment> searchAppointmentByDateAndTime(Date date, Time time) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Appointment> searchAppointmentByDate(Date date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Appointment> searchAppointmentByType(String type) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setAppointment(Appointment a) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteAppointment(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addProject(String p, Worker w) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getProject(int workerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setProject(int workerId, String project) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteProject(int workerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addDisease(Disease d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Disease getDisease(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Disease> searchDiseaseByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Disease> searchDiseaseByPatient(int patientId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setDisease(Disease d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteDisease(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
