@@ -454,62 +454,150 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void addProject(String p, Worker w) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "UPDATE Worker SET project = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, w.getProject());
+			prep.executeUpdate();
+			prep.close();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}	
 	}
 
 	@Override
 	public String getProject(int workerId) {
-		// TODO Auto-generated method stub
-		return null;
+		String p = null;
+		try {
+			String sql = "SELECT * FROM Worker WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, workerId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				p = rs.getString("project");			
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	@Override
-	public void setProject(int workerId, String project) {
-		// TODO Auto-generated method stub
-		
+	public void setProject(String project, Worker w) {
+		try {
+			String sql = "UPDATE Worker SET project = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, w.getProject());
+			prep.executeUpdate();
+			prep.close();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}	
 	}
 
 	@Override
-	public void deleteProject(int workerId) {
-		// TODO Auto-generated method stub
-		
+	public void deleteProject(Worker w) {
+		try {
+			String sql = "UPDATE Worker SET project = null";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, w.getProject());
+			prep.executeUpdate();
+			prep.close();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}	
 	}
 
 	@Override
 	public void addDisease(Disease d) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO Disease (id, diseaseName, prescription) VALUES (?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, d.getId());
+			prep.setString(2, d.getDiseaseName());
+			prep.setString(3, d.getPrescripition());
+			prep.executeUpdate();
+			prep.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Disease getDisease(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Disease d = null;
+		try {
+			String sql = "SELECT * FROM Disease WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String diseaseName = rs.getString("diseaseName");
+				String prescription = rs.getString("prescription");
+				d = new Disease(id, diseaseName, prescription, null, null) ;
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return d;
 	}
 
 	@Override
-	public List<Disease> searchDiseaseByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Disease searchDiseaseByName(String name) {
+		Disease d = null;
+		try {
+			String sql = "SELECT * FROM Disease WHERE diseaseName LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				Integer id = rs.getInt("id");
+				String prescription = rs.getString("prescription");
+				d= new Disease(id, name, prescription, null, null);
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return d ;
 	}
 
 	@Override
 	public List<Disease> searchDiseaseByPatient(int patientId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setDisease(Disease d, int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "UPDATE Disease SET id = ?, diseaseName = ?, prescription = ? WHERE ID = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, d.getId());
+			prep.setString(2, d.getDiseaseName());
+			prep.setString(3, d.getPrescripition());
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void deleteDisease(int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "DELETE FROM Appointment WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

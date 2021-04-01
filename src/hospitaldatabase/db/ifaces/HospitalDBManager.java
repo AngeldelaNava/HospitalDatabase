@@ -37,12 +37,12 @@ public interface HospitalDBManager {
 	
 	public void addProject(String p, Worker w);
 	public String getProject(int workerId);
-	public void setProject(int workerId, String project);
-	public void deleteProject(int workerId);
+	public void setProject(String project, Worker w);
+	public void deleteProject(Worker w);
 	
 	public void addDisease(Disease d);
 	public Disease getDisease(int id);
-	public List<Disease> searchDiseaseByName(String name);
+	public Disease searchDiseaseByName(String name);
 	public List<Disease> searchDiseaseByPatient(int patientId);
 	public void setDisease(Disease d, int id);
 	public void deleteDisease(int id);
