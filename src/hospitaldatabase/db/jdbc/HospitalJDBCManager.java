@@ -115,15 +115,14 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addWorker(Worker w) {
 		try {
-			String sql = "INSERT INTO Worker (id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Worker (name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, w.getId());
-			prep.setString(2, w.getName());
-			prep.setString(3, w.getType());
-			prep.setString(4, w.getJobInTheHospital());
-			prep.setString(5, w.getDiseaseThatInvestigates());
-			prep.setString(6, w.getExternCompany());
-			prep.setString(7, w.getProject());
+			prep.setString(1, w.getName());
+			prep.setString(2, w.getType());
+			prep.setString(3, w.getJobInTheHospital());
+			prep.setString(4, w.getDiseaseThatInvestigates());
+			prep.setString(5, w.getExternCompany());
+			prep.setString(6, w.getProject());
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -290,15 +289,15 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE Worker SET workerId = ?, name = ?, type = ?, jobInTheHospital = ?, diseaseThatInvestigates = ?, externCompany = ?, project = ?";
+			String sql = "UPDATE Worker SET name = ?, type = ?, jobInTheHospital = ?, diseaseThatInvestigates = ?, externCompany = ?, project = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, w.getId());
-			prep.setString(2, w.getName());
-			prep.setString(3, w.getType());
-			prep.setString(4, w.getJobInTheHospital());
-			prep.setString(5, w.getDiseaseThatInvestigates());
-			prep.setString(6, w.getExternCompany());
-			prep.setString(7, w.getProject());
+			prep.setString(1, w.getName());
+			prep.setString(2, w.getType());
+			prep.setString(3, w.getJobInTheHospital());
+			prep.setString(4, w.getDiseaseThatInvestigates());
+			prep.setString(5, w.getExternCompany());
+			prep.setString(6, w.getProject());
+			prep.setInt(7, id);
 			prep.executeUpdate();
 			prep.close();
 	}catch(SQLException e) {
@@ -422,15 +421,16 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setAppointment(Appointment a, int id) {
 		try {
-			String sql = "UPDATE Appointment SET patientId = ?, type = ?, intervention = ?, dateStart = ?, timeStart = ?, duration = ?, success = ?";
+			String sql = "UPDATE Appointment SET patientId = ?, type = ?, intervention = ?, dateStart = ?, timeStart = ?, duration = ?, success = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, a.getId());
+			prep.setInt(1, a.getPatient().getId());
 			prep.setString(2, a.getType());
 			prep.setString(3, a.getIntervention());
 			prep.setDate(4, a.getDateStart());
 			prep.setTime(5, a.getTimeStart());
 			prep.setInt(6, a.getDuration());
 			prep.setBoolean(7, a.isSuccess());
+			prep.setInt(8, id);
 			prep.executeUpdate();
 			prep.close();
 		}catch(SQLException e) {
