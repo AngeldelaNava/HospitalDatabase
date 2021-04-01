@@ -3,9 +3,12 @@ package hospitaldatabase.db.jdbc;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
@@ -159,18 +162,52 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void addAppointment(Appointment a) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO Appointment (patientId, type, intervention, dateStart, timeStart, duration, success) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, a.getPatient().getId());
+			prep.setString(2, a.getType());
+			prep.setString(3, a.getIntervention());
+			prep.setDate(4, a.getDateStart());
+			prep.setTime(5, a.getTimeStart());
+			prep.setInt(6, a.getDuration());
+			prep.setBoolean(7, a.isSuccess());
+			prep.executeUpdate();
+			prep.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Appointment getAppointment(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Appointment a = null;
+		try {
+			String sql = "SELECT * FROM Appointment WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String type = rs.getString("type");
+				String intervention = rs.getString("intervention");
+				Date dateStart = rs.getDate("dateStart");
+				Time timeStart = rs.getTime("timeStart");
+				int duration = rs.getInt("duration");
+				boolean success = rs.getBoolean("success");
+				int patientId = rs.getInt("patientId");
+				Patient patient = getPatient(patientId);
+				a = new Appointment(id, type, intervention, dateStart, timeStart, duration, success, patient, null);
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
-	public void setWorker(Worker w) {
+	public void setWorker(Worker w, int id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -188,7 +225,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void setPatient(Patient p) {
+	public void setPatient(Patient p, int id) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -201,31 +238,115 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public List<Appointment> searchAppointmentByDateAndTime(Date date, Time time) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Appointment> a = new ArrayList<Appointment>();
+		try {
+			String sql = "SELECT * FROM Appointment WHERE dateStart = ? AND timeStart = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setDate(1, date);
+			prep.setTime(2, time);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String type = rs.getString("type");
+				String intervention = rs.getString("intervention");
+				int duration = rs.getInt("duration");
+				boolean success = rs.getBoolean("success");
+				int patientId = rs.getInt("patientId");
+				Patient patient = getPatient(patientId);
+				a.add(new Appointment(id, type, intervention, date, time, duration, success, patient, null));
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
 	public List<Appointment> searchAppointmentByDate(Date date) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Appointment> a = new ArrayList<Appointment>();
+		try {
+			String sql = "SELECT * FROM Appointment WHERE dateStart = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setDate(1, date);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String type = rs.getString("type");
+				String intervention = rs.getString("intervention");
+				Time timeStart = rs.getTime("timeStart");
+				int duration = rs.getInt("duration");
+				boolean success = rs.getBoolean("success");
+				int patientId = rs.getInt("patientId");
+				Patient patient = getPatient(patientId);
+				a.add(new Appointment(id, type, intervention, date, timeStart, duration, success, patient, null));
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
 	public List<Appointment> searchAppointmentByType(String type) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Appointment> a = new ArrayList<Appointment>();
+		try {
+			String sql = "SELECT * FROM Appointment WHERE type LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + type + "%");
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String intervention = rs.getString("intervention");
+				Date dateStart = rs.getDate("dateStart");
+				Time timeStart = rs.getTime("timeStart");
+				int duration = rs.getInt("duration");
+				boolean success = rs.getBoolean("success");
+				int patientId = rs.getInt("patientId");
+				Patient patient = getPatient(patientId);
+				a.add(new Appointment(id, type, intervention, dateStart, timeStart, duration, success, patient, null));
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return a;
 	}
 
 	@Override
-	public void setAppointment(Appointment a) {
-		// TODO Auto-generated method stub
-		
+	public void setAppointment(Appointment a, int id) {
+		try {
+			String sql = "UPDATE Appointment SET patientId = ?, type = ?, intervention = ?, dateStart = ?, timeStart = ?, duration = ?, success = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, a.getId());
+			prep.setString(2, a.getType());
+			prep.setString(3, a.getIntervention());
+			prep.setDate(4, a.getDateStart());
+			prep.setTime(5, a.getTimeStart());
+			prep.setInt(6, a.getDuration());
+			prep.setBoolean(7, a.isSuccess());
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void deleteAppointment(int id) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "DELETE FROM Appointment WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -278,7 +399,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void setDisease(Disease d) {
+	public void setDisease(Disease d, int id) {
 		// TODO Auto-generated method stub
 		
 	}

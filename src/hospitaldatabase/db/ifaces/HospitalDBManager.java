@@ -14,7 +14,7 @@ public interface HospitalDBManager {
 	public void addWorker(Worker w);
 	public Worker getWorker(int id);
 	public List<Worker> searchWorkerByName(String name);
-	public void setWorker(Worker w);
+	public void setWorker(Worker w, int id);
 	public void deleteWorker(int id);
 	
 	public void addContract(Contract c);
@@ -24,7 +24,7 @@ public interface HospitalDBManager {
 	public Patient getPatient(int id);
 	public List<Patient> searchPatientByName(String name);
 	public List<Patient> checkListOfPatients();
-	public void setPatient(Patient p);
+	public void setPatient(Patient p, int id);
 	public void deletePatient(int id);
 	
 	public void addAppointment(Appointment a);
@@ -32,7 +32,7 @@ public interface HospitalDBManager {
 	public List<Appointment> searchAppointmentByDateAndTime(Date date, Time time);
 	public List<Appointment> searchAppointmentByDate(Date date);
 	public List<Appointment> searchAppointmentByType(String type);
-	public void setAppointment(Appointment a);
+	public void setAppointment(Appointment a, int id);
 	public void deleteAppointment(int id);
 	
 	public void addProject(String p, Worker w);
@@ -44,6 +44,6 @@ public interface HospitalDBManager {
 	public Disease getDisease(int id);
 	public List<Disease> searchDiseaseByName(String name);
 	public List<Disease> searchDiseaseByPatient(int patientId);
-	public void setDisease(Disease d);
+	public void setDisease(Disease d, int id);
 	public void deleteDisease(int id);
 }
