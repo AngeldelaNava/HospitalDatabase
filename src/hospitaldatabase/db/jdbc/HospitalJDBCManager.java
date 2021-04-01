@@ -114,32 +114,113 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void addWorker(Worker w) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO Worker (id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, w.getId());
+			prep.setString(2, w.getName());
+			prep.setString(3, w.getType());
+			prep.setString(4, w.getJobInTheHospital());
+			prep.setString(5, w.getDiseaseThatInvestigates());
+			prep.setString(6, w.getExternCompany());
+			prep.setString(7, w.getProject());
+			prep.executeUpdate();
+			prep.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Worker getWorker(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Worker> searchWorkerByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void addContract(Contract c) {
-		// TODO Auto-generated method stub
+		Worker w = null; 
+		try {
+			String sql = "SELECT * FROM Worker WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				String jobInTheHospital = rs.getString("jobInTheHospital");
+				String diseaseThatInvestigates = rs.getString("diseaseThatInvestigates");
+				String externCompany = rs.getString("externCompany");
+				String project = rs.getString("project");
+				w = new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null);
+			
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return w;
 		
 	}
 
 	@Override
+	public List<Worker> searchWorkerByName(String name) {
+		List<Worker> w = new ArrayList<Worker>();
+		try {
+			String sql = "SELECT * FROM Worker WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String type = rs.getString("type");
+				String jobInTheHospital = rs.getString("jobInTheHospital");
+				String diseaseThatInvestigates = rs.getString("diseaseThatInvestigates");
+				String externCompany = rs.getString("externCompany");
+				String project = rs.getString("project");
+				w.add(new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null));
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return w;
+	}
+
+	@Override
+	public void addContract(Contract ct) {
+		try {
+			String sql = "INSERT INTO Contract (salary, hireDate, endDate, staffId) VALUES (?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, ct.getSalary());
+			prep.setDate(2, ct.getHireDate());
+			prep.setDate(3, ct.getDateOfEnd());
+			prep.setInt(4, ct.getWorker().getId());
+			prep.executeUpdate();
+			prep.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public Contract getContract(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Contract ct = null;
+		try {
+			String sql = "SELECT * FROM Contract WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				int salary = rs.getInt("salary");
+				Date hireDate = rs.getDate("hireDate");
+				Date endDate = rs.getDate("endDate");
+				int workerId = rs.getInt("workerId");
+				Worker worker = getWorker(workerId);
+				ct = new Contract(id, salary, hireDate, endDate, worker);
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return ct;
 	}
 
 	@Override
@@ -208,14 +289,35 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void setWorker(Worker w, int id) {
-		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE Worker SET workerId = ?, name = ?, type = ?, jobInTheHospital = ?, diseaseThatInvestigates = ?, externCompany = ?, project = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, w.getId());
+			prep.setString(2, w.getName());
+			prep.setString(3, w.getType());
+			prep.setString(4, w.getJobInTheHospital());
+			prep.setString(5, w.getDiseaseThatInvestigates());
+			prep.setString(6, w.getExternCompany());
+			prep.setString(7, w.getProject());
+			prep.executeUpdate();
+			prep.close();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
 		
 	}
 
 	@Override
 	public void deleteWorker(int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "DELETE FROM Worker WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+			prep.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override
