@@ -469,7 +469,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	public String getProject(int workerId) {
 		String p = null;
 		try {
-			String sql = "SELECT * FROM Worker WHERE id = ?";
+			String sql = "SELECT project FROM Worker WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, workerId);
 			ResultSet rs = prep.executeQuery();
@@ -485,11 +485,12 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void setProject(String project, Worker w) {
+	public void setProject(String project, int id) {//He cambiado el parametro de worker por su id, en el setString he metido el String que entra como parámetro y he puesto un wher para ponerlo en la persona que querem0s según su id
 		try {
-			String sql = "UPDATE Worker SET project = ?";
+			String sql = "UPDATE Worker SET project = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, w.getProject());
+			prep.setString(1, project);
+			prep.setInt(2, id);
 			prep.executeUpdate();
 			prep.close();
 	}catch(SQLException e) {
