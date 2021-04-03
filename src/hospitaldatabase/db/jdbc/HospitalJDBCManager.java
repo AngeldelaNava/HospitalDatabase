@@ -499,11 +499,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void deleteProject(Worker w) {
+	public void deleteProject(int workerId) {
 		try {
-			String sql = "UPDATE Worker SET project = null";
+			String sql = "UPDATE Worker SET project = NULL WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, w.getProject());
+			prep.setInt(1, workerId);
 			prep.executeUpdate();
 			prep.close();
 	}catch(SQLException e) {
