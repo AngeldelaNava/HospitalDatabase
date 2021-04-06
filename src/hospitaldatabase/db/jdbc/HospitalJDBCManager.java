@@ -224,21 +224,71 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void addPatient(Patient p) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO Patient (name, gender, bloodGroup, roomNumber) VALUES (?, ?, ?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, p.getName());
+			prep.setString(2, p.getGender());
+			prep.setString(3, p.getBloodGroup());
+			prep.setInt(4, p.getRoomNumber());
+			prep.executeUpdate();
+			prep.close();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	}
 
 	@Override
 	public Patient getPatient(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Patient p = null; 
+		try {
+			String sql = "SELECT * FROM Patient WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+				String bloodGroup = rs.getString("bloodGroup");
+				int roomNumber = rs.getInt("roomNumber");
+				
+				p = new Patient(id, name, gender, bloodGroup, roomNumber,null, null, null);
+			
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
 
 	@Override
 	public List<Patient> searchPatientByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Patient> p = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM Patient WHERE name LIKE ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, "%" + name + "%");
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Integer id = rs.getInt("id");
+				String gender = rs.getString("gender");
+				String bloodGroup = rs.getString("bloodGroup");
+				int roomNumber = rs.getInt("roomNumber");
+				String externCompany = rs.getString("externCompany");
+				String project = rs.getString("project");
+				p.add(new Patient(id, name, gender, bloodGroup, roomNumber, null, null, null));
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
 	}
+	
 
 	@Override
 	public void addAppointment(Appointment a) {
@@ -327,15 +377,36 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void setPatient(Patient p, int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "UPDATE Patient SET name = ?, gender = ?, bloodGroup = ?, roomNumber = ?, WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setString(1, p.getName());
+			prep.setString(2, p.getGender());
+			prep.setString(3, p.getBloodGroup());
+			prep.setInt(4, p.getRoomNumber());
+			prep.setInt(5, id);
+			prep.executeUpdate();
+			prep.close();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}
+	
 	}
 
 	@Override
 	public void deletePatient(int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "DELETE FROM Patient WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, id);
+			prep.executeUpdate();
+			prep.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
 	}
+		
+	
 
 	@Override
 	public List<Appointment> searchAppointmentByDateAndTime(Date date, Time time) {
@@ -452,18 +523,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		
 	}
 
-	@Override
-	public void addProject(String p, Worker w) {
-		try {
-			String sql = "UPDATE Worker SET project = ?";
-			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setString(1, w.getProject());
-			prep.executeUpdate();
-			prep.close();
-	}catch(SQLException e) {
-		e.printStackTrace();
-	}	
-	}
 
 	@Override
 	public String getProject(int workerId) {
@@ -571,7 +630,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	public List<Disease> searchDiseaseByPatient(int patientId) {
 		return null;
 	}
-
+	
+	//hacer 
+	
 	@Override
 	public void setDisease(Disease d, int id) {
 		try {
