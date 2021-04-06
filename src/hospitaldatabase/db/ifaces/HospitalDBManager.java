@@ -35,7 +35,6 @@ public interface HospitalDBManager {
 	public void setAppointment(Appointment a, int id);
 	public void deleteAppointment(int id);
 	
-	public void addProject(String p, Worker w);
 	public String getProject(int workerId);
 	public void setProject(String project, int id);
 	public void deleteProject(int workerId);

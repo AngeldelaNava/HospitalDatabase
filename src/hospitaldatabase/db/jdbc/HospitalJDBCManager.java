@@ -237,7 +237,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			e.printStackTrace();
 		}
 	}
-	}
 
 	@Override
 	public Patient getPatient(int id) {
@@ -629,10 +628,10 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public List<Disease> searchDiseaseByPatient(int patientId) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
-	//hacer 
 	
 	@Override
 	public void setDisease(Disease d, int id) {
@@ -661,5 +660,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }
