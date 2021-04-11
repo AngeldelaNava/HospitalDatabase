@@ -1,0 +1,7 @@
+This two weeks we expected to do the UML class diagram as well as the DML code.
+========================
+This 2 weeks we made the UML class diagram, the DML code in Java and did the midterm presentation.
+--------------
+UML Diagram and DML code aren't just finished.
+===================
+Next week we expect to finish the UML class diagram, the DML code and make updates on the table column names as our teacher advised us
