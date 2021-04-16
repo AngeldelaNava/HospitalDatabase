@@ -276,8 +276,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodGroup = rs.getString("bloodGroup");
 				int roomNumber = rs.getInt("roomNumber");
-				String externCompany = rs.getString("externCompany");
-				String project = rs.getString("project");
 				p.add(new Patient(id, name, gender, bloodGroup, roomNumber, null, null, null));
 			}
 			rs.close();
@@ -371,6 +369,18 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public List<Patient> checkListOfPatients() {
 		// TODO Auto-generated method stub
+		List<Patient> patients = new ArrayList<Patient>();
+		try {
+			String sql = "SELECT * FROM Patient";
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				Patient p = new Patient(rs.getInt("id"), rs.getString("name"));
+				
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
