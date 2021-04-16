@@ -12,8 +12,8 @@ public class Worker implements Serializable{
 	private Integer id;
 	private String name;
 	private String type;
-	private String jobInTheHospital;
-	private String diseaseThatInvestigates;
+	private String job;
+	private String disease;
 	private String externCompany;
 	private String project;
 	private Contract contract;
@@ -27,8 +27,8 @@ public class Worker implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.jobInTheHospital = jobInTheHospital;
-		this.diseaseThatInvestigates = diseaseThatInvestigates;
+		this.job = jobInTheHospital;
+		this.disease = diseaseThatInvestigates;
 		this.externCompany = externCompany;
 		this.project = project;
 		this.contract = contract;
@@ -42,7 +42,7 @@ public class Worker implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.diseaseThatInvestigates = diseaseThatInvestigates;
+		this.disease = diseaseThatInvestigates;
 		this.contract = contract;
 		this.appointments = appointments;
 		this.patients = patients;
@@ -54,7 +54,7 @@ public class Worker implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.type = type;
-		this.jobInTheHospital = jobInTheHospital;
+		this.job = jobInTheHospital;
 		this.externCompany = externCompany;
 		this.project = project;
 		this.contract = contract;
@@ -91,17 +91,17 @@ public class Worker implements Serializable{
 	public void setType(String type) {
 		this.type = type;
 	}
-	public String getJobInTheHospital() {
-		return jobInTheHospital;
+	public String getJob() {
+		return job;
 	}
-	public void setJobInTheHospital(String jobInTheHospital) {
-		this.jobInTheHospital = jobInTheHospital;
+	public void setJob(String job) {
+		this.job = job;
 	}
-	public String getDiseaseThatInvestigates() {
-		return diseaseThatInvestigates;
+	public String getDisease() {
+		return disease;
 	}
-	public void setDiseaseThatInvestigates(String diseaseThatInvestigates) {
-		this.diseaseThatInvestigates = diseaseThatInvestigates;
+	public void setDisease(String disease) {
+		this.disease = disease;
 	}
 	public String getExternCompany() {
 		return externCompany;
@@ -141,8 +141,8 @@ public class Worker implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Worker [id=" + id + ", name=" + name + ", type=" + type + ", jobInTheHospital=" + jobInTheHospital
-				+ ", diseaseThatInvestigates=" + diseaseThatInvestigates + ", externCompany=" + externCompany
+		return "Worker [id=" + id + ", name=" + name + ", type=" + type + ", job=" + job
+				+ ", disease=" + disease + ", externCompany=" + externCompany
 				+ ", project=" + project + ", contract=" + contract + ", appointments=" + appointments + ", patients="
 				+ patients + ", diseases=" + diseases + "]";
 	}

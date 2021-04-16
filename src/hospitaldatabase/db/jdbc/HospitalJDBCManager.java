@@ -119,8 +119,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
-			prep.setString(3, w.getJobInTheHospital());
-			prep.setString(4, w.getDiseaseThatInvestigates());
+			prep.setString(3, w.getJob());
+			prep.setString(4, w.getDisease());
 			prep.setString(5, w.getExternCompany());
 			prep.setString(6, w.getProject());
 			prep.executeUpdate();
@@ -229,7 +229,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
-			prep.setString(3, p.getBloodGroup());
+			prep.setString(3, p.getBloodType());
 			prep.setInt(4, p.getRoomNumber());
 			prep.executeUpdate();
 			prep.close();
@@ -340,8 +340,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
-			prep.setString(3, w.getJobInTheHospital());
-			prep.setString(4, w.getDiseaseThatInvestigates());
+			prep.setString(3, w.getJob());
+			prep.setString(4, w.getDisease());
 			prep.setString(5, w.getExternCompany());
 			prep.setString(6, w.getProject());
 			prep.setInt(7, id);
@@ -391,7 +391,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
-			prep.setString(3, p.getBloodGroup());
+			prep.setString(3, p.getBloodType());
 			prep.setInt(4, p.getRoomNumber());
 			prep.setInt(5, id);
 			prep.executeUpdate();

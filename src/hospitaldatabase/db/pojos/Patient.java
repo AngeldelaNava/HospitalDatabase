@@ -13,7 +13,7 @@ public class Patient implements Serializable{
 	private Integer id;
 	private String name;
 	private String gender;
-	private String bloodGroup;
+	private String bloodType;
 	private int roomNumber;
 	private List<Worker> workers;
 	private List<Disease> diseases;
@@ -24,7 +24,7 @@ public class Patient implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		this.bloodGroup = bloodGroup;
+		this.bloodType = bloodGroup;
 		this.roomNumber = roomNumber;
 		this.workers = workers;
 		this.diseases = diseases;
@@ -36,7 +36,7 @@ public class Patient implements Serializable{
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		this.bloodGroup = bloodGroup;
+		this.bloodType = bloodGroup;
 		this.workers = workers;
 		this.diseases = diseases;
 		this.appointment = appointment;
@@ -59,11 +59,11 @@ public class Patient implements Serializable{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getBloodGroup() {
-		return bloodGroup;
+	public String getBloodType() {
+		return bloodType;
 	}
-	public void setBloodGroup(String bloodGroup) {
-		this.bloodGroup = bloodGroup;
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
 	}
 	public int getRoomNumber() {
 		return roomNumber;
@@ -91,7 +91,7 @@ public class Patient implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Patient [id=" + id + ", name=" + name + ", gender=" + gender + ", bloodGroup=" + bloodGroup
+		return "Patient [id=" + id + ", name=" + name + ", gender=" + gender + ", bloodType=" + bloodType
 				+ ", roomNumber=" + roomNumber + ", workers=" + workers + ", diseases=" + diseases + ", appointment="
 				+ appointment + "]";
 	}
