@@ -375,13 +375,13 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				Patient p = new Patient(rs.getInt("id"), rs.getString("name"));
-				
+				Patient p = new Patient(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getString("bloodType"), rs.getInt("roomNumber"), null, null, null);
+				patients.add(p);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return patients;
 	}
 
 	@Override

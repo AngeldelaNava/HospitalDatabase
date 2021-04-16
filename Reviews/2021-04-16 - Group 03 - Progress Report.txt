@@ -1,0 +1,5 @@
+This week we expected to finish the UML class diagram, the DML code and make updates on the table column names as our teacher advised us
+==============================
+This week we made updates on the table column names, asked for JavaFX and organized the rest of the project.
+==============================
+Next weeks we expect to finish the DML methods and start doing the JavaFX for the graphic user interface.
