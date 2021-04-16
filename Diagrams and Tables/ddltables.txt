@@ -2,8 +2,8 @@ CREATE TABLE Worker(
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 name TEXT NOT NULL,
 type TEXT NOT NULL,
-jobInTheHospital TEXT,
-diseaseThatInvestigates TEXT,
+job TEXT,
+disease TEXT,
 externCompany TEXT,
 project TEXT)
 
@@ -19,7 +19,7 @@ id INTEGER PRIMARY KEY AUTOINCREMENT,
 name TEXT NOT NULL,
 gender TEXT NOT NULL,
 age INTEGER NOT NULL,
-bloodGroup TEXT NOT NULL,
+bloodType TEXT NOT NULL,
 roomNumber INTEGER)
 
 CREATE TABLE Disease(

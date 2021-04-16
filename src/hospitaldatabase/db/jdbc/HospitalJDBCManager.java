@@ -141,11 +141,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				String jobInTheHospital = rs.getString("job");
-				String diseaseThatInvestigates = rs.getString("disease");
+				String job = rs.getString("job");
+				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
-				w = new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null);
+				w = new Worker(id, name, type, job, disease, externCompany, project, null, null, null, null);
 			
 			}
 			rs.close();
@@ -168,11 +168,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String type = rs.getString("type");
-				String jobInTheHospital = rs.getString("job");
-				String diseaseThatInvestigates = rs.getString("disease");
+				String job = rs.getString("job");
+				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
-				w.add(new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null));
+				w.add(new Worker(id, name, type, job, disease, externCompany, project, null, null, null, null));
 			}
 			rs.close();
 			prep.close();
@@ -249,10 +249,10 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
-				String bloodGroup = rs.getString("bloodType");
+				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
 				
-				p = new Patient(id, name, gender, bloodGroup, roomNumber,null, null, null);
+				p = new Patient(id, name, gender, bloodType, roomNumber,null, null, null);
 			
 			}
 			rs.close();
@@ -274,9 +274,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String gender = rs.getString("gender");
-				String bloodGroup = rs.getString("bloodType");
+				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				p.add(new Patient(id, name, gender, bloodGroup, roomNumber, null, null, null));
+				p.add(new Patient(id, name, gender, bloodType, roomNumber, null, null, null));
 			}
 			rs.close();
 			prep.close();
