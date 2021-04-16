@@ -47,8 +47,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ " name TEXT NOT NULL, "
 					+ " type TEXT NOT NULL, "
-					+ " jobInTheHospital TEXT, "
-					+ " diseaseThatInvestigates TEXT, "
+					+ " job TEXT, "
+					+ " disease TEXT, "
 					+ " externCompany TEXT, "
 					+ " project TEXT) ";
 			stmnt.executeUpdate(sql);
@@ -63,7 +63,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
 					+ " name TEXT NOT NULL, "
 					+ " gender TEXT NOT NULL, "
-					+ " bloodGroup TEXT NOT NULL, "
+					+ " bloodType TEXT NOT NULL, "
 					+ " roomNumber INTEGER)";
 			stmnt.executeUpdate(sql);
 			sql = "CREATE TABLE Disease( "
@@ -115,7 +115,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addWorker(Worker w) {
 		try {
-			String sql = "INSERT INTO Worker (name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Worker (name, type, job, disease, externCompany, project) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
@@ -141,8 +141,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				String name = rs.getString("name");
 				String type = rs.getString("type");
-				String jobInTheHospital = rs.getString("jobInTheHospital");
-				String diseaseThatInvestigates = rs.getString("diseaseThatInvestigates");
+				String jobInTheHospital = rs.getString("job");
+				String diseaseThatInvestigates = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
 				w = new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null);
@@ -168,8 +168,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String type = rs.getString("type");
-				String jobInTheHospital = rs.getString("jobInTheHospital");
-				String diseaseThatInvestigates = rs.getString("diseaseThatInvestigates");
+				String jobInTheHospital = rs.getString("job");
+				String diseaseThatInvestigates = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
 				w.add(new Worker(id, name, type, jobInTheHospital, diseaseThatInvestigates, externCompany, project, null, null, null, null));
@@ -225,7 +225,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addPatient(Patient p) {
 		try {
-			String sql = "INSERT INTO Patient (name, gender, bloodGroup, roomNumber) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Patient (name, gender, bloodType, roomNumber) VALUES (?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
@@ -249,7 +249,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				String name = rs.getString("name");
 				String gender = rs.getString("gender");
-				String bloodGroup = rs.getString("bloodGroup");
+				String bloodGroup = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
 				
 				p = new Patient(id, name, gender, bloodGroup, roomNumber,null, null, null);
@@ -274,7 +274,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String gender = rs.getString("gender");
-				String bloodGroup = rs.getString("bloodGroup");
+				String bloodGroup = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
 				p.add(new Patient(id, name, gender, bloodGroup, roomNumber, null, null, null));
 			}
@@ -336,7 +336,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE Worker SET name = ?, type = ?, jobInTheHospital = ?, diseaseThatInvestigates = ?, externCompany = ?, project = ? WHERE id = ?";
+			String sql = "UPDATE Worker SET name = ?, type = ?, job = ?, disease = ?, externCompany = ?, project = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
@@ -387,7 +387,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setPatient(Patient p, int id) {
 		try {
-			String sql = "UPDATE Patient SET name = ?, gender = ?, bloodGroup = ?, roomNumber = ?, WHERE id = ?";
+			String sql = "UPDATE Patient SET name = ?, gender = ?, bloodType = ?, roomNumber = ?, WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
