@@ -18,6 +18,7 @@ import hospitaldatabase.db.pojos.Disease;
 import hospitaldatabase.db.pojos.Patient;
 import hospitaldatabase.db.pojos.Worker;
 
+
 public class HospitalJDBCManager implements HospitalDBManager {
 
 	private Connection c;
@@ -553,7 +554,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void setProject(String project, int id) {//He cambiado el parametro de worker por su id, en el setString he metido el String que entra como parámetro y he puesto un wher para ponerlo en la persona que querem0s según su id
+	public void setProject(String project, int id) {
 		try {
 			String sql = "UPDATE Worker SET project = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -605,7 +606,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				String diseaseName = rs.getString("diseaseName");
 				String prescription = rs.getString("prescription");
-				d = new Disease(id, diseaseName, prescription, null, null) ;
+				d = new Disease(id, diseaseName, prescription) ;
 			}
 			rs.close();
 			prep.close();
@@ -626,7 +627,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				Integer id = rs.getInt("id");
 				String prescription = rs.getString("prescription");
-				d= new Disease(id, name, prescription, null, null);
+				d= new Disease(id, name, prescription);
 			}
 			rs.close();
 			prep.close();
@@ -638,8 +639,22 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public List<Disease> searchDiseaseByPatient(int patientId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Disease> diseases = new ArrayList<Disease>();
+		String sql= "SELECT * FROM Disease AS d JOIN PatientDisease AS pd ON d.id= pd.diseaseId WHERE pd.patientId= ?";
+		try {
+		PreparedStatement prep= c.prepareStatement(sql);
+		prep.setInt(1, patientId);
+		ResultSet rs = prep.executeQuery();
+		if(rs.next()) {
+			Disease d = new Disease(rs.getInt("id"), rs.getString("diseaseName"), rs.getString("prescription"));
+			diseases.add(d);	
+		}
+		rs.close();
+		prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return diseases;
 	}
 	
 	
