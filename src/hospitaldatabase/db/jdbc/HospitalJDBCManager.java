@@ -291,15 +291,14 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addAppointment(Appointment a) {
 		try {
-			String sql = "INSERT INTO Appointment (patientId, type, intervention, dateStart, timeStart, duration, success) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Appointment (type, intervention, dateStart, timeStart, duration, success) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, a.getPatient().getId());
-			prep.setString(2, a.getType());
-			prep.setString(3, a.getIntervention());
-			prep.setDate(4, a.getDateStart());
-			prep.setTime(5, a.getTimeStart());
-			prep.setInt(6, a.getDuration());
-			prep.setBoolean(7, a.isSuccess());
+			prep.setString(1, a.getType());
+			prep.setString(2, a.getIntervention());
+			prep.setDate(3, a.getDateStart());
+			prep.setTime(4, a.getTimeStart());
+			prep.setInt(5, a.getDuration());
+			prep.setBoolean(6, a.isSuccess());
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -322,9 +321,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				Time timeStart = rs.getTime("timeStart");
 				int duration = rs.getInt("duration");
 				boolean success = rs.getBoolean("success");
-				int patientId = rs.getInt("patientId");
-				Patient patient = getPatient(patientId);
-				a = new Appointment(id, type, intervention, dateStart, timeStart, duration, success, patient, null);
+				a = new Appointment(id, type, intervention, dateStart, timeStart, duration, success);
 			}
 			rs.close();
 			prep.close();
@@ -433,9 +430,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String intervention = rs.getString("intervention");
 				int duration = rs.getInt("duration");
 				boolean success = rs.getBoolean("success");
-				int patientId = rs.getInt("patientId");
-				Patient patient = getPatient(patientId);
-				a.add(new Appointment(id, type, intervention, date, time, duration, success, patient, null));
+				a.add(new Appointment(id, type, intervention, date, time, duration, success));
 			}
 			rs.close();
 			prep.close();
@@ -460,9 +455,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				Time timeStart = rs.getTime("timeStart");
 				int duration = rs.getInt("duration");
 				boolean success = rs.getBoolean("success");
-				int patientId = rs.getInt("patientId");
-				Patient patient = getPatient(patientId);
-				a.add(new Appointment(id, type, intervention, date, timeStart, duration, success, patient, null));
+				a.add(new Appointment(id, type, intervention, date, timeStart, duration, success));
 			}
 			rs.close();
 			prep.close();
@@ -487,9 +480,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				Time timeStart = rs.getTime("timeStart");
 				int duration = rs.getInt("duration");
 				boolean success = rs.getBoolean("success");
-				int patientId = rs.getInt("patientId");
-				Patient patient = getPatient(patientId);
-				a.add(new Appointment(id, type, intervention, dateStart, timeStart, duration, success, patient, null));
+				a.add(new Appointment(id, type, intervention, dateStart, timeStart, duration, success));
 			}
 			rs.close();
 			prep.close();
@@ -502,16 +493,15 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setAppointment(Appointment a, int id) {
 		try {
-			String sql = "UPDATE Appointment SET patientId = ?, type = ?, intervention = ?, dateStart = ?, timeStart = ?, duration = ?, success = ? WHERE id = ?";
+			String sql = "UPDATE Appointment SET type = ?, intervention = ?, dateStart = ?, timeStart = ?, duration = ?, success = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, a.getPatient().getId());
-			prep.setString(2, a.getType());
-			prep.setString(3, a.getIntervention());
-			prep.setDate(4, a.getDateStart());
-			prep.setTime(5, a.getTimeStart());
-			prep.setInt(6, a.getDuration());
-			prep.setBoolean(7, a.isSuccess());
-			prep.setInt(8, id);
+			prep.setString(1, a.getType());
+			prep.setString(2, a.getIntervention());
+			prep.setDate(3, a.getDateStart());
+			prep.setTime(4, a.getTimeStart());
+			prep.setInt(5, a.getDuration());
+			prep.setBoolean(6, a.isSuccess());
+			prep.setInt(7, id);
 			prep.executeUpdate();
 			prep.close();
 		}catch(SQLException e) {

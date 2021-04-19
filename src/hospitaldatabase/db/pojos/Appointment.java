@@ -18,10 +18,7 @@ public class Appointment implements Serializable{
 	private Time timeStart;
 	private int duration;
 	private boolean success;
-	private Patient patient;
-	private List<Worker> workers;
-	public Appointment(int id, String type, String intervention, Date dateStart, Time timeStart, int duration, boolean success,
-			Patient patient, List<Worker> workers) {
+	public Appointment(int id, String type, String intervention, Date dateStart, Time timeStart, int duration, boolean success) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -30,16 +27,12 @@ public class Appointment implements Serializable{
 		this.timeStart = timeStart;
 		this.duration = duration;
 		this.success = success;
-		this.patient = patient;
-		this.workers = workers;
 	}
-	public Appointment(int id, String type, Date dateStart, Patient patient, List<Worker> workers) {
+	public Appointment(int id, String type, Date dateStart) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.dateStart = dateStart;
-		this.patient = patient;
-		this.workers = workers;
 	}
 	public int getId() {
 		return id;
@@ -83,23 +76,10 @@ public class Appointment implements Serializable{
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	public Patient getPatient() {
-		return patient;
-	}
-	public void setPatient(Patient patient) {
-		this.patient = patient;
-	}
-	public List<Worker> getWorkers() {
-		return workers;
-	}
-	public void setWorkers(List<Worker> workers) {
-		this.workers = workers;
-	}
 	@Override
 	public String toString() {
 		return "Appointment [id=" + id + ", type=" + type + ", intervention=" + intervention + ", dateStart="
-				+ dateStart + ", timeStart="+ timeStart + ", duration=" + duration + ", success=" + success + ", patient=" + patient
-				+ ", workers=" + workers + "]";
+				+ dateStart + ", timeStart="+ timeStart + ", duration=" + duration + ", success=" + success + "]";
 	}
 	
 	
