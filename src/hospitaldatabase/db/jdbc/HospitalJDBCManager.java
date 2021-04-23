@@ -173,7 +173,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
-				w.add(new Worker(id, name, type, job, disease, externCompany, project, null, null, null, null));
+				w.add(new Worker(id, rs.getString("name"), type, job, disease, externCompany, project, null, null, null, null));
 			}
 			rs.close();
 			prep.close();

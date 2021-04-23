@@ -57,9 +57,12 @@ public class Menu {
 
 	}
 
-	private static void deleteWorker() {
+	private static void deleteWorker() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		System.out.println(dbman.searchWorkerByName(""));
+		System.out.print("Introduce worker's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.deleteWorker(id);
 	}
 
 	private static void setWorker() {
@@ -67,8 +70,11 @@ public class Menu {
 		
 	}
 
-	private static void searchWorkerByName() {
+	private static void searchWorkerByName() throws IOException {
 		// TODO Auto-generated method stub
+		System.out.println("Introduce worker's name: ");
+		String name = reader.readLine();
+		System.out.println(dbman.searchWorkerByName(name));
 		
 	}
 
@@ -82,6 +88,30 @@ public class Menu {
 		System.out.print("Please, input the worker info\n"
 				+ "Insert name: ");
 		String name = reader.readLine();
+		System.out.print("Insert type of worker (Surgeon, Doctor, Nurse...): ");
+		String type = reader.readLine();
+		System.out.print("Insert job: ");
+		String job = reader.readLine();
+		if (job.equals("")) {
+			job = null;
+		}
+		System.out.print("Insert disease: ");
+		String disease = reader.readLine();
+		if (disease.equals("")) {
+			disease = null;
+		}
+		System.out.print("Insert extern company: ");
+		String externCompany = reader.readLine();
+		if (externCompany.equals("")) {
+			externCompany = null;
+		}
+		System.out.print("Insert project: ");
+		String project = reader.readLine();
+		if (project.equals("")) {
+			project = null;
+		}
+		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
+		dbman.addWorker(w);
 	}
 
 }
