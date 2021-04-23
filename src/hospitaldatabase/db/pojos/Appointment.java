@@ -3,7 +3,6 @@ package hospitaldatabase.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.List;
 
 public class Appointment implements Serializable{
 
