@@ -3,6 +3,10 @@ package hospitaldatabase.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
@@ -17,6 +21,7 @@ public class Menu {
 	public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	private static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("hh:mm:ss");
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		dbman.connect();
@@ -198,39 +203,122 @@ public class Menu {
 		
 	}
 
-	private static void deleteAppointment() {
-		// TODO Auto-generated method stub
-		
+	private static void deleteAppointment() throws NumberFormatException, IOException {
+		// TODO try the method
+		dbman.searchAppointmentByType("");
+		System.out.print("Introduce the appointment id: ");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.deleteAppointment(id);
 	}
 
-	private static void setAppointment() {
-		// TODO Auto-generated method stub
-		
+	private static void setAppointment() throws NumberFormatException, IOException {
+		// TODO try the method
+		System.out.print("Introduce the appointment id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println("Please input the appointment info. If it is null, press enter");
+		System.out.print("Introduce the type: ");
+		String type = reader.readLine();
+		System.out.print("Introduce the intervention: ");
+		String intervention = reader.readLine();
+		if (intervention.equals("")) {
+			intervention = null;
+		}
+		System.out.print("Introduce the start date (yy-mm-dd): ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Introduce the start time (hh:mm:ss): ");
+		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		System.out.print("Introduce the duration: ");
+		String reading = reader.readLine();
+		Integer duration;
+		if (reading.equals("")) {
+			duration = null;
+		} else {
+			duration = Integer.parseInt(reading);
+		}
+		System.out.print("Introduce the succes (T for true, other thing except entering for false): ");
+		reading = reader.readLine();
+		Boolean success;
+		if (reading.equals("")) {
+			success = null;
+		} else {
+			if (reading.equals("T") || reading.equals("t")) {
+				success = true;
+			} else {
+				success = false;
+			}
+		}
+		Appointment a = new Appointment(id, type, intervention, Date.valueOf(startDate), Time.valueOf(startTime), duration, success);
+		dbman.setAppointment(a, id);
 	}
 
-	private static void searchAppointmentByType() {
-		// TODO Auto-generated method stub
-		
+	private static void searchAppointmentByType() throws IOException {
+		// TODO try the method
+		System.out.print("Introduce the type: ");
+		String type = reader.readLine();
+		System.out.println(dbman.searchAppointmentByType(type));
 	}
 
-	private static void searchAppointmentByDate() {
-		// TODO Auto-generated method stub
-		
+	private static void searchAppointmentByDate() throws IOException {
+		// TODO try the method
+		System.out.print("Introduce the start date (yy-mm-dd): ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.println(dbman.searchAppointmentByDate(Date.valueOf(startDate)));
 	}
 
-	private static void searchAppointmentByDateAndTime() {
-		// TODO Auto-generated method stub
-		
+	private static void searchAppointmentByDateAndTime() throws IOException {
+		// TODO try the method
+		System.out.print("Introduce the start date (yy-mm-dd): ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Introduce the start time (hh:mm:ss): ");
+		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		System.out.println(dbman.searchAppointmentByDateAndTime(Date.valueOf(startDate), Time.valueOf(startTime)));
 	}
 
-	private static void searchAppointmentByID() {
-		// TODO Auto-generated method stub
-		
+	private static void searchAppointmentByID() throws NumberFormatException, IOException {
+		// TODO try the method
+		System.out.print("Introduce the appointment id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getAppointment(id));
 	}
 
-	private static void addAppointment() {
-		// TODO Auto-generated method stub
-		
+	private static void addAppointment() throws NumberFormatException, IOException {
+		// TODO try the method
+		System.out.println("Please input the appointment info. If it is null, press enter");
+		System.out.print("Introduce the Appointment id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.print("Introduce the type: ");
+		String type = reader.readLine();
+		System.out.print("Introduce the intervention: ");
+		String intervention = reader.readLine();
+		if (intervention.equals("")) {
+			intervention = null;
+		}
+		System.out.print("Introduce the start date (yy-mm-dd): ");
+		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Introduce the start time (hh:mm:ss): ");
+		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		System.out.print("Introduce the duration: ");
+		String reading = reader.readLine();
+		Integer duration;
+		if (reading.equals("")) {
+			duration = null;
+		} else {
+			duration = Integer.parseInt(reading);
+		}
+		System.out.print("Introduce the succes (T for true, other thing except entering for false): ");
+		reading = reader.readLine();
+		Boolean success;
+		if (reading.equals("")) {
+			success = null;
+		} else {
+			if (reading.equals("T") || reading.equals("t")) {
+				success = true;
+			} else {
+				success = false;
+			}
+		}
+		Appointment a = new Appointment(id, type, intervention, Date.valueOf(startDate), Time.valueOf(startTime), duration, success);
+		dbman.addAppointment(a);
 	}
 
 	private static void deletePatient() {
@@ -274,7 +362,6 @@ public class Menu {
 	}
 
 	private static void deleteWorker() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println(dbman.searchWorkerByName(""));
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -282,7 +369,6 @@ public class Menu {
 	}
 
 	private static void setWorker() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println("Please, input the new information. For not updating, input the same info. For setting null, press enter");
@@ -315,7 +401,6 @@ public class Menu {
 	}
 
 	private static void searchWorkerByName() throws IOException {
-		// TODO Auto-generated method stub
 		System.out.println("Introduce worker's name: ");
 		String name = reader.readLine();
 		System.out.println(dbman.searchWorkerByName(name));
@@ -323,14 +408,12 @@ public class Menu {
 	}
 
 	private static void searchWorkerByID() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getWorker(id));
 	}
 
 	private static void addWorker() throws IOException {
-		// TODO Auto-generated method stub
 		System.out.print("Please, input the worker info\n"
 				+ "Insert name: ");
 		String name = reader.readLine();
