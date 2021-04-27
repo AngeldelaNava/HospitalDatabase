@@ -21,7 +21,6 @@ public class Menu {
 	public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	private static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("hh:mm:ss");
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		dbman.connect();
@@ -226,7 +225,7 @@ public class Menu {
 		System.out.print("Introduce the start date (yy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
-		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		LocalTime startTime = LocalTime.parse(reader.readLine());
 		System.out.print("Introduce the duration: ");
 		String reading = reader.readLine();
 		Integer duration;
@@ -270,7 +269,7 @@ public class Menu {
 		System.out.print("Introduce the start date (yy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
-		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		LocalTime startTime = LocalTime.parse(reader.readLine());
 		System.out.println(dbman.searchAppointmentByDateAndTime(Date.valueOf(startDate), Time.valueOf(startTime)));
 	}
 
@@ -284,8 +283,6 @@ public class Menu {
 	private static void addAppointment() throws NumberFormatException, IOException {
 		// TODO try the method
 		System.out.println("Please input the appointment info. If it is null, press enter");
-		System.out.print("Introduce the Appointment id: ");
-		int id = Integer.parseInt(reader.readLine());
 		System.out.print("Introduce the type: ");
 		String type = reader.readLine();
 		System.out.print("Introduce the intervention: ");
@@ -296,7 +293,7 @@ public class Menu {
 		System.out.print("Introduce the start date (yy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
-		LocalTime startTime = LocalTime.parse(reader.readLine(), formatter2);
+		LocalTime startTime = LocalTime.parse(reader.readLine());
 		System.out.print("Introduce the duration: ");
 		String reading = reader.readLine();
 		Integer duration;
@@ -317,7 +314,7 @@ public class Menu {
 				success = false;
 			}
 		}
-		Appointment a = new Appointment(id, type, intervention, Date.valueOf(startDate), Time.valueOf(startTime), duration, success);
+		Appointment a = new Appointment(1, type, intervention, Date.valueOf(startDate), Time.valueOf(startTime), duration, success);
 		dbman.addAppointment(a);
 	}
 
