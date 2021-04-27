@@ -677,7 +677,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void realitionPatientWorker(int patientId, int workerId) {
+	public void relationPatientWorker(int patientId, int workerId) {
 		// TODO Auto-generated method stub
 		
 	}

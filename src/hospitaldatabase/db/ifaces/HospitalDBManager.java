@@ -46,5 +46,5 @@ public interface HospitalDBManager {
 	public void setDisease(Disease d, int id);
 	public void deleteDisease(int id);
 	
-	public void realitionPatientWorker(int patientId, int workerId);
+	public void relationPatientWorker(int patientId, int workerId);
 }
