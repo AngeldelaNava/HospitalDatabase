@@ -17,7 +17,7 @@ public class Appointment implements Serializable{
 	private Time timeStart;
 	private Integer duration;
 	private Boolean success;
-	public Appointment(int id, String type, String intervention, Date dateStart, Time timeStart, Integer duration, Boolean success) {
+	public Appointment(Integer id, String type, String intervention, Date dateStart, Time timeStart, Integer duration, Boolean success) {
 		super();
 		this.id = id;
 		this.type = type;
