@@ -630,7 +630,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public List<Disease> searchDiseaseByPatient(int patientId) {
 		List<Disease> diseases = new ArrayList<Disease>();
-		String sql= "SELECT * FROM Disease AS d JOIN PatientDisease AS pd ON d.id= pd.diseaseId WHERE pd.patientId= ?";
+		String sql= "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id= pd.diseaseId WHERE pd.patientId= ?";
 		try {
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, patientId);
