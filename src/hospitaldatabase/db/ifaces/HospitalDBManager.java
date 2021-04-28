@@ -41,7 +41,7 @@ public interface HospitalDBManager {
 	
 	public void addDisease(Disease d);
 	public Disease getDisease(int id);
-	public Disease searchDiseaseByName(String name);
+	public List<Disease> searchDiseaseByName(String name);
 	public List<Disease> searchDiseaseByPatient(int patientId);
 	public void setDisease(Disease d, int id);
 	public void deleteDisease(int id);

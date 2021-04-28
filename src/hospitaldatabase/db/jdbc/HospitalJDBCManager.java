@@ -606,17 +606,17 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public Disease searchDiseaseByName(String name) {
-		Disease d = null;
+	public List<Disease> searchDiseaseByName(String name) {
+		List<Disease> d = new ArrayList<Disease>();
 		try {
 			String sql = "SELECT * FROM Disease WHERE diseaseName LIKE ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, "%" + name + "%");
 			ResultSet rs = prep.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				Integer id = rs.getInt("id");
 				String prescription = rs.getString("prescription");
-				d= new Disease(id, rs.getString("diseaseName"), prescription);
+				d.add(new Disease(id, rs.getString("diseaseName"), prescription));
 			}
 			rs.close();
 			prep.close();
@@ -634,7 +634,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, patientId);
 		ResultSet rs = prep.executeQuery();
-		if(rs.next()) {
+		while(rs.next()) {
 			Disease d = new Disease(rs.getInt("id"), rs.getString("diseaseName"), rs.getString("prescription"));
 			diseases.add(d);	
 		}
