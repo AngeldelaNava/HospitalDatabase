@@ -15,9 +15,9 @@ public class Appointment implements Serializable{
 	private String intervention;
 	private Date dateStart;
 	private Time timeStart;
-	private int duration;
-	private boolean success;
-	public Appointment(int id, String type, String intervention, Date dateStart, Time timeStart, int duration, boolean success) {
+	private Integer duration;
+	private Boolean success;
+	public Appointment(Integer id, String type, String intervention, Date dateStart, Time timeStart, Integer duration, Boolean success) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -27,11 +27,12 @@ public class Appointment implements Serializable{
 		this.duration = duration;
 		this.success = success;
 	}
-	public Appointment(int id, String type, Date dateStart) {
+	public Appointment(int id, String type, Date dateStart, Time timeStart) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.dateStart = dateStart;
+		this.timeStart = timeStart;
 	}
 	public int getId() {
 		return id;
@@ -63,16 +64,16 @@ public class Appointment implements Serializable{
 	public void setTimeStart(Time timeStart) {
 		this.timeStart = timeStart;
 	}
-	public int getDuration() {
+	public Integer getDuration() {
 		return duration;
 	}
-	public void setDuration(int duration) {
+	public void setDuration(Integer duration) {
 		this.duration = duration;
 	}
-	public boolean isSuccess() {
+	public Boolean isSuccess() {
 		return success;
 	}
-	public void setSuccess(boolean success) {
+	public void setSuccess(Boolean success) {
 		this.success = success;
 	}
 	@Override

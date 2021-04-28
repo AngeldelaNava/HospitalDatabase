@@ -1,0 +1,5 @@
+This week we expected to finish the DML methods and start doing the JavaFX for the graphic user interface.
+========================
+This week we continued with the DML methods, installed JavaFX and triedn the worker methods we already have
+========================
+Next weeks we expect to try all the methods, make the many-to-many relationship methods and maybe start with JavaFX in the project
