@@ -157,9 +157,11 @@ public class Menu {
 
 	}
 
-	private static void deleteDisease() {
-		// TODO Auto-generated method stub
-		
+	private static void deleteDisease() throws NumberFormatException, IOException {//todavia no la he probado
+		System.out.println(dbman.searchDiseaseByName(""));
+		System.out.print("Introduce disease's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.deleteDisease(id);
 	}
 
 	private static void setDisease() {
@@ -172,19 +174,24 @@ public class Menu {
 		
 	}
 
-	private static void searchDiseaseByName() {
-		// TODO Auto-generated method stub
-		
+	private static void searchDiseaseByName() throws IOException {//revisar
+		System.out.println("Introduce disease's name: ");
+		String diseaseName = reader.readLine();
+		System.out.println(dbman.searchDiseaseByName(diseaseName));
 	}
 
 	private static void searchDiseaseByID() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
-	private static void addDisease() {
-		// TODO Auto-generated method stub
-		
+	private static void addDisease() throws IOException {
+		System.out.print("Please, input the disease info\n"
+				+ "Insert disease name: ");
+		String diseaseName = reader.readLine();
+		System.out.print("Insert the prescription: ");
+		String prescription = reader.readLine();
+		Disease d = new Disease(1, diseaseName, prescription);
+		dbman.addDisease(d);
 	}
 
 	private static void deleteProject() {

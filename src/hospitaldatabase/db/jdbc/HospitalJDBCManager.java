@@ -573,11 +573,10 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addDisease(Disease d) {
 		try {
-			String sql = "INSERT INTO Disease (id, diseaseName, prescription) VALUES (?, ?, ?)";
+			String sql = "INSERT INTO Disease (diseaseName, prescription) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, d.getId());
-			prep.setString(2, d.getDiseaseName());
-			prep.setString(3, d.getPrescripition());
+			prep.setString(1, d.getDiseaseName());
+			prep.setString(2, d.getPrescripition());
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -617,7 +616,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				Integer id = rs.getInt("id");
 				String prescription = rs.getString("prescription");
-				d= new Disease(id, name, prescription);
+				d= new Disease(id, rs.getString("diseaseName"), prescription);
 			}
 			rs.close();
 			prep.close();
