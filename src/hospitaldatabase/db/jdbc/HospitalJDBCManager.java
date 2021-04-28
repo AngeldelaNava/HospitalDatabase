@@ -297,8 +297,16 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(2, a.getIntervention());
 			prep.setDate(3, a.getDateStart());
 			prep.setTime(4, a.getTimeStart());
-			prep.setInt(5, a.getDuration());
-			prep.setBoolean(6, a.isSuccess());
+			if (a.getDuration() == null) {
+				prep.setNull(5, java.sql.Types.INTEGER);
+			} else {
+				prep.setInt(5, a.getDuration());
+			}
+			if (a.isSuccess() == null) {
+				prep.setNull(6, java.sql.Types.BOOLEAN);
+			} else {
+				prep.setBoolean(6, a.isSuccess());
+			}
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -499,8 +507,16 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(2, a.getIntervention());
 			prep.setDate(3, a.getDateStart());
 			prep.setTime(4, a.getTimeStart());
-			prep.setInt(5, a.getDuration());
-			prep.setBoolean(6, a.isSuccess());
+			if (a.getDuration() == null) {
+				prep.setNull(5, java.sql.Types.INTEGER);
+			} else {
+				prep.setInt(5, a.getDuration());
+			}
+			if (a.isSuccess() == null) {
+				prep.setNull(6, java.sql.Types.BOOLEAN);
+			} else {
+				prep.setBoolean(6, a.isSuccess());
+			}
 			prep.setInt(7, id);
 			prep.executeUpdate();
 			prep.close();
