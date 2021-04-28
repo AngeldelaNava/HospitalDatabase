@@ -210,7 +210,6 @@ public class Menu {
 	}
 
 	private static void deleteAppointment() throws NumberFormatException, IOException {
-		// TODO try the method
 		dbman.searchAppointmentByType("");
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -218,7 +217,6 @@ public class Menu {
 	}
 
 	private static void setAppointment() throws NumberFormatException, IOException {
-		// TODO try the method
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println("Please input the appointment info. If it is null, press enter");
@@ -258,21 +256,18 @@ public class Menu {
 	}
 
 	private static void searchAppointmentByType() throws IOException {
-		// TODO try the method
 		System.out.print("Introduce the type: ");
 		String type = reader.readLine();
 		System.out.println(dbman.searchAppointmentByType(type));
 	}
 
 	private static void searchAppointmentByDate() throws IOException {
-		// TODO try the method
 		System.out.print("Introduce the start date (yy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.println(dbman.searchAppointmentByDate(Date.valueOf(startDate)));
 	}
 
 	private static void searchAppointmentByDateAndTime() throws IOException {
-		// TODO try the method
 		System.out.print("Introduce the start date (yy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
@@ -281,14 +276,12 @@ public class Menu {
 	}
 
 	private static void searchAppointmentByID() throws NumberFormatException, IOException {
-		// TODO try the method
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getAppointment(id));
 	}
 
 	private static void addAppointment() throws NumberFormatException, IOException {
-		// TODO try the method
 		System.out.println("Please input the appointment info. If it is null, press enter");
 		System.out.print("Introduce the type: ");
 		String type = reader.readLine();
