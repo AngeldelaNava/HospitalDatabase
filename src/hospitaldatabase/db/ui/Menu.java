@@ -363,10 +363,16 @@ public class Menu {
 		LocalDate hireDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Insert contract's date of end: ");
 		LocalDate dateOfEnd = LocalDate.parse(reader.readLine(), formatter);
+		System.out.println(dbman.searchWorkerByName(""));
 		System.out.print("Insert worker's id of this contract: ");
-		int id = Integer.parseInt(reader.readLine());
-		Worker w = dbman.getWorker(id);
-	
+		String reading = reader.readLine();
+		Worker w;
+		if (reading.equals("")) {
+			w = null;
+		} else {
+			int id = Integer.parseInt(reading);
+			w = dbman.getWorker(id);
+		}
 		Contract ct = new Contract(1, salary, Date.valueOf(hireDate), Date.valueOf(dateOfEnd), w);
 		dbman.addContract(ct);
 		

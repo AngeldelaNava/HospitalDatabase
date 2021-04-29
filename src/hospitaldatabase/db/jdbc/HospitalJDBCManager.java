@@ -186,7 +186,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addContract(Contract ct) {
 		try {
-			String sql = "INSERT INTO Contract (salary, hireDate, endDate, staffId) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Contract (salary, hireDate, dateOfEnd, staffId) VALUES (?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, ct.getSalary());
 			prep.setDate(2, ct.getHireDate());
@@ -214,8 +214,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if(rs.next()) {
 				int salary = rs.getInt("salary");
 				Date hireDate = rs.getDate("hireDate");
-				Date endDate = rs.getDate("endDate");
-				int workerId = rs.getInt("workerId");
+				Date endDate = rs.getDate("dateOfEnd");
+				int workerId = rs.getInt("staffId");
 				Worker worker = getWorker(workerId);
 				ct = new Contract(id, salary, hireDate, endDate, worker);
 			}
