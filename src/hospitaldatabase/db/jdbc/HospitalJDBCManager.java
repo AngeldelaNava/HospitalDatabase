@@ -191,7 +191,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setInt(1, ct.getSalary());
 			prep.setDate(2, ct.getHireDate());
 			prep.setDate(3, ct.getDateOfEnd());
-			prep.setInt(4, ct.getWorker().getId());
+			if (ct.getWorker() == null) {
+				prep.setNull(4, java.sql.Types.INTEGER);
+			} else {
+				prep.setInt(4, ct.getWorker().getId());
+			}
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
