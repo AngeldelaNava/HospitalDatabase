@@ -348,13 +348,29 @@ public class Menu {
 		
 	}
 
-	private static void searchContractByID() {
-		// TODO Auto-generated method stub
+	private static void searchContractByID() throws NumberFormatException, IOException {
+		System.out.print("Introduce contract's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getContract(id));
 		
 	}
 
-	private static void addContract() {
+	private static void addContract() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
+		System.out.print("Please, input the contract's info\n"
+				+ "Insert salary: ");
+		int salary = Integer.parseInt(reader.readLine());
+		System.out.print("Insert hire date: ");
+		LocalDate hireDate = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Insert contract's date of end: ");
+		LocalDate dateOfEnd = LocalDate.parse(reader.readLine(), formatter);
+		System.out.print("Insert worker's id of this contract: ");
+		int id = Integer.parseInt(reader.readLine());
+		Worker w = dbman.getWorker(id);
+	
+		Contract ct = new Contract(1, salary, Date.valueOf(hireDate), Date.valueOf(dateOfEnd), w);
+		dbman.addContract(ct);
+		
 		
 	}
 
