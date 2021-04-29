@@ -194,18 +194,24 @@ public class Menu {
 		dbman.addDisease(d);
 	}
 
-	private static void deleteProject() {
-		// TODO Auto-generated method stub
-		
+	private static void deleteProject() throws NumberFormatException, IOException {
+		System.out.print("Introduce worker's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.deleteProject(id);
 	}
 
-	private static void setProject() {
-		// TODO Auto-generated method stub
-		
+	private static void setProject() throws NumberFormatException, IOException {
+		System.out.print("Introduce worker's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println("Introduce the project: ");
+		String project = reader.readLine();
+		dbman.setProject(project, id);
 	}
 
-	private static void searchProject() {
-		// TODO Auto-generated method stub
+	private static void searchProject() throws NumberFormatException, IOException {
+		System.out.print("Introduce worker's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getProject(id));
 		
 	}
 
