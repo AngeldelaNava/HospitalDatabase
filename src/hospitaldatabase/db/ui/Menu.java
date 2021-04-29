@@ -356,7 +356,6 @@ public class Menu {
 	}
 
 	private static void addContract() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		System.out.print("Please, input the contract's info\n"
 				+ "Insert salary: ");
 		int salary = Integer.parseInt(reader.readLine());
