@@ -324,33 +324,64 @@ public class Menu {
 		dbman.addAppointment(a);
 	}
 
-	private static void deletePatient() {
-		// TODO Auto-generated method stub
+	private static void deletePatient() throws NumberFormatException, IOException {
+		System.out.println(dbman.searchPatientByName(""));
+		System.out.print("Introduce patient's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		dbman.deletePatient(id);
 		
 	}
 
-	private static void setPatient() {
-		// TODO Auto-generated method stub
-		
+	private static void setPatient() throws IOException {
+		System.out.print("Introduce patient's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println("Please, input the new information. (If the info is unchanged enter the same information)");
+		System.out.print("Insert name: ");
+		String name = reader.readLine();
+		System.out.print("Insert the patient's gender: ");
+		String gender = reader.readLine();
+		System.out.print("Insert the patients blood type: ");
+		String bloodType = reader.readLine();
+		System.out.print("Insert room number: ");
+		int roomNumber = Integer.parseInt(reader.readLine());
+
+		Patient p = new Patient(1, name, gender, bloodType, roomNumber, null, null, null);
+		dbman.setPatient(p, id);
 	}
+		
+
 
 	private static void readAllPatientsData() {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void searchPatientByName() {
-		// TODO Auto-generated method stub
-		
+	private static void searchPatientByName() throws IOException {
+		System.out.println("Introduce disease's name: ");
+		String patientName = reader.readLine();
+		System.out.println(dbman.searchDiseaseByName(patientName));		
 	}
 
-	private static void searchPatientByID() {
-		// TODO Auto-generated method stub
-		
+	private static void searchPatientByID() throws NumberFormatException, IOException {
+		System.out.print("Introduce contract's id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getPatient(id));
+			
 	}
 
-	private static void addPatient() {
-		// TODO Auto-generated method stub
+	private static void addPatient() throws NumberFormatException, IOException {
+		System.out.print("Please, input the patient's info\n"
+				+ "Insert patients name: ");
+		String patientName = reader.readLine();
+		System.out.print("Insert the blood type: ");
+		String bloodType = reader.readLine();
+		System.out.print("Insert the patient's gender: ");
+		String gender = reader.readLine();
+		System.out.print("Insert the patient's room number: ");
+		int roomNumber=Integer.parseInt(reader.readLine());
+		
+		Patient p = new Patient(1, patientName, gender,bloodType,roomNumber,null,null,null);
+		dbman.addPatient(p);
 		
 	}
 
