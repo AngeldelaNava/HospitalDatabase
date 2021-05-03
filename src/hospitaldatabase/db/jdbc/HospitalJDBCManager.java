@@ -382,7 +382,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public List<Patient> checkListOfPatients() {
-		// TODO Auto-generated method stub
 		List<Patient> patients = new ArrayList<Patient>();
 		try {
 			String sql = "SELECT * FROM Patient";

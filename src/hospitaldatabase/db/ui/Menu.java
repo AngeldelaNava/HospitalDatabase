@@ -372,7 +372,7 @@ public class Menu {
 
 
 	private static void readAllPatientsData() {
-		System.out.println(dbman.searchPatientByName(""));
+		System.out.println(dbman.checkListOfPatients());
 	}
 
 	private static void searchPatientByName() throws IOException {
