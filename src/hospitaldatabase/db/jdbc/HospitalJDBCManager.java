@@ -235,7 +235,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
 			prep.setString(3, p.getBloodType());
-			prep.setInt(4, p.getRoomNumber());
+			if (p.getRoomNumber() == null) {
+				prep.setNull(4, java.sql.Types.INTEGER);
+			} else {
+				prep.setInt(4, p.getRoomNumber());
+			}
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -281,7 +285,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				p.add(new Patient(id, name, gender, bloodType, roomNumber, null, null, null));
+				p.add(new Patient(id, rs.getString("name"), gender, bloodType, roomNumber, null, null, null));
 			}
 			rs.close();
 			prep.close();
@@ -397,12 +401,16 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setPatient(Patient p, int id) {
 		try {
-			String sql = "UPDATE Patient SET name = ?, gender = ?, bloodType = ?, roomNumber = ?, WHERE id = ?";
+			String sql = "UPDATE Patient SET name = ?, gender = ?, bloodType = ?, roomNumber = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
 			prep.setString(3, p.getBloodType());
-			prep.setInt(4, p.getRoomNumber());
+			if (p.getRoomNumber() == null) {
+				prep.setNull(4, java.sql.Types.INTEGER);
+			} else {
+				prep.setInt(4, p.getRoomNumber());
+			}
 			prep.setInt(5, id);
 			prep.executeUpdate();
 			prep.close();

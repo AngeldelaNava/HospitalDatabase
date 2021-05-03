@@ -14,11 +14,11 @@ public class Patient implements Serializable{
 	private String name;
 	private String gender;
 	private String bloodType;
-	private int roomNumber;
+	private Integer roomNumber;
 	private List<Worker> workers;
 	private List<Disease> diseases;
 	private Appointment appointment;
-	public Patient(int id, String name, String gender, String bloodGroup, int roomNumber, List<Worker> workers,
+	public Patient(int id, String name, String gender, String bloodGroup, Integer roomNumber, List<Worker> workers,
 			List<Disease> diseases, Appointment appointment) {
 		super();
 		this.id = id;
@@ -41,10 +41,10 @@ public class Patient implements Serializable{
 		this.diseases = diseases;
 		this.appointment = appointment;
 	}
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -65,10 +65,10 @@ public class Patient implements Serializable{
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
-	public int getRoomNumber() {
+	public Integer getRoomNumber() {
 		return roomNumber;
 	}
-	public void setRoomNumber(int roomNumber) {
+	public void setRoomNumber(Integer roomNumber) {
 		this.roomNumber = roomNumber;
 	}
 	public List<Worker> getWorkers() {
