@@ -678,11 +678,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setDisease(Disease d, int id) {
 		try {
-			String sql = "UPDATE Disease SET id = ?, diseaseName = ?, prescription = ? WHERE ID = ?";
+			String sql = "UPDATE Disease SET diseaseName = ?, prescription = ? WHERE ID = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
-			prep.setInt(1, d.getId());
-			prep.setString(2, d.getDiseaseName());
-			prep.setString(3, d.getPrescripition());
+			prep.setString(1, d.getDiseaseName());
+			prep.setString(2, d.getPrescripition());
+			prep.setInt(3, id);
 			prep.executeUpdate();
 			prep.close();
 		}catch(SQLException e) {
@@ -693,7 +693,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void deleteDisease(int id) {
 		try {
-			String sql = "DELETE FROM Appointment WHERE id = ?";
+			String sql = "DELETE FROM Disease WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setInt(1, id);
 			prep.executeUpdate();

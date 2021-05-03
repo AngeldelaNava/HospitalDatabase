@@ -1,0 +1,5 @@
+This week we expect to try all the methods, make the many-to-many relationship methods and maybe start with JavaFX in the project
+========================
+This week we finished with the DML methods and tried all methods in the menu
+========================
+Next weeks we expect to make the many-to-many relationship methods and start with JavaFX in the project

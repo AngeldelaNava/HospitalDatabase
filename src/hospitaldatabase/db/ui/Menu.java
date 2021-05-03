@@ -157,16 +157,25 @@ public class Menu {
 
 	}
 
-	private static void deleteDisease() throws NumberFormatException, IOException {//todavia no la he probado
+	private static void deleteDisease() throws NumberFormatException, IOException {
 		System.out.println(dbman.searchDiseaseByName(""));
 		System.out.print("Introduce disease's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteDisease(id);
 	}
 
-	private static void setDisease() {
-		// TODO Auto-generated method stub
-		
+	private static void setDisease() throws IOException {
+		System.out.println(dbman.searchDiseaseByName(""));
+		System.out.print("Introduce disease id: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getDisease(id));
+		System.out.print("Please, input the new information. (If the info is unchanged enter the same information) \n"
+				+ "Insert disease name: ");
+		String diseaseName = reader.readLine();
+		System.out.print("Insert the prescription: ");
+		String prescription = reader.readLine();
+		Disease d = new Disease(1, diseaseName, prescription);
+		dbman.setDisease(d, id);
 	}
 
 	private static void searchDiseaseByPatient() {
@@ -174,14 +183,16 @@ public class Menu {
 		
 	}
 
-	private static void searchDiseaseByName() throws IOException {//revisar
+	private static void searchDiseaseByName() throws IOException {
 		System.out.println("Introduce disease's name: ");
 		String diseaseName = reader.readLine();
 		System.out.println(dbman.searchDiseaseByName(diseaseName));
 	}
 
-	private static void searchDiseaseByID() {
-
+	private static void searchDiseaseByID() throws NumberFormatException, IOException {
+		System.out.println("Introduce disease's name: ");
+		int id = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.getDisease(id));
 	}
 
 	private static void addDisease() throws IOException {
@@ -195,12 +206,14 @@ public class Menu {
 	}
 
 	private static void deleteProject() throws NumberFormatException, IOException {
+		System.out.println(dbman.searchWorkerByName(""));
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteProject(id);
 	}
 
 	private static void setProject() throws NumberFormatException, IOException {
+		System.out.println(dbman.searchWorkerByName(""));
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println("Introduce the project: ");
@@ -209,6 +222,7 @@ public class Menu {
 	}
 
 	private static void searchProject() throws NumberFormatException, IOException {
+		System.out.println(dbman.searchWorkerByName(""));
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getProject(id));
