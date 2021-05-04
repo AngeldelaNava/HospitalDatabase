@@ -708,6 +708,24 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		
 	}
 
+	@Override
+	public void relationDiseaseWorker(int diseaseId, int workerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void relationAppointentWorker(int appointmentId, int workerId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void relationPatientDisease(int patientId, int diseaseId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }
