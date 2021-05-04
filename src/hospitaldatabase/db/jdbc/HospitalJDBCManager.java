@@ -97,6 +97,11 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " workerId REFERENCES Worker(id), "
 					+ " PRIMARY KEY(appointmentId, workerId))";
 			stmnt.executeUpdate(sql);
+			sql = "CREATE TABLE DiseaseWorker( "
+					+ " diseaseId REFERENCES Disease(id), "
+					+ " workerId REFERENCES Worker(id), "
+					+ " PRIMARY KEY(diseaseId, workerId))";
+			stmnt.executeUpdate(sql);
 		} catch(SQLException e) {
 			e.printStackTrace();
 			System.out.println("There was an exception creating the tables");
@@ -717,7 +722,15 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void relationAppointentWorker(int appointmentId, int workerId) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO AppointmentWorker (appointmentId, workerId) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, appointmentId);
+			prep.setInt(2, workerId);
+			prep.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
