@@ -56,6 +56,12 @@ public class Menu {
 			System.out.println("27. Search disease by patient");
 			System.out.println("28. Edit disease data");
 			System.out.println("29. Delete disease");
+			System.out.println("30. Relate a patient with a worker");
+			System.out.println("31. Relate a disease with a worker");
+			System.out.println("32. Relate an appointment with a worker");
+			System.out.println("33. Relate a patient with a disease");
+			System.out.println("34. Relate a worker with a contract");
+			System.out.println("35. Relate a patient with an appointment");
 			System.out.println("0. Exit");
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -146,6 +152,24 @@ public class Menu {
 			case 29:
 				deleteDisease();
 				break;
+			case 30:
+				relationPatientWorker();
+				break;
+			case 31:
+				relationDiseaseWorker();
+				break;
+			case 32:
+				relationAppointmentWorker();
+				break;
+			case 33:
+				relationPatientDisease();
+				break;
+			case 34:
+				relationWorkerContract();
+				break;
+			case 35:
+				relationPatientAppointment();
+				break;
 			case 0:
 				dbman.disconnect();
 				System.exit(0);
@@ -155,6 +179,36 @@ public class Menu {
 			}
 		} while(true);
 
+	}
+
+	private static void relationPatientAppointment() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void relationWorkerContract() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void relationPatientDisease() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void relationAppointmentWorker() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void relationDiseaseWorker() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void relationPatientWorker() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void deleteDisease() throws NumberFormatException, IOException {
