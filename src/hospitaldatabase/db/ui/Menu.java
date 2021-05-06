@@ -8,6 +8,8 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.List;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.jdbc.HospitalJDBCManager;
@@ -181,14 +183,34 @@ public class Menu {
 
 	}
 
-	private static void relationPatientAppointment() {
+	private static void relationPatientAppointment() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
+		System.out.print("Introduce the patient id: ");
+		int patientId = Integer.parseInt(reader.readLine());
+		List<Appointment> appointments = dbman.searchAppointmentByType("");
+		for(int i = 0; i < appointments.size(); i++) {
+			System.out.println(appointments.get(i));
+		}
+		System.out.print("Introduce the appointment id: ");
+		int appointmentId = Integer.parseInt(reader.readLine());
+		dbman.relationPatientAppointment(patientId, appointmentId);
 	}
 
-	private static void relationWorkerContract() {
+	private static void relationWorkerContract() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
+		System.out.print("Introduce the worker id: ");
+		int workerId = Integer.parseInt(reader.readLine());
+		System.out.print("Introduce the contract id: ");
+		int contractId = Integer.parseInt(reader.readLine());
+		dbman.relationWorkerContract(workerId, contractId);
 	}
 
 	private static void relationPatientDisease() {
