@@ -710,13 +710,31 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void relationPatientWorker(int patientId, int workerId) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO PatientWorker (patientId, workerId) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patientId);
+			prep.setInt(2, workerId);
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void relationDiseaseWorker(int diseaseId, int workerId) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO DiseaseWorker (diseaseId, workerId) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, diseaseId);
+			prep.setInt(2, workerId);
+			prep.executeUpdate();
+			prep.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -728,6 +746,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setInt(1, appointmentId);
 			prep.setInt(2, workerId);
 			prep.executeUpdate();
+			prep.close();
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -736,7 +755,46 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void relationPatientDisease(int patientId, int diseaseId) {
 		// TODO Auto-generated method stub
-		
+		try {
+			String sql = "INSERT INTO PatientDisease (patientId, diseaseId) VALUES (?, ?)";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patientId);
+			prep.setInt(2, diseaseId);
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void relationWorkerContract(int workerId, int contractId) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE Contract SET staffId = ? WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, workerId);
+			prep.setInt(2, contractId);
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void relationPatientAppointment(int patientId, int appointmentId) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "UPDATE Appointment SET patientId = ? WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patientId);
+			prep.setInt(2, appointmentId);
+			prep.executeUpdate();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	

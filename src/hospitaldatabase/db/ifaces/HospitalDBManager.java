@@ -50,4 +50,6 @@ public interface HospitalDBManager {
 	public void relationDiseaseWorker(int diseaseId, int workerId);
 	public void relationAppointentWorker(int appointmentId, int workerId);
 	public void relationPatientDisease(int patientId, int diseaseId);
+	public void relationWorkerContract(int workerId, int contractId);
+	public void relationPatientAppointment(int patientId, int appointmentId);
 }
