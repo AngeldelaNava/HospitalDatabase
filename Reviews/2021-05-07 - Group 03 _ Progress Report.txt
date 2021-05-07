@@ -1,0 +1,7 @@
+This week we expect to make the many-to-many relationship methods and start with JavaFX in the project
+==================================
+This week we finished the many-to-many relationships and add more menu methods
+----------------------------------
+We finally decided not to do the project with JavaFX, because we wouldn't have enough time to finish the project.
+================================
+Next weeks we expect to finish the general menu and start with log in.

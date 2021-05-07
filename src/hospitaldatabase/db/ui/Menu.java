@@ -207,6 +207,10 @@ public class Menu {
 		}
 		System.out.print("Introduce the worker id: ");
 		int workerId = Integer.parseInt(reader.readLine());
+		List<Contract> contracts = dbman.listAllContracts();
+		for(int i = 0; i < contracts.size(); i++) {
+			System.out.println(contracts.get(i));
+		}
 		System.out.print("Introduce the contract id: ");
 		int contractId = Integer.parseInt(reader.readLine());
 		dbman.relationWorkerContract(workerId, contractId);
@@ -220,28 +224,64 @@ public class Menu {
 		}
 		System.out.print("Introduce the patient id: ");
 		int patientId = Integer.parseInt(reader.readLine());
-		List<Disease> appointments = dbman.searchDiseaseByName("");
+		List<Disease> diseases = dbman.searchDiseaseByName("");
+		for(int i = 0; i < diseases.size(); i++) {
+			System.out.println(diseases.get(i));
+		}
+		System.out.print("Introduce the disease id: ");
+		int diseaseId = Integer.parseInt(reader.readLine());
+		dbman.relationPatientDisease(patientId, diseaseId);
+	}
+
+	private static void relationAppointmentWorker() throws NumberFormatException, IOException {
+		// TODO Auto-generated method stub
+		List<Appointment> appointments = dbman.searchAppointmentByType("");
 		for(int i = 0; i < appointments.size(); i++) {
 			System.out.println(appointments.get(i));
 		}
-		System.out.print("Introduce the disease id: ");
+		System.out.print("Introduce the appointment id: ");
 		int appointmentId = Integer.parseInt(reader.readLine());
-		dbman.relationPatientDisease(patientId, appointmentId);		
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
+		System.out.print("Introduce the worker id: ");
+		int workerId = Integer.parseInt(reader.readLine());
+		dbman.relationAppointentWorker(appointmentId, workerId);
 	}
 
-	private static void relationAppointmentWorker() {
+	private static void relationDiseaseWorker() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		List<Disease> diseases = dbman.searchDiseaseByName("");
+		for(int i = 0; i < diseases.size(); i++) {
+			System.out.println(diseases.get(i));
+		}
+		System.out.print("Introduce the disease id: ");
+		int diseaseId = Integer.parseInt(reader.readLine());
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
+		System.out.print("Introduce the worker id: ");
+		int workerId = Integer.parseInt(reader.readLine());
+		dbman.relationDiseaseWorker(diseaseId, workerId);
 	}
 
-	private static void relationDiseaseWorker() {
+	private static void relationPatientWorker() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	private static void relationPatientWorker() {
-		// TODO Auto-generated method stub
-		
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
+		System.out.print("Introduce the patient id: ");
+		int patientId = Integer.parseInt(reader.readLine());
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
+		System.out.print("Introduce the worker id: ");
+		int workerId = Integer.parseInt(reader.readLine());
+		dbman.relationPatientWorker(patientId, workerId);
 	}
 
 	private static void deleteDisease() throws NumberFormatException, IOException {
@@ -265,8 +305,15 @@ public class Menu {
 		dbman.setDisease(d, id);
 	}
 
-	private static void searchDiseaseByPatient() {
+	private static void searchDiseaseByPatient() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
+		System.out.print("Introduce patient id: ");
+		int patientId = Integer.parseInt(reader.readLine());
+		System.out.println(dbman.searchDiseaseByPatient(patientId));
 		
 	}
 

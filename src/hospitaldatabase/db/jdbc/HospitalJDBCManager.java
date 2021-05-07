@@ -504,7 +504,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				Time timeStart = rs.getTime("timeStart");
 				int duration = rs.getInt("duration");
 				boolean success = rs.getBoolean("success");
-				a.add(new Appointment(id, type, intervention, dateStart, timeStart, duration, success));
+				a.add(new Appointment(id, rs.getString("type"), intervention, dateStart, timeStart, duration, success));
 			}
 			rs.close();
 			prep.close();
@@ -795,6 +795,23 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Contract> listAllContracts() {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "SELECT * FROM Contract";
+			List<Contract> contracts = new ArrayList<Contract>();
+			PreparedStatement prep = c.prepareStatement(sql);
+			ResultSet rs = prep.executeQuery();
+			while(rs.next()) {
+				contracts.add(new Contract(rs.getInt("id"), rs.getInt("salary"), rs.getDate("hireDate"), rs.getDate("dateOfEnd"), getWorker(rs.getInt("id"))));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	

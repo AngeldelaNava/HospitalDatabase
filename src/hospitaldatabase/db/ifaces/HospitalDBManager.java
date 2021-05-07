@@ -19,6 +19,7 @@ public interface HospitalDBManager {
 	
 	public void addContract(Contract c);
 	public Contract getContract(int id);
+	public List<Contract> listAllContracts();
 	
 	public void addPatient(Patient p);
 	public Patient getPatient(int id);
