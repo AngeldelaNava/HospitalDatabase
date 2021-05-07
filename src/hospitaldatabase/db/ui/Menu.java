@@ -213,9 +213,21 @@ public class Menu {
 		dbman.relationWorkerContract(workerId, contractId);
 	}
 
-	private static void relationPatientDisease() {
+	private static void relationPatientDisease() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
+		System.out.print("Introduce the patient id: ");
+		int patientId = Integer.parseInt(reader.readLine());
+		List<Disease> appointments = dbman.searchDiseaseByName("");
+		for(int i = 0; i < appointments.size(); i++) {
+			System.out.println(appointments.get(i));
+		}
+		System.out.print("Introduce the disease id: ");
+		int appointmentId = Integer.parseInt(reader.readLine());
+		dbman.relationPatientDisease(patientId, appointmentId);		
 	}
 
 	private static void relationAppointmentWorker() {
