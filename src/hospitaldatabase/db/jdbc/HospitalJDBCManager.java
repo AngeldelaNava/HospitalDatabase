@@ -313,15 +313,15 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
+				sql = "SELECT d.id, d.diseaseName, d.prescription FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
 				prep = c.prepareStatement(sql);
 				prep.setInt(1, id);
 				ResultSet rs2 = prep.executeQuery();
 				List<Disease> d = new ArrayList<Disease>();
 				while(rs2.next()) {
-					String diseaseName = rs.getString("diseaseName");
-					String prescription = rs.getString("prescription");
-					d.add(new Disease(id, diseaseName, prescription)) ;
+					String diseaseName = rs2.getString("diseaseName");
+					String prescription = rs2.getString("prescription");
+					d.add(new Disease(rs2.getInt("id"), diseaseName, prescription)) ;
 				}
 				p = new Patient(id, name, gender, bloodType, roomNumber, null, d, null);
 				rs2.close();
@@ -348,15 +348,15 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
+				sql = "SELECT d.id, d.diseaseName, d.prescription FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
 				prep = c.prepareStatement(sql);
 				prep.setInt(1, id);
 				ResultSet rs2 = prep.executeQuery();
 				List<Disease> d = new ArrayList<Disease>();
 				while(rs2.next()) {
-					String diseaseName = rs.getString("diseaseName");
-					String prescription = rs.getString("prescription");
-					d.add(new Disease(id, diseaseName, prescription)) ;
+					String diseaseName = rs2.getString("diseaseName");
+					String prescription = rs2.getString("prescription");
+					d.add(new Disease(rs2.getInt("id"), diseaseName, prescription)) ;
 				}
 				p.add(new Patient(id, rs.getString("name"), gender, bloodType, roomNumber, null, d, null));
 			}
