@@ -151,7 +151,31 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
-				w = new Worker(id, name, type, job, disease, externCompany, project, null, null, null, null);
+				List<Appointment> appointments = new ArrayList<Appointment>();
+				sql = "SELECT a.* FROM Appointment AS a JOIN AppointmentWorker AS aw ON a.id = aw.appointmentId WHERE aw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				ResultSet rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					appointments.add(new Appointment(rs2.getInt("id"), rs2.getString("type"), rs2.getString("intervention"), rs2.getDate("dateStart"), rs2.getTime("timeStart"), rs2.getInt("duration"), rs2.getBoolean("success")));
+				}
+				List<Patient> patients = new ArrayList<Patient>();
+				sql = "SELECT p.* FROM Patient AS p JOIN PatientWorker AS pw ON p.id = pw.patientId WHERE pw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					patients.add(new Patient(rs2.getInt("id"), rs2.getString("name"), rs2.getString("gender"), rs2.getString("bloodType"), rs2.getInt("roomNumber"), null, null, null));
+				}
+				List<Disease> diseases = new ArrayList<Disease>();
+				sql = "SELECT d.* FROM Disease AS d JOIN DiseaseWorker AS dw ON d.id = dw.diseaseId WHERE dw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
+				}
+				w = new Worker(id, name, type, job, disease, externCompany, project, null, appointments, patients, diseases);
 			
 			}
 			rs.close();
@@ -178,7 +202,31 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
-				w.add(new Worker(id, rs.getString("name"), type, job, disease, externCompany, project, null, null, null, null));
+				List<Appointment> appointments = new ArrayList<Appointment>();
+				sql = "SELECT a.* FROM Appointment AS a JOIN AppointmentWorker AS aw ON a.id = aw.appointmentId WHERE aw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				ResultSet rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					appointments.add(new Appointment(rs2.getInt("id"), rs2.getString("type"), rs2.getString("intervention"), rs2.getDate("dateStart"), rs2.getTime("timeStart"), rs2.getInt("duration"), rs2.getBoolean("success")));
+				}
+				List<Patient> patients = new ArrayList<Patient>();
+				sql = "SELECT p.* FROM Patient AS p JOIN PatientWorker AS pw ON p.id = pw.patientId WHERE pw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					patients.add(new Patient(rs2.getInt("id"), rs2.getString("name"), rs2.getString("gender"), rs2.getString("bloodType"), rs2.getInt("roomNumber"), null, null, null));
+				}
+				List<Disease> diseases = new ArrayList<Disease>();
+				sql = "SELECT d.* FROM Disease AS d JOIN DiseaseWorker AS dw ON d.id = dw.diseaseId WHERE dw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
+				}
+				w.add(new Worker(id, rs.getString("name"), type, job, disease, externCompany, project, null, appointments, patients, diseases));
 			}
 			rs.close();
 			prep.close();
