@@ -313,7 +313,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE p.id = ?";
+				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
 				prep = c.prepareStatement(sql);
 				prep.setInt(1, id);
 				ResultSet rs2 = prep.executeQuery();
@@ -348,7 +348,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE p.id = ?";
+				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
 				prep = c.prepareStatement(sql);
 				prep.setInt(1, id);
 				ResultSet rs2 = prep.executeQuery();
