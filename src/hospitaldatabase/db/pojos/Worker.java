@@ -141,10 +141,22 @@ public class Worker implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Worker [id=" + id + ", name=" + name + ", type=" + type + ", job=" + job
+		String vuelta = "Worker [id=" + id + ", name=" + name + ", type=" + type + ", job=" + job
 				+ ", disease=" + disease + ", externCompany=" + externCompany
-				+ ", project=" + project + ", contract=" + contract + ", appointments=" + appointments + ", patients="
-				+ patients + ", diseases=" + diseases + "]";
+				+ ", project=" + project + ", appointments=\n";
+		for(int i = 0; i < appointments.size(); i++) {
+			vuelta += appointments.get(i) + "\n";
+		}
+		vuelta +=  ", patients=\n";
+		for(int i = 0; i < patients.size(); i++) {
+			vuelta += patients.get(i)+ "\n";
+		}
+		vuelta += ", diseases=\n";
+		for(int i = 0; i < diseases.size(); i++) {
+			vuelta += diseases.get(i) + "\n";
+		}
+		vuelta += "]";
+		return vuelta;
 	}
 	
 	
