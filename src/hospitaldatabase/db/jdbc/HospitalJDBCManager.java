@@ -313,10 +313,20 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				
-				p = new Patient(id, name, gender, bloodType, roomNumber,null, null, null);
-			
+				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE p.id = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				ResultSet rs2 = prep.executeQuery();
+				List<Disease> d = new ArrayList<Disease>();
+				while(rs2.next()) {
+					String diseaseName = rs.getString("diseaseName");
+					String prescription = rs.getString("prescription");
+					d.add(new Disease(id, diseaseName, prescription)) ;
+				}
+				p = new Patient(id, name, gender, bloodType, roomNumber, null, d, null);
+				rs2.close();
 			}
+			
 			rs.close();
 			prep.close();
 		}catch(SQLException e) {
@@ -338,7 +348,17 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String gender = rs.getString("gender");
 				String bloodType = rs.getString("bloodType");
 				int roomNumber = rs.getInt("roomNumber");
-				p.add(new Patient(id, rs.getString("name"), gender, bloodType, roomNumber, null, null, null));
+				sql = "SELECT d.* FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE p.id = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, id);
+				ResultSet rs2 = prep.executeQuery();
+				List<Disease> d = new ArrayList<Disease>();
+				while(rs2.next()) {
+					String diseaseName = rs.getString("diseaseName");
+					String prescription = rs.getString("prescription");
+					d.add(new Disease(id, diseaseName, prescription)) ;
+				}
+				p.add(new Patient(id, rs.getString("name"), gender, bloodType, roomNumber, null, d, null));
 			}
 			rs.close();
 			prep.close();
