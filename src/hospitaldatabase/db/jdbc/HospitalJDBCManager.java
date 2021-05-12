@@ -461,7 +461,17 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
-				Patient p = new Patient(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getString("bloodType"), rs.getInt("roomNumber"), null, null, null);
+				sql = "SELECT d.id, d.diseaseName, d.prescription FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, rs.getInt("id"));
+				ResultSet rs2 = prep.executeQuery();
+				List<Disease> d = new ArrayList<Disease>();
+				while(rs2.next()) {
+					String diseaseName = rs2.getString("diseaseName");
+					String prescription = rs2.getString("prescription");
+					d.add(new Disease(rs2.getInt("id"), diseaseName, prescription)) ;
+				}
+				Patient p = new Patient(rs.getInt("id"), rs.getString("name"), rs.getString("gender"), rs.getString("bloodType"), rs.getInt("roomNumber"), null, d, null);
 				patients.add(p);
 			}
 		} catch(SQLException e) {
