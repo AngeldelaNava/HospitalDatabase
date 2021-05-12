@@ -279,20 +279,29 @@ public class Menu {
 		for(int i = 0; i < workers.size(); i++) {
 			System.out.println(workers.get(i));
 		}
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce the worker id: ");
 		int workerId = Integer.parseInt(reader.readLine());
 		dbman.relationPatientWorker(patientId, workerId);
 	}
 
 	private static void deleteDisease() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchDiseaseByName(""));
+		List<Disease> diseases = dbman.searchDiseaseByName("");
+		for(int i = 0; i < diseases.size(); i++) {
+			System.out.println(diseases.get(i));
+		}
 		System.out.print("Introduce disease's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteDisease(id);
 	}
 
 	private static void setDisease() throws IOException {
-		System.out.println(dbman.searchDiseaseByName(""));
+		List<Disease> diseases = dbman.searchDiseaseByName("");
+		for(int i = 0; i < diseases.size(); i++) {
+			System.out.println(diseases.get(i));
+		}
 		System.out.print("Introduce disease id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getDisease(id));
@@ -324,7 +333,11 @@ public class Menu {
 	}
 
 	private static void searchDiseaseByID() throws NumberFormatException, IOException {
-		System.out.println("Introduce disease's name: ");
+		List<Disease> diseases = dbman.searchDiseaseByName("");
+		for(int i = 0; i < diseases.size(); i++) {
+			System.out.println(diseases.get(i));
+		}
+		System.out.println("Introduce disease's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getDisease(id));
 	}
@@ -340,23 +353,32 @@ public class Menu {
 	}
 
 	private static void deleteProject() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchWorkerByName(""));
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteProject(id);
 	}
 
 	private static void setProject() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchWorkerByName(""));
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
-		System.out.println("Introduce the project: ");
+		System.out.println("Introduce the new project: ");
 		String project = reader.readLine();
 		dbman.setProject(project, id);
 	}
 
 	private static void searchProject() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchWorkerByName(""));
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getProject(id));
@@ -364,16 +386,24 @@ public class Menu {
 	}
 
 	private static void deleteAppointment() throws NumberFormatException, IOException {
-		dbman.searchAppointmentByType("");
+		List<Appointment> appointments = dbman.searchAppointmentByType("");
+		for(int i = 0; i < appointments.size(); i++) {
+			System.out.println(appointments.get(i));
+		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteAppointment(id);
 	}
 
 	private static void setAppointment() throws NumberFormatException, IOException {
+		List<Appointment> appointments = dbman.searchAppointmentByType("");
+		for(int i = 0; i < appointments.size(); i++) {
+			System.out.println(appointments.get(i));
+		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
-		System.out.println("Please input the appointment info. If it is null, press enter");
+		System.out.println("Please input the appointment info if it does not change introduce the same values. If it is null, press enter");
+		System.out.println(dbman.getAppointment(id));
 		System.out.print("Introduce the type: ");
 		String type = reader.readLine();
 		System.out.print("Introduce the intervention: ");
@@ -430,6 +460,10 @@ public class Menu {
 	}
 
 	private static void searchAppointmentByID() throws NumberFormatException, IOException {
+		List<Appointment> appointments = dbman.searchAppointmentByType("");
+		for(int i = 0; i < appointments.size(); i++) {
+			System.out.println(appointments.get(i));
+		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getAppointment(id));
@@ -473,7 +507,10 @@ public class Menu {
 	}
 
 	private static void deletePatient() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchPatientByName(""));
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
 		System.out.print("Introduce patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deletePatient(id);
@@ -481,9 +518,14 @@ public class Menu {
 	}
 
 	private static void setPatient() throws NumberFormatException, IOException {
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
 		System.out.print("Introduce patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println("Please, input the new information. (If the info is unchanged enter the same information)");
+		System.out.println(dbman.getPatient(id));
 		System.out.print("Insert name: ");
 		String name = reader.readLine();
 		System.out.print("Insert the patient's gender: ");
@@ -516,6 +558,10 @@ public class Menu {
 	}
 
 	private static void searchPatientByID() throws NumberFormatException, IOException {
+		List<Patient> patients = dbman.checkListOfPatients();
+		for(int i = 0; i < patients.size(); i++) {
+			System.out.println(patients.get(i));
+		}
 		System.out.print("Introduce patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getPatient(id));
@@ -544,6 +590,10 @@ public class Menu {
 	}
 
 	private static void searchContractByID() throws NumberFormatException, IOException {
+		List<Contract> contracts = dbman.listAllContracts();
+		for(int i = 0; i < contracts.size(); i++) {
+			System.out.println(contracts.get(i));
+		}
 		System.out.print("Introduce contract's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getContract(id));
@@ -575,16 +625,24 @@ public class Menu {
 	}
 
 	private static void deleteWorker() throws NumberFormatException, IOException {
-		System.out.println(dbman.searchWorkerByName(""));
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		dbman.deleteWorker(id);
 	}
 
 	private static void setWorker() throws NumberFormatException, IOException {
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println("Please, input the new information. For not updating, input the same info. For setting null, press enter");
+		System.out.println(dbman.getWorker(id));
 		System.out.print("Insert name: ");
 		String name = reader.readLine();
 		System.out.print("Insert type of worker (Surgeon, Doctor, Nurse...): ");
@@ -621,6 +679,10 @@ public class Menu {
 	}
 
 	private static void searchWorkerByID() throws NumberFormatException, IOException {
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println(workers.get(i));
+		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
 		System.out.println(dbman.getWorker(id));

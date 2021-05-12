@@ -93,10 +93,15 @@ public class Patient implements Serializable{
 	public String toString() {
 		String vuelta = "Patient [id=" + id + ", name=" + name + ", gender=" + gender + ", bloodType=" + bloodType
 				+ ", roomNumber=" + roomNumber + ", diseases=\n";
+		if(this.diseases!= null) {
 		for(int i = 0; i < diseases.size(); i++) {
 			vuelta+= diseases.get(i) + "\n";
 		}
 		vuelta += "]";
+		}
+		else {
+		vuelta += "null]";
+		}
 		return vuelta;
 	}
 	
