@@ -11,22 +11,45 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
+import hospitaldatabase.db.ifaces.HospitalUserManager;
 import hospitaldatabase.db.jdbc.HospitalJDBCManager;
+import hospitaldatabase.db.jpa.HospitalJPAUserManager;
 import hospitaldatabase.db.pojos.*;
+import hospitaldatabase.db.pojos.users.User;
 
 
 
 public class Menu {
 
 	public static HospitalDBManager dbman = new HospitalJDBCManager();
+	public static HospitalUserManager userman = new HospitalJPAUserManager();
 	public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		dbman.connect();
+		userman.connect();
 		System.out.println("Database connection opened.");
 		do {
+			System.out.println("Choose an option");
+			System.out.println("1. Log in");
+			System.out.println("0. Exit");
+			int option = Integer.parseInt(reader.readLine());
+			switch(option) {
+			case 1:
+				login();
+				break;
+			case 0:
+				dbman.disconnect();
+				userman.disconnect();
+				System.exit(0);
+			default:
+				break;
+			}
+		}while(true);
+		
+		/*do {
 			System.out.println("Choose an option:");
 			System.out.println("1. Add a worker");
 			System.out.println("2. Search worker by id");
@@ -173,13 +196,54 @@ public class Menu {
 				break;
 			case 0:
 				dbman.disconnect();
+				userman.disconnect();
 				System.exit(0);
 				break;
 			default:
 				break;
 			}
-		} while(true);
+		} while(true);*/
 
+	}
+
+	private static void login() throws IOException {
+		// TODO Auto-generated method stub
+		System.out.print("Please, introduce your email address: ");
+		String email = reader.readLine();
+		System.out.print("Please, introduce your password: ");
+		String password = reader.readLine();
+		User user = userman.checkPassword(email, password);
+		if (user == null) {
+			System.out.println("Wrong email or password");
+		} else if(user.getRole().getName().equalsIgnoreCase("administrator")){
+			adminMenu();
+		} else if(user.getRole().getName().equalsIgnoreCase("biomedical engineer")){
+			biomedicalEngineerMenu();
+		} else if(user.getRole().getName().equalsIgnoreCase("hospital staff")){
+			hospitalStaffMenu();
+		} else if(user.getRole().getName().equalsIgnoreCase("patient")){
+			patientMenu();
+		}
+	}
+
+	private static void patientMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void hospitalStaffMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void biomedicalEngineerMenu() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void adminMenu() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static void relationPatientAppointment() throws NumberFormatException, IOException {
