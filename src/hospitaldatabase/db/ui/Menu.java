@@ -621,7 +621,6 @@ public class Menu {
 		Contract ct = new Contract(1, salary, Date.valueOf(hireDate), Date.valueOf(dateOfEnd), w);
 		dbman.addContract(ct);
 		
-		
 	}
 
 	private static void deleteWorker() throws NumberFormatException, IOException {
