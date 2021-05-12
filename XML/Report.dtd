@@ -1,0 +1,16 @@
+<!-- 
+The type of the attribute "id" of Employee needs
+to be CDATA instead of ID, since DTD doesn't allow
+IDs that start with a number
+-->
+< !DOCTYPE Hospital [
+   <!ELEMENT Patient (name, gender, bloodType, roomNumber, PatientDisease)>
+   <!ELEMENT name (#PCDATA)>
+   <!ELEMENT gender (#PCDATA)>
+   <!ELEMENT bloodType (#PCDATA)>
+   <!ATTLIST Patient id CDATA #REQUIRED
+   					 roomNumber CDATA #IMPLIED>
+   <!ELEMENT PatientDisease(Disease+)>  
+   <!ELEMENT Disease(prescription)>
+   <!ATTLIST Disease name CDATA #REQUIRED>
+]>
