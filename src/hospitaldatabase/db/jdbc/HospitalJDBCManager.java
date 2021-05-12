@@ -291,7 +291,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			if (p.getRoomNumber() == null) {
 				prep.setNull(4, java.sql.Types.INTEGER);
 			} else {
+				
 				prep.setInt(4, p.getRoomNumber());
+				
 			}
 			prep.executeUpdate();
 			prep.close();
