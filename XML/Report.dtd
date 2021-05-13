@@ -1,7 +1,5 @@
 <!-- 
-The type of the attribute "id" of Employee needs
-to be CDATA instead of ID, since DTD doesn't allow
-IDs that start with a number
+
 -->
 < !DOCTYPE Hospital [
    <!ELEMENT Patient (name, gender, bloodType, roomNumber, PatientDisease)>
