@@ -1,5 +1,3 @@
-package sample.db.xml;
-
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -10,10 +8,10 @@ import org.xml.sax.SAXException;
 
 import sample.db.xml.utils.CustomErrorHandler;
 
-public class DTDCheckerReport {
+public class DTDChecker {
 
     public static void main(String[] args) {
-        File xmlFile = new File("./xmls/External-Hospital.xml"); 
+        File xmlFile = new File("./XML/External-Hospital.xml"); 
         try {
         	// Create a DocumentBuilderFactory
             DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
