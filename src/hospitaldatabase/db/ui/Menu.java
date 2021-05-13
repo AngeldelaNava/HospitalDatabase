@@ -10,6 +10,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
+
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.ifaces.HospitalUserManager;
 import hospitaldatabase.db.jdbc.HospitalJDBCManager;
@@ -243,7 +245,164 @@ public class Menu {
 
 	private static void adminMenu() {
 		// TODO Auto-generated method stub
-		
+		int choice = -1;
+		do {
+			try {
+				System.out.println("Choose an option:");
+				System.out.println("1. Add a worker");
+				System.out.println("2. Search worker by id");
+				System.out.println("3. Search worker by name");
+				System.out.println("4. Edit worker information and data");
+				System.out.println("5. Delete worker");
+				System.out.println("6. Add a contract");
+				System.out.println("7. Search contract by id");
+				System.out.println("8. Add a patient");
+				System.out.println("9. Search patient by id");
+				System.out.println("10. Search patient by name");
+				System.out.println("11. Read all patients data");
+				System.out.println("12. Edit patient data");
+				System.out.println("13. Delete patient");
+				System.out.println("14. Add an appointment");
+				System.out.println("15. Search appointment by id");
+				System.out.println("16. Search appointment by date and time");
+				System.out.println("17. Search appointment by date");
+				System.out.println("18. Search appointment by type");
+				System.out.println("19. Edit appointment data");
+				System.out.println("20. Delete appointment");
+				System.out.println("21. Search the project from a worker");
+				System.out.println("22. Add/edit a worker's project");
+				System.out.println("23. Delete a worker's project");
+				System.out.println("24. Add a disease");
+				System.out.println("25. Search disease by id");
+				System.out.println("26. Search disease by name");
+				System.out.println("27. Search disease by patient");
+				System.out.println("28. Edit disease data");
+				System.out.println("29. Delete disease");
+				System.out.println("30. Relate a patient with a worker");
+				System.out.println("31. Relate a disease with a worker");
+				System.out.println("32. Relate an appointment with a worker");
+				System.out.println("33. Relate a patient with a disease");
+				System.out.println("34. Relate a worker with a contract");
+				System.out.println("35. Relate a patient with an appointment");
+				System.out.println("0. Exit");
+				choice = Integer.parseInt(reader.readLine());
+				switch (choice) {
+				case 1:
+					addWorker();
+					break;
+				case 2:
+					searchWorkerByID();
+					break;
+				case 3:
+					searchWorkerByName();
+					break;
+				case 4:
+					setWorker();
+					break;
+				case 5:
+					deleteWorker();
+					break;
+				case 6:
+					addContract();
+					break;
+				case 7:
+					searchContractByID();
+					break;
+				case 8:
+					addPatient();
+					break;
+				case 9:
+					searchPatientByID();
+					break;
+				case 10:
+					searchPatientByName();
+					break;
+				case 11:
+					readAllPatientsData();
+					break;
+				case 12:
+					setPatient();
+					break;
+				case 13:
+					deletePatient();
+					break;
+				case 14:
+					addAppointment();
+					break;
+				case 15:
+					searchAppointmentByID();
+					break;
+				case 16:
+					searchAppointmentByDateAndTime();
+					break;
+				case 17:
+					searchAppointmentByDate();
+					break;
+				case 18:
+					searchAppointmentByType();
+					break;
+				case 19:
+					setAppointment();
+					break;
+				case 20:
+					deleteAppointment();
+					break;
+				case 21:
+					searchProject();
+					break;
+				case 22:
+					setProject();
+					break;
+				case 23:
+					deleteProject();
+					break;
+				case 24:
+					addDisease();
+					break;
+				case 25:
+					searchDiseaseByID();
+					break;
+				case 26:
+					searchDiseaseByName();
+					break;
+				case 27:
+					searchDiseaseByPatient();
+					break;
+				case 28:
+					setDisease();
+					break;
+				case 29:
+					deleteDisease();
+					break;
+				case 30:
+					relationPatientWorker();
+					break;
+				case 31:
+					relationDiseaseWorker();
+					break;
+				case 32:
+					relationAppointmentWorker();
+					break;
+				case 33:
+					relationPatientDisease();
+					break;
+				case 34:
+					relationWorkerContract();
+					break;
+				case 35:
+					relationPatientAppointment();
+					break;
+				default:
+					break;
+				}
+			}catch(IOException e) {
+				e.printStackTrace();
+			}catch(NumberFormatException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} while(choice != 0);
 	}
 
 	private static void relationPatientAppointment() throws NumberFormatException, IOException {
