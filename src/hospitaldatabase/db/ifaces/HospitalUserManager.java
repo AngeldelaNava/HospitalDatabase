@@ -14,4 +14,5 @@ public interface HospitalUserManager {
 	public Role getRole(int id);
 	public List<Role> getRoles();
 	public User checkPassword(String email, String password);
+	public List<User> getAdmins();
 }

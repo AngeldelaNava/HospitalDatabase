@@ -29,11 +29,19 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 			this.newRole(new Role("hospital staff"));
 			this.newRole(new Role("patient"));
 		}
-		//List<User> existingUsers = this.getUsers();
-		//if(existingUsers.size() < 1){
-			//this.newUser(new User("admin", "admin", existingRoles.get(0)));
-		//}
+		List<User> existingAdmins = this.getAdmins();
+		if(existingAdmins.size() < 1){
+			try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update("admin".getBytes());
+			byte[] hash = md.digest();
+			this.newUser(new User("admin", hash, existingRoles.get(0)));
+			}catch(NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+		}
 	}
+		
 
 	@Override
 	public void disconnect() {
@@ -83,6 +91,14 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 			return null;
 		}
 		return null;
+	}
+
+	@Override
+	public List<User> getAdmins() {
+		// TODO Auto-generated method stub
+		Query q = em.createNativeQuery("SELECT u.* FROM User AS u JOIN Role AS r ON u.role_id = r.id WHERE r.name LIKE ?", User.class);
+		q.setParameter(1, "administrator");
+		return (List<User>) q.getResultList();
 	}
 
 }
