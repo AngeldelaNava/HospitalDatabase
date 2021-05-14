@@ -1,3 +1,5 @@
+package hospitaldatabase.db.xml;
+
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.DocumentBuilder;
@@ -6,11 +8,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import sample.db.xml.utils.CustomErrorHandler;
-
 public class DTDChecker {
 
     public static void main(String[] args) {
+    	
         File xmlFile = new File("./XML/External-Hospital.xml"); 
         try {
         	// Create a DocumentBuilderFactory
