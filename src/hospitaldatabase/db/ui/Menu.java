@@ -218,32 +218,32 @@ public class Menu {
 		if (user == null) {
 			System.out.println("Wrong email or password");
 		} else if(user.getRole().getName().equalsIgnoreCase("administrator")){
-			adminMenu();
+			adminMenu(user);
 		} else if(user.getRole().getName().equalsIgnoreCase("biomedical engineer")){
-			biomedicalEngineerMenu();
+			biomedicalEngineerMenu(user);
 		} else if(user.getRole().getName().equalsIgnoreCase("hospital staff")){
-			hospitalStaffMenu();
+			hospitalStaffMenu(user);
 		} else if(user.getRole().getName().equalsIgnoreCase("patient")){
-			patientMenu();
+			patientMenu(user);
 		}
 	}
 
-	private static void patientMenu() {
+	private static void patientMenu(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void hospitalStaffMenu() {
+	private static void hospitalStaffMenu(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void biomedicalEngineerMenu() {
+	private static void biomedicalEngineerMenu(User user) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private static void adminMenu() {
+	private static void adminMenu(User user) {
 		// TODO Auto-generated method stub
 		int choice = -1;
 		do {
@@ -284,6 +284,7 @@ public class Menu {
 				System.out.println("33. Relate a patient with a disease");
 				System.out.println("34. Relate a worker with a contract");
 				System.out.println("35. Relate a patient with an appointment");
+				System.out.println("36. Change password");
 				System.out.println("0. Exit");
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
@@ -392,6 +393,11 @@ public class Menu {
 				case 35:
 					relationPatientAppointment();
 					break;
+				case 36:
+					user = changePassword(user);
+					break;
+				case 0:
+					return;
 				default:
 					break;
 				}
@@ -402,7 +408,28 @@ public class Menu {
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
-		} while(choice != 0);
+		} while(true);
+	}
+
+	private static User changePassword(User user) throws IOException {
+		// TODO Auto-generated method stub
+		String password, passwordAgain;
+		do {
+			System.out.print("Introduce the new password: ");
+			password = reader.readLine();
+			System.out.print("Introduce the new password again: ");
+			passwordAgain = reader.readLine();
+			if (!password.equals(passwordAgain)) {
+				System.out.println("You have introduced different passwords");
+			}
+		} while(!password.equals(passwordAgain));
+		User u = userman.changePassword(user.getId(), password);
+		if (u != null) {
+			user = u;
+		} else {
+			System.out.println("There was a problem changing the password");
+		}
+		return user;
 	}
 
 	private static void relationPatientAppointment() throws NumberFormatException, IOException {
