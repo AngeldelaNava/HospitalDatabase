@@ -103,7 +103,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " PRIMARY KEY(diseaseId, workerId))";
 			stmnt.executeUpdate(sql);
 		} catch(SQLException e) {
-			e.printStackTrace();
 			System.out.println("There was an exception creating the tables");
 		}
 	}

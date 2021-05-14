@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
@@ -35,7 +36,7 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update("admin".getBytes());
 			byte[] hash = md.digest();
-			this.newUser(new User("admin", hash, existingRoles.get(0)));
+			this.newUser(new User("admin", hash, getRole(1)));
 			}catch(NoSuchAlgorithmException e) {
 				e.printStackTrace();
 			}
