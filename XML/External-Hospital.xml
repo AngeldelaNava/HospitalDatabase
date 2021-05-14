@@ -1,22 +1,21 @@
 
 <!DOCTYPE Hospital [
    <!ELEMENT Patient (name, gender, bloodType, PatientDisease)>
+   <!ATTLIST Patient id CDATA #REQUIRED
+   					 roomNumber CDATA #IMPLIED>
    <!ELEMENT name (#PCDATA)>
    <!ELEMENT gender (#PCDATA)>
    <!ELEMENT bloodType (#PCDATA)>
-   <!ATTLIST Patient id CDATA #REQUIRED
-   					 roomNumber CDATA #IMPLIED>
    <!ELEMENT PatientDisease (Disease+)>  
    <!ELEMENT Disease (prescription)>
    <!ELEMENT prescription (#PCDATA)>
    <!ATTLIST Disease name CDATA #REQUIRED>
 ]>
 
-<Patient>
+<Patient id="03" roomNumber="114">
 	<name>Marta Bañon</name>
 	<gender>female</gender>
 	<bloodType>A+</bloodType>
-	<Patient id="03" roomNumber="114"> esta linea falla
 	<PatientDisease>
 		<Disease name="Humerus fracture">
 			<prescription>pain killers</prescription>
