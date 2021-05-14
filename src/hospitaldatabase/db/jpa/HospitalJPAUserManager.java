@@ -101,4 +101,25 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 		return (List<User>) q.getResultList();
 	}
 
+
+	@Override
+	public User changePassword(int id, String password) {
+		// TODO Auto-generated method stub
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			md.update(password.getBytes());
+			byte[] hash = md.digest();
+			Query q = em.createNativeQuery("SELECT * FROM User WHERE id = ?", User.class);
+			q.setParameter(1, id);
+			User u = (User) q.getSingleResult();
+			em.getTransaction().begin();
+			u.setPassword(hash);
+			em.getTransaction().commit();
+			return u;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
