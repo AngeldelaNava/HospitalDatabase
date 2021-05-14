@@ -1,0 +1,7 @@
+This week we expected to finish the general menu and start with log in.
+====================================
+This week we finished the general menu, made the log in, started dividing the menu into 4 sub-menus by the 4 roles that a user can have, created a DTD schema, started xlst and created a DTD checker.
+------------------------------------
+We divided the work into 2 mini-groups of 2 people each one. One for making all related with JPA and nother one for XML.
+====================================
+Next weeks we expet to finish the programming and fix the diagrams mistakes, because lots of changes have been made.
