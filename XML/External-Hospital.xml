@@ -1,39 +1,19 @@
 
-<!DOCTYPE Hospital [
-   <!ELEMENT Patient (name, gender, bloodType, PatientDisease)>
-   <!ATTLIST Patient id CDATA #REQUIRED
-   					 roomNumber CDATA #IMPLIED>
-   <!ELEMENT name (#PCDATA)>
-   <!ELEMENT gender (#PCDATA)>
-   <!ELEMENT bloodType (#PCDATA)>
-   <!ELEMENT PatientDisease (Disease+)>  
-   <!ELEMENT Disease (prescription)>
-   <!ELEMENT prescription (#PCDATA)>
-   <!ATTLIST Disease name CDATA #REQUIRED>
-]>
 
-<Patient id="03" roomNumber="114">
+<!DOCTYPE Patient SYSTEM "Hospital.dtd">
+<Patient id="03">
 	<name>Marta Bañon</name>
 	<gender>female</gender>
 	<bloodType>A+</bloodType>
+	<roomNumber>114</roomNumber>
 	<PatientDisease>
 		<Disease name="Humerus fracture">
-			<prescription>pain killers</prescription>
+			<Prescription>pain killers</Prescription>
 		</Disease>
 		<Disease name="Appendicitis">
-			<prescription>antibiotics</prescription>
+			<Prescription>antibiotics</Prescription>
 		</Disease>
 	</PatientDisease>
 </Patient>
 
-<Patient>
-	<name>Sofia Chollet</name>
-	<gender>female</gender>
-	<bloodType>O-</bloodType>
-	<Patient id="04" roomNumber="256"> mal
-	<PatientDisease>
-		<Disease name="Leukemia">
-			<prescription>drugs</prescription>
-		</Disease>
-	</PatientDisease>
-</Patient>
+

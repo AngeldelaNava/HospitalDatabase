@@ -1,14 +1,13 @@
-<!-- 
 
--->
-< !DOCTYPE Hospital [
-   <!ELEMENT Patient (name, gender, bloodType, roomNumber, PatientDisease)>
+ <!ELEMENT Patient (name, gender, bloodType, roomNumber, PatientDisease)>
    <!ELEMENT name (#PCDATA)>
    <!ELEMENT gender (#PCDATA)>
    <!ELEMENT bloodType (#PCDATA)>
-   <!ATTLIST Patient id CDATA #REQUIRED
-   					 roomNumber CDATA #IMPLIED>
-   <!ELEMENT PatientDisease(Disease+)>  
-   <!ELEMENT Disease(prescription)>
-   <!ATTLIST Disease name CDATA #REQUIRED>
-]>
+   <!ELEMENT roomNumber (#PCDATA)>		
+   <!ATTLIST Patient id CDATA #REQUIRED>
+   <!ELEMENT PatientDisease (Disease+)>  
+	<!ELEMENT Disease (Prescription)>
+      	<!ELEMENT Prescription (#PCDATA)>
+<!ATTLIST Disease name CDATA #REQUIRED>
+
+
