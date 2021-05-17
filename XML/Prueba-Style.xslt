@@ -11,7 +11,7 @@
       <th>Job</th>       
     </tr>
     <xsl:for-each select="Worker">
-    <xsl:if test="salary>100">
+    <xsl:if test="salary>1200">
       <tr>
         <td><xsl:value-of select="name"/></td>
         <td><xsl:value-of select="salary"/></td>
