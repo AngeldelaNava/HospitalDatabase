@@ -1,13 +1,14 @@
 
- <!ELEMENT Patient (name, gender, bloodType, roomNumber, PatientDisease)>
+ <!ELEMENT Hospital (name, city, ListOfWorkers)>
    <!ELEMENT name (#PCDATA)>
-   <!ELEMENT gender (#PCDATA)>
-   <!ELEMENT bloodType (#PCDATA)>
-   <!ELEMENT roomNumber (#PCDATA)>		
-   <!ATTLIST Patient id CDATA #REQUIRED>
-   <!ELEMENT PatientDisease (Disease+)>  
-	<!ELEMENT Disease (Prescription)>
-      	<!ELEMENT Prescription (#PCDATA)>
-<!ATTLIST Disease name CDATA #REQUIRED>
+   <!ELEMENT city (#PCDATA)>
+   <!ELEMENT ListOfWorkers (Worker+)>
+   <!ELEMENT Worker (name, job, salary, hireDate, endDate)>
+   <!ELEMENT name (#PCDATA)>
+	<!ELEMENT job (#PCDATA)>
+	<!ELEMENT salary (#PCDATA)>
+	<!ELEMENT hireDate (#PCDATA)>
+	<!ELEMENT endDate (#PCDATA)>	
+<!ATTLIST Worker id CDATA #REQUIRED>
 
 
