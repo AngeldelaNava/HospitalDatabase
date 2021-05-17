@@ -130,7 +130,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(4, w.getDisease());
 			prep.setString(5, w.getExternCompany());
 			prep.setString(6, w.getProject());
-			prep.setInt(6, userId);
+			prep.setInt(7, userId);
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -290,7 +290,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
 			prep.setString(3, p.getBloodType());
-			prep.setInt(4, userId);
 			if (p.getRoomNumber() == null) {
 				prep.setNull(4, java.sql.Types.INTEGER);
 			} else {
@@ -298,6 +297,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				prep.setInt(4, p.getRoomNumber());
 				
 			}
+			prep.setInt(5, userId);
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
