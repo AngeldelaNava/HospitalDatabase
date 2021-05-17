@@ -1,0 +1,11 @@
+<!DOCTYPE Patient SYSTEM "Patient.dtd">
+<Patient id="04"> 
+	<name>Sofia Chollet</name>
+	<gender>female</gender>
+	<bloodType>O-</bloodType>
+	<PatientDisease>
+		<Disease name="Leukemia">
+			<prescription>drugs</prescription>
+		</Disease>
+	</PatientDisease>
+</Patient>

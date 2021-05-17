@@ -12,7 +12,7 @@ public class DTDChecker {
 
     public static void main(String[] args) {
     	
-        File xmlFile = new File("./XML/External-Hospital.xml"); 
+        File xmlFile = new File("./XML/Patient.xml"); 
         try {
         	// Create a DocumentBuilderFactory
             DocumentBuilderFactory dBF = DocumentBuilderFactory.newInstance();
