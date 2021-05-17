@@ -1,0 +1,13 @@
+
+<!ELEMENT Hospital (name, city, Worker)>
+	<!ELEMENT name (#PCDATA)>
+	<!ELEMENT city (#PCDATA)>
+	<!ELEMENT Worker (name, job, salary, hireDate, endDate)>
+   		<!ELEMENT name (#PCDATA)>
+   		<!ELEMENT job (#PCDATA)>
+   		<!ELEMENT salary (#PCDATA)>
+   		<!ELEMENT hireDate (#PCDATA)>
+   		<!ELEMENT endDate (#PCDATA)>		
+   		<!ATTLIST Worker id CDATA #REQUIRED>
+
+
