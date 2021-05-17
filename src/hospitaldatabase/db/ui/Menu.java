@@ -3,6 +3,8 @@ package hospitaldatabase.db.ui;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ import hospitaldatabase.db.ifaces.HospitalUserManager;
 import hospitaldatabase.db.jdbc.HospitalJDBCManager;
 import hospitaldatabase.db.jpa.HospitalJPAUserManager;
 import hospitaldatabase.db.pojos.*;
+import hospitaldatabase.db.pojos.users.Role;
 import hospitaldatabase.db.pojos.users.User;
 
 
@@ -289,7 +292,7 @@ public class Menu {
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
 				case 1:
-					addWorker();
+					registerWorker();
 					break;
 				case 2:
 					searchWorkerByID();
@@ -310,7 +313,7 @@ public class Menu {
 					searchContractByID();
 					break;
 				case 8:
-					addPatient();
+					registerPatient();
 					break;
 				case 9:
 					searchPatientByID();
@@ -409,6 +412,55 @@ public class Menu {
 				e.printStackTrace();
 			}
 		} while(true);
+	}
+	
+	private static void registerWorker() throws IOException, NoSuchAlgorithmException {
+		// TODO Auto-generated method stub
+		System.out.print("Please write your email address: ");
+		String email = reader.readLine();
+		System.out.print("Please write your password: ");
+		String password = reader.readLine();
+		int number = 0;
+		do {
+			System.out.println("Introduce '1' for a hospital staff and a '2' for a biomedical engineer: ");
+			try {
+				number = Integer.parseInt(reader.readLine());
+				if(!(number == 1 || number == 2)) {
+					System.out.println("Non-valid number");
+				}
+			} catch(NumberFormatException e) {
+				System.out.println("You have not introduced a number");
+			}
+		} while(!(number == 1 || number == 2));
+		Role role = null;
+		switch(number) {
+		case 1:
+			role = userman.getRole(3);
+			break;
+		case 2:
+			role = userman.getRole(2);
+			break;
+		}
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] hash = md.digest();
+		User u = new User(email, hash, role);
+		userman.newUser(u);
+		addWorker(u.getId());
+	}
+
+	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
+		System.out.print("Please write your email address: ");
+		String email = reader.readLine();
+		System.out.print("Please write your password: ");
+		String password = reader.readLine();
+		Role role = userman.getRole(4);
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(password.getBytes());
+		byte[] hash = md.digest();
+		User u = new User(email, hash, role);
+		userman.newUser(u);
+		addPatient(u.getId());
 	}
 
 	private static User changePassword(User user) throws IOException {
@@ -818,7 +870,7 @@ public class Menu {
 			
 	}
 
-	private static void addPatient() throws NumberFormatException, IOException {
+	private static void addPatient(Integer userId) throws NumberFormatException, IOException {
 		System.out.print("Please, input the patient's info\n"
 				+ "Insert patients name: ");
 		String patientName = reader.readLine();
@@ -835,7 +887,7 @@ public class Menu {
 			roomNumber = Integer.parseInt(reading);
 		}
 		Patient p = new Patient(1, patientName, gender, bloodType, roomNumber, null, null, null);
-		dbman.addPatient(p);
+		dbman.addPatient(p, userId);
 		
 	}
 
@@ -937,7 +989,7 @@ public class Menu {
 		System.out.println(dbman.getWorker(id));
 	}
 
-	private static void addWorker() throws IOException {
+	private static void addWorker(Integer userId) throws IOException {
 		System.out.print("Please, input the worker info\n"
 				+ "Insert name: ");
 		String name = reader.readLine();
@@ -964,7 +1016,7 @@ public class Menu {
 			project = null;
 		}
 		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
-		dbman.addWorker(w);
+		dbman.addWorker(w, userId);
 	}
 
 }

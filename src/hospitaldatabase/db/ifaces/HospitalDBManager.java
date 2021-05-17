@@ -11,7 +11,7 @@ public interface HospitalDBManager {
 	public void connect();
 	public void disconnect();
 	
-	public void addWorker(Worker w);
+	public void addWorker(Worker w, int userId);
 	public Worker getWorker(int id);
 	public List<Worker> searchWorkerByName(String name);
 	public void setWorker(Worker w, int id);
@@ -21,7 +21,7 @@ public interface HospitalDBManager {
 	public Contract getContract(int id);
 	public List<Contract> listAllContracts();
 	
-	public void addPatient(Patient p);
+	public void addPatient(Patient p, int userId);
 	public Patient getPatient(int id);
 	public List<Patient> searchPatientByName(String name);
 	public List<Patient> checkListOfPatients();

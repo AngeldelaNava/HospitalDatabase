@@ -51,7 +51,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " job TEXT, "
 					+ " disease TEXT, "
 					+ " externCompany TEXT, "
-					+ " project TEXT) ";
+					+ " project TEXT, "
+					+ " userId REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE) ";
 			stmnt.executeUpdate(sql);
 			sql = "CREATE TABLE Contract( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -65,7 +66,8 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " name TEXT NOT NULL, "
 					+ " gender TEXT NOT NULL, "
 					+ " bloodType TEXT NOT NULL, "
-					+ " roomNumber INTEGER)";
+					+ " roomNumber INTEGER, "
+					+ " userId REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE)";
 			stmnt.executeUpdate(sql);
 			sql = "CREATE TABLE Disease( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -118,9 +120,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void addWorker(Worker w) {
+	public void addWorker(Worker w, int userId) {
 		try {
-			String sql = "INSERT INTO Worker (name, type, job, disease, externCompany, project) VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Worker (name, type, job, disease, externCompany, project, userId) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
@@ -128,6 +130,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			prep.setString(4, w.getDisease());
 			prep.setString(5, w.getExternCompany());
 			prep.setString(6, w.getProject());
+			prep.setInt(6, userId);
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -280,13 +283,14 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	}
 
 	@Override
-	public void addPatient(Patient p) {
+	public void addPatient(Patient p, int userId) {
 		try {
-			String sql = "INSERT INTO Patient (name, gender, bloodType, roomNumber) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Patient (name, gender, bloodType, roomNumber, userId) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, p.getName());
 			prep.setString(2, p.getGender());
 			prep.setString(3, p.getBloodType());
+			prep.setInt(4, userId);
 			if (p.getRoomNumber() == null) {
 				prep.setNull(4, java.sql.Types.INTEGER);
 			} else {
