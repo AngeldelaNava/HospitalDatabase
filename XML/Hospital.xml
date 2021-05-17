@@ -1,34 +1,30 @@
-<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="Hospital-Style.xslt"?>
 
+<!DOCTYPE Patient SYSTEM "Hospital.dtd">
+    <Patient id="03">
+	<name>Marta Bañon</name>
+	<gender>female</gender>
+	<bloodType>A+</bloodType>
+	<roomNumber>114</roomNumber>
+	<PatientDisease>
+		<Disease name="Humerus fracture">
+			<Prescription>pain killers</Prescription>
+		</Disease>
+		<Disease name="Appendicitis">
+			<Prescription>antibiotics</Prescription>
+		</Disease>
+	</PatientDisease>
+</Patient>
 
-<!DOCTYPE Hospital SYSTEM "Hospital.dtd">
-<Hospital>
-<name>Hospital Clínico</name>
-<city>Madrid</city>
-<ListOfWorkers>
-
-<Worker id="03">
-<name>Marta Bañon</name>
-<job>Biomedical Engineer</job>
-<salary>6000</salary>
-<hireDate>14/10/2014</hireDate>
-<endDate>02/01/2027</endDate>
-</Worker>
-
-<Worker id="04">
-<name>Sofia Chollet</name>
-<job>Surgeon</job>
-<salary>9000</salary>
-<hireDate>21/09/2010</hireDate>
-<endDate>01/05/2050</endDate>
-</Worker>
-
-<Worker id="05">
-<name>Angel de la Nava</name>
-<job>Nurse</job>
-<salary>1000</salary>
-<hireDate>17/09/2020</hireDate>
-<endDate>23/05/2025</endDate>
-</Worker>
-</ListOfWorkers>
-</Hospital>
+<!DOCTYPE Patient SYSTEM "Hospital.dtd">
+<Patient id="04"> 
+	<name>Sofia Chollet</name>
+	<gender>female</gender>
+	<bloodType>O-</bloodType>
+	<roomNumber>256</roomNumber>
+	<PatientDisease>
+		<Disease name="Leukemia">
+			<Prescription>drugs</Prescription>
+		</Disease>
+	</PatientDisease>
+</Patient>
