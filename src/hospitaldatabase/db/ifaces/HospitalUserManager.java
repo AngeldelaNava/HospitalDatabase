@@ -16,4 +16,5 @@ public interface HospitalUserManager {
 	public User checkPassword(String email, String password);
 	public List<User> getAdmins();
 	public User changePassword(int id, String password);
+	public void deleteUser(int userId);
 }

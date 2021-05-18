@@ -122,4 +122,16 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 		return null;
 	}
 
+
+	@Override
+	public void deleteUser(int userId) {
+		// TODO Auto-generated method stub
+		Query q = em.createNativeQuery("SELECT * FROM User WHERE ID = ?", User.class);
+		q.setParameter(1, userId);
+		User u = (User) q.getSingleResult();
+		em.getTransaction().begin();
+		em.remove(u);
+		em.getTransaction().commit();
+	}
+
 }

@@ -815,8 +815,9 @@ public class Menu {
 		}
 		System.out.print("Introduce patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
+		int userId = dbman.getUserFromPatient(id);
 		dbman.deletePatient(id);
-		
+		userman.deleteUser(userId);
 	}
 
 	private static void setPatient() throws NumberFormatException, IOException {
@@ -932,7 +933,9 @@ public class Menu {
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
+		int userId = dbman.getUserFromWorker(id);
 		dbman.deleteWorker(id);
+		userman.deleteUser(userId);
 	}
 
 	private static void setWorker() throws NumberFormatException, IOException {

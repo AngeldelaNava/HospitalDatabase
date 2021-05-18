@@ -11,6 +11,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
+
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.pojos.Appointment;
 import hospitaldatabase.db.pojos.Contract;
@@ -895,6 +897,41 @@ public class HospitalJDBCManager implements HospitalDBManager {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public int getUserFromWorker(int workerId) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "SELECT userId FROM Worker WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, workerId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("userId");
+			}
+			return 0;
+		} catch (SQLException e) {
+			return 0;
+		}
+		
+	}
+
+	@Override
+	public Integer getUserFromPatient(int patientId) {
+		// TODO Auto-generated method stub
+		try {
+			String sql = "SELECT userId FROM Patient WHERE id = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, patientId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				return rs.getInt("userId");
+			}
+			return 0;
+		} catch (SQLException e) {
+			return 0;
+		}
 	}
 
 	

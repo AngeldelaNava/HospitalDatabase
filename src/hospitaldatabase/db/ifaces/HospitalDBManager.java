@@ -16,6 +16,7 @@ public interface HospitalDBManager {
 	public List<Worker> searchWorkerByName(String name);
 	public void setWorker(Worker w, int id);
 	public void deleteWorker(int id);
+	public int getUserFromWorker(int workerId);
 	
 	public void addContract(Contract c);
 	public Contract getContract(int id);
@@ -27,6 +28,7 @@ public interface HospitalDBManager {
 	public List<Patient> checkListOfPatients();
 	public void setPatient(Patient p, int id);
 	public void deletePatient(int id);
+	public Integer getUserFromPatient(int patientId);
 	
 	public void addAppointment(Appointment a);
 	public Appointment getAppointment(int id);
