@@ -310,7 +310,7 @@ public class Menu {
 				System.out.println("34. Relate a worker with a contract");
 				System.out.println("35. Relate a patient with an appointment");
 				System.out.println("36. Change password");
-				System.out.println("0. Exit");
+				System.out.println("0. Log out");
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
 				case 1:
