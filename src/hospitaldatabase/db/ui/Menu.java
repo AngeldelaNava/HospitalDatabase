@@ -231,9 +231,31 @@ public class Menu {
 		}
 	}
 
-	private static void patientMenu(User user) {
+	private static void patientMenu(User user) throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
-		
+		do {
+			System.out.println("Choose an option:");
+			System.out.println("1. Check my data");
+			System.out.println("2. Search a disease");
+			System.out.println("3. Check my medical history");
+			System.out.println("0. Log out");
+			int choice = Integer.parseInt(reader.readLine());
+			switch (choice) {
+			case 1:
+				
+				break;
+			case 2:
+				
+				break;
+			case 3:
+				
+				break;
+			case 0:
+				return;
+				
+			}
+		} while(true);
+
 	}
 
 	private static void hospitalStaffMenu(User user) {

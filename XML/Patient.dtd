@@ -1,0 +1,10 @@
+
+<!ELEMENT Patient (name, gender, bloodType, PatientDisease)>
+   <!ATTLIST Patient id CDATA #REQUIRED>
+   <!ELEMENT name (#PCDATA)>
+   <!ELEMENT gender (#PCDATA)>
+   <!ELEMENT bloodType (#PCDATA)>
+   <!ELEMENT PatientDisease (Disease+)>
+   <!ELEMENT Disease (prescription)>
+<!ATTLIST Disease name CDATA #REQUIRED>
+<!ELEMENT prescription (#PCDATA)>
