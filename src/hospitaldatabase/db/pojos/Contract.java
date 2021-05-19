@@ -3,6 +3,20 @@ package hospitaldatabase.db.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+@Entity
+@Table(name = "contracts")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Contract")
+@XmlType(propOrder = { "salary", "hireDate", "dateOfEnd","Worker"})
+
 public class Contract implements Serializable{
 
 	/**

@@ -4,6 +4,20 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Time;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+@Entity
+@Table(name = "appointments")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Appointment")
+@XmlType(propOrder = { "type", "intervention", "dateStart","timeStart","duration","sucess"})
+
 public class Appointment implements Serializable{
 
 	/**

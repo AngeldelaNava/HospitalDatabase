@@ -2,6 +2,21 @@ package hospitaldatabase.db.pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
+
+
+@Entity
+@Table(name = "diseases")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Disease")
+@XmlType(propOrder = { "diseaseName", "prescription"})
+
+
 public class Disease implements Serializable{
 
 	/**
