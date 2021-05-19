@@ -17,10 +17,12 @@ public interface HospitalDBManager {
 	public void setWorker(Worker w, int id);
 	public void deleteWorker(int id);
 	public int getUserFromWorker(int workerId);
+	public Worker getWorkerByUserId(int userId);
 	
 	public void addContract(Contract c);
 	public Contract getContract(int id);
 	public List<Contract> listAllContracts();
+	public Contract getContractByWorker(int workerId);
 	
 	public void addPatient(Patient p, int userId);
 	public Patient getPatient(int id);
@@ -29,6 +31,7 @@ public interface HospitalDBManager {
 	public void setPatient(Patient p, int id);
 	public void deletePatient(int id);
 	public Integer getUserFromPatient(int patientId);
+	public Patient getPatientByUserId(int userId);
 	
 	public void addAppointment(Appointment a);
 	public Appointment getAppointment(int id);

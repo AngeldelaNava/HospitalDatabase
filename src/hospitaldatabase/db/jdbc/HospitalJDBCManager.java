@@ -934,6 +934,112 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		}
 	}
 
+	@Override
+	public Patient getPatientByUserId(int userId) {
+		// TODO Auto-generated method stub
+		Patient p= null;
+		try {
+			String sql = "SELECT * FROM Patient WHERE userId = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, userId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String name = rs.getString("name");
+				String gender = rs.getString("gender");
+				String bloodType = rs.getString("bloodType");
+				int roomNumber = rs.getInt("roomNumber");
+				sql = "SELECT d.id, d.diseaseName, d.prescription FROM Disease AS d JOIN PatientDisease AS pd ON d.id = pd.diseaseId WHERE pd.patientId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, rs.getInt("id"));
+				ResultSet rs2 = prep.executeQuery();
+				List<Disease> d = new ArrayList<Disease>();
+				while(rs2.next()) {
+					String diseaseName = rs2.getString("diseaseName");
+					String prescription = rs2.getString("prescription");
+					d.add(new Disease(rs2.getInt("id"), diseaseName, prescription)) ;
+				}
+				p = new Patient(rs.getInt("id"), name, gender, bloodType, roomNumber, null, d, null);
+				rs2.close();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return p;
+	}
+
+	@Override
+	public Worker getWorkerByUserId(int userId) {
+		// TODO Auto-generated method stub
+		Worker w = null;
+		try {
+			String sql = "SELECT * FROM Worker WHERE userId = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, userId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				String name = rs.getString("name");
+				String type = rs.getString("type");
+				String job = rs.getString("job");
+				String disease = rs.getString("disease");
+				String externCompany = rs.getString("externCompany");
+				String project = rs.getString("project");
+				List<Appointment> appointments = new ArrayList<Appointment>();
+				sql = "SELECT a.* FROM Appointment AS a JOIN AppointmentWorker AS aw ON a.id = aw.appointmentId WHERE aw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, rs.getInt("id"));
+				ResultSet rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					appointments.add(new Appointment(rs2.getInt("id"), rs2.getString("type"), rs2.getString("intervention"), rs2.getDate("dateStart"), rs2.getTime("timeStart"), rs2.getInt("duration"), rs2.getBoolean("success")));
+				}
+				List<Patient> patients = new ArrayList<Patient>();
+				sql = "SELECT p.* FROM Patient AS p JOIN PatientWorker AS pw ON p.id = pw.patientId WHERE pw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, rs.getInt("id"));
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					patients.add(new Patient(rs2.getInt("id"), rs2.getString("name"), rs2.getString("gender"), rs2.getString("bloodType"), rs2.getInt("roomNumber"), null, null, null));
+				}
+				List<Disease> diseases = new ArrayList<Disease>();
+				sql = "SELECT d.* FROM Disease AS d JOIN DiseaseWorker AS dw ON d.id = dw.diseaseId WHERE dw.workerId = ?";
+				prep = c.prepareStatement(sql);
+				prep.setInt(1, rs.getInt("id"));
+				rs2 = prep.executeQuery();
+				while(rs2.next()) {
+					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
+				}
+				w = new Worker(rs.getInt("id"), name, type, job, disease, externCompany, project, null, appointments, patients, diseases);
+			
+			}
+			rs.close();
+			prep.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return w;
+	}
+
+	@Override
+	public Contract getContractByWorker(int workerId) {
+		// TODO Auto-generated method stub
+		Contract ct = null;
+		try {
+			String sql = "SELECT * FROM Contract WHERE staffId = ?";
+			PreparedStatement prep = c.prepareStatement(sql);
+			prep.setInt(1, workerId);
+			ResultSet rs = prep.executeQuery();
+			if(rs.next()) {
+				int salary = rs.getInt("salary");
+				Date hireDate = rs.getDate("hireDate");
+				Date endDate = rs.getDate("dateOfEnd");
+				Worker worker = getWorker(workerId);
+				ct = new Contract(rs.getInt("id"), salary, hireDate, endDate, worker);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return ct;
+	}
+
 	
 
 }

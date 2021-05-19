@@ -242,13 +242,13 @@ public class Menu {
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
 			case 1:
-				
+				checkPersonalPatientData(user.getId());
 				break;
 			case 2:
-				
+				searchDiseaseByName();
 				break;
 			case 3:
-				
+				checkMyMedicalHistory(user.getId());
 				break;
 			case 0:
 				return;
@@ -258,9 +258,96 @@ public class Menu {
 
 	}
 
+	private static void checkMyMedicalHistory(Integer userId) {
+		// TODO Auto-generated method stub
+		Patient p= dbman.getPatientByUserId(userId);
+		System.out.println(p.getDiseases());
+		}
+
+	private static void checkPersonalPatientData(Integer userId) {
+		// TODO Auto-generated method stub
+		System.out.println(dbman.getPatientByUserId(userId));
+	}
+
 	private static void hospitalStaffMenu(User user) {
 		// TODO Auto-generated method stub
-		
+		int choice = -1;
+		do {
+			try {
+				System.out.println("Choose an option:");
+				System.out.println("1. Modify patient data");
+				System.out.println("2. Check patient data");
+				System.out.println("3. Check list of patients");
+				System.out.println("4. Add appointment");
+				System.out.println("5. Modify appointment");
+				System.out.println("6. Check appointment by date");
+				System.out.println("7. Delete appointment");
+				System.out.println("8. Add a disease");
+				System.out.println("9. Search disease by name");
+				System.out.println("10. Modify disease data");
+				System.out.println("11. Delete disease");
+				System.out.println("12. Check contract");
+				System.out.println("0. Log out");
+				choice = Integer.parseInt(reader.readLine());
+				switch (choice) {
+				case 1:
+					setPatient();
+					break;
+				case 2:
+					searchPatientByName();
+					break;
+				case 3:
+					readAllPatientsData();
+					break;
+				case 4:
+					addAppointment();
+					break;
+				case 5:
+					setAppointment();
+					break;
+				case 6:
+					searchAppointmentByDate();
+					break;
+				case 7:
+					deleteAppointment();
+					break;
+				case 8:
+					addDisease();
+					break;
+				case 9:
+					searchDiseaseByName();
+					break;
+				case 10:
+					setDisease();
+					break;
+				case 11:
+					deleteDisease();
+					break;
+				case 12:
+					getPersonalWorkerData(user.getId());
+					break;
+				case 0:
+					return;
+				}
+			}catch(IOException e) {
+				e.printStackTrace();
+			}catch(NumberFormatException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		} while(true);
+	}
+
+	private static void getPersonalWorkerData(int userId) {
+		// TODO Auto-generated method stub
+		System.out.println(dbman.getWorkerByUserId(userId));
+	}
+
+	private static void getMyContract(int userId) {
+		// TODO Auto-generated method stub
+		Worker w = dbman.getWorkerByUserId(userId);
+		System.out.println(dbman.getContractByWorker(w.getId()));
 	}
 
 	private static void biomedicalEngineerMenu(User user) {
