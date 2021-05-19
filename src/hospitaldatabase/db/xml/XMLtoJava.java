@@ -38,6 +38,7 @@ public class XMLtoJava {
 		List<Disease> list = patient.getDiseases();
 		for (Disease dis : list) {
 			System.out.println("Disease: " + dis.getDiseaseName());
+			System.out.println("Prescription: " + dis.getPrescripition());
 		}
 
 		// Store the report in the database

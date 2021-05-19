@@ -26,7 +26,7 @@ public class XML_to_HTML{
 	}
 
 	public static void main(String[] args) {
-		simpleTransform("./xmls/MedicalHistory.xml", "./xmls/MedicalHistory.xslt", "./xmls/MedicalHistory.html");
+		simpleTransform("./XML/MedicalHistory.xml", "./XML/MedicalHistory.xslt", "./XML/MedicalHistory.html");
 
 	}
 }
