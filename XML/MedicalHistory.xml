@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE Patient SYSTEM "Patient.dtd">
+<!DOCTYPE Patient SYSTEM "MedicalHistory.dtd">
     <Patient id="03">
 	<name>Marta Bañon</name>
 	<gender>female</gender>
