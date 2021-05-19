@@ -27,7 +27,7 @@ public class XMLtoJava {
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
 
 		// Use the Unmarshaller to unmarshal the XML document from a file
-		File file = new File("./xml/MedicalHistory.xml");
+		File file = new File("./XML/MedicalHistory.xml");
 		Patient patient = (Patient) unmarshaller.unmarshal(file);
 
 		// Print the medical history
@@ -35,8 +35,8 @@ public class XMLtoJava {
 		System.out.println("Name: " + patient.getName());
 		System.out.println("Gender: " + patient.getGender());
 		System.out.println("BloodType: " + patient.getBloodType());
-		List<Disease> list = patient.getDiseases();
-		for (Disease dis : list) {
+		List<Disease> listDis = patient.getDiseases();
+		for (Disease dis : listDis) {
 			System.out.println("Disease: " + dis.getDiseaseName());
 			System.out.println("Prescription: " + dis.getPrescripition());
 		}
@@ -59,7 +59,7 @@ public class XMLtoJava {
 		// We assume the authors are not already in the database
 		// In a real world, we should check if they already exist
 		// and update them instead of inserting as new
-		for (Disease disease : list) {
+		for (Disease disease : listDis) {
 			em.persist(disease);
 		}
 		em.persist(patient);

@@ -22,10 +22,10 @@ public class JavaToXML {
 		
 	private static void printPatients() {
 		Query q1 = em.createNativeQuery("SELECT * FROM patients", Patient.class);
-		List<Patient> reps = (List<Patient>) q1.getResultList();
-		// Print the departments
-		for (Patient rep : reps) {
-			System.out.println(rep);
+		List<Patient> listPats = (List<Patient>) q1.getResultList();
+		// Print the patients
+		for (Patient pat : listPats) {
+			System.out.println(pat);
 		}
 	}
 	
