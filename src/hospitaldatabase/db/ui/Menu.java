@@ -10,9 +10,9 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
-
-import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
+import java.util.Random;
 
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.ifaces.HospitalUserManager;
@@ -238,6 +238,7 @@ public class Menu {
 			System.out.println("1. Check my data");
 			System.out.println("2. Search a disease");
 			System.out.println("3. Check my medical history");
+			System.out.println("4. Change password");
 			System.out.println("0. Log out");
 			int choice = Integer.parseInt(reader.readLine());
 			switch (choice) {
@@ -249,6 +250,9 @@ public class Menu {
 				break;
 			case 3:
 				checkMyMedicalHistory(user.getId());
+				break;
+			case 4:
+				user = changePassword(user);
 				break;
 			case 0:
 				return;
@@ -287,6 +291,7 @@ public class Menu {
 				System.out.println("10. Modify disease data");
 				System.out.println("11. Delete disease");
 				System.out.println("12. Check contract");
+				System.out.println("13. Change password");
 				System.out.println("0. Log out");
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
@@ -326,6 +331,9 @@ public class Menu {
 				case 12:
 					getPersonalWorkerData(user.getId());
 					break;
+				case 13:
+					user = changePassword(user);
+					break;
 				case 0:
 					return;
 				}
@@ -344,15 +352,78 @@ public class Menu {
 		System.out.println(dbman.getWorkerByUserId(userId));
 	}
 
-	private static void getMyContract(int userId) {
-		// TODO Auto-generated method stub
-		Worker w = dbman.getWorkerByUserId(userId);
-		System.out.println(dbman.getContractByWorker(w.getId()));
-	}
-
 	private static void biomedicalEngineerMenu(User user) {
 		// TODO Auto-generated method stub
-		
+		int choice = -1;
+		do {
+			try {
+				System.out.println("Choose an option:");
+				System.out.println("1. Modify patient data");
+				System.out.println("2. Check patient data");
+				System.out.println("3. Check list of patients");
+				System.out.println("4. Add or modify project");
+				System.out.println("5. Check project");
+				System.out.println("6. Delete project");
+				System.out.println("7. Check contract");
+				System.out.println("8. Change password");
+				System.out.println("0. Log out");
+				choice = Integer.parseInt(reader.readLine());
+				switch(choice) {
+				case 1:
+					setPatient();
+					break;
+				case 2:
+					searchPatientByName();
+					break;
+				case 3:
+					readAllPatientsData();
+					break;
+				case 4:
+					addPersonalProject(user.getId());
+					break;
+				case 5:
+					checkMyProject(user.getId());
+					break;
+				case 6:
+					deleteMyProject(user.getId());
+					break;
+				case 7:
+					getPersonalWorkerData(user.getId());
+					break;
+				case 8:
+					user = changePassword(user);
+					break;
+				case 0:
+					return;
+				}
+			}catch(IOException e) {
+				e.printStackTrace();
+			}catch(NumberFormatException e) {
+				e.printStackTrace();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}while(true);
+	}
+
+	private static void deleteMyProject(Integer userId) {
+		// TODO Auto-generated method stub
+		Worker w = dbman.getWorkerByUserId(userId);
+		dbman.deleteProject(w.getId());
+	}
+
+	private static void checkMyProject(Integer userId) {
+		// TODO Auto-generated method stub
+		Worker w = dbman.getWorkerByUserId(userId);
+		System.out.println(dbman.getProject(w.getId()));
+	}
+
+	private static void addPersonalProject(Integer userId) throws IOException {
+		// TODO Auto-generated method stub
+		Worker w = dbman.getWorkerByUserId(userId);
+		System.out.print("Introduce new project: ");
+		String project = reader.readLine();
+		dbman.setProject(project, w.getId());
 	}
 
 	private static void adminMenu(User user) {
@@ -529,6 +600,8 @@ public class Menu {
 		String email = reader.readLine();
 		System.out.print("Please write your password: ");
 		String password = reader.readLine();
+		//String password = generatePassword();
+		//System.out.println("Password generated: " + password);
 		int number = 0;
 		do {
 			System.out.println("Introduce '1' for a hospital staff and a '2' for a biomedical engineer: ");
@@ -563,6 +636,8 @@ public class Menu {
 		String email = reader.readLine();
 		System.out.print("Please write your password: ");
 		String password = reader.readLine();
+		//String password = generatePassword();
+		//System.out.println("Password generated: " + password);
 		Role role = userman.getRole(4);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -583,7 +658,7 @@ public class Menu {
 			if (!password.equals(passwordAgain)) {
 				System.out.println("You have introduced different passwords");
 			}
-		} while(!password.equals(passwordAgain));
+		} while(!(password.equals(passwordAgain) && verifyPasswordQuality(password)));
 		User u = userman.changePassword(user.getId(), password);
 		if (u != null) {
 			user = u;
@@ -1129,6 +1204,235 @@ public class Menu {
 		}
 		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
 		dbman.addWorker(w, userId);
+	}
+	
+	public static boolean verifyPasswordQuality(String password) {
+		int numbers = 0, lowercase = 0, uppercase = 0;
+		if(password.length() < 8) {
+			System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
+			return false;
+		}
+		for (int i = 0; i < password.length(); i++) {
+			if(Character.isLowerCase(password.charAt(i))) {
+				lowercase++;
+			}
+			else {
+				if(Character.isUpperCase(password.charAt(i))) {
+					uppercase++;
+					
+				}else {
+					numbers++;
+				}
+			}
+		}
+		if(numbers < 1 || lowercase < 1 || uppercase < 1) {
+			System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
+			return false;
+		}
+		System.out.println("Password valid");
+		return true;
+	}
+	
+	public static String generatePassword() {
+		Random rand = new Random();
+		String password = "";
+		do {
+			int aleatorio = rand.nextInt(62);
+			switch(aleatorio) {
+			case 0:
+				password += "0";
+				break;
+			case 1:
+				password += "1";
+				break;
+			case 2:
+				password += "2";
+				break;
+			case 3:
+				password += "3";
+				break;
+			case 4:
+				password += "4";
+				break;
+			case 5:
+				password += "5";
+				break;
+			case 6:
+				password += "6";
+				break;
+			case 7:
+				password += "7";
+				break;
+			case 8:
+				password += "8";
+				break;
+			case 9:
+				password += "9";
+				break;
+			case 10:
+				password += "A";
+				break;
+			case 11:
+				password += "B";
+				break;
+			case 12:
+				password += "C";
+				break;
+			case 13:
+				password += "D";
+				break;
+			case 14:
+				password += "E";
+				break;
+			case 15:
+				password += "F";
+				break;
+			case 16:
+				password += "G";
+				break;
+			case 17:
+				password += "H";
+				break;
+			case 18:
+				password += "I";
+				break;
+			case 19:
+				password += "J";
+				break;
+			case 20:
+				password += "K";
+				break;
+			case 21:
+				password += "L";
+				break;
+			case 22:
+				password += "M";
+				break;
+			case 23:
+				password += "N";
+				break;
+			case 24:
+				password += "O";
+				break;
+			case 25:
+				password += "P";
+				break;
+			case 26:
+				password += "Q";
+				break;
+			case 27:
+				password += "R";
+				break;
+			case 28:
+				password += "S";
+				break;
+			case 29:
+				password += "T";
+				break;
+			case 30:
+				password += "U";
+				break;
+			case 31:
+				password += "V";
+				break;
+			case 32:
+				password += "W";
+				break;
+			case 33:
+				password += "X";
+				break;
+			case 34:
+				password += "Y";
+				break;
+			case 35:
+				password += "Z";
+				break;
+			case 36:
+				password += "a";
+				break;
+			case 37:
+				password += "b";
+				break;
+			case 38:
+				password += "c";
+				break;
+			case 39:
+				password += "d";
+				break;
+			case 40:
+				password += "e";
+				break;
+			case 41:
+				password += "f";
+				break;
+			case 42:
+				password += "g";
+				break;
+			case 43:
+				password += "h";
+				break;
+			case 44:
+				password += "i";
+				break;
+			case 45:
+				password += "j";
+				break;
+			case 46:
+				password += "k";
+				break;
+			case 47:
+				password += "l";
+				break;
+			case 48:
+				password += "m";
+				break;
+			case 49:
+				password += "n";
+				break;
+			case 50:
+				password += "o";
+				break;
+			case 51:
+				password += "p";
+				break;
+			case 52:
+				password += "q";
+				break;
+			case 53:
+				password += "r";
+				break;
+			case 54:
+				password += "s";
+				break;
+			case 55:
+				password += "t";
+				break;
+			case 56:
+				password += "u";
+				break;
+			case 57:
+				password += "v";
+				break;
+			case 58:
+				password += "w";
+				break;
+			case 59:
+				password += "x";
+				break;
+			case 60:
+				password += "y";
+				break;
+			case 61:
+				password += "z";
+				break;
+			}
+		} while(password.length() < 8);
+		if(verifyPasswordQuality(password)) {
+			return password;
+		} else {
+			return generatePassword();
+		}
+		
 	}
 
 }
