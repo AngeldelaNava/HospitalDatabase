@@ -1,0 +1,5 @@
+This week we expected to to finish the programming and fix the diagrams mistakes.
+==================================================
+This week we finished the XML and the JPA parts, created a function to create a random password and another one to verify password security.
+==============================================
+Next weeks we will implement the two password new methods, fix some code to make the application be tidier, fix the diagram mistakes and make the presentation.
