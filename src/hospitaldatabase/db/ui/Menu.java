@@ -821,7 +821,7 @@ public class Menu {
 	private static void searchDiseaseByID() throws NumberFormatException, IOException {
 		List<Disease> diseases = dbman.searchDiseaseByName("");
 		for(int i = 0; i < diseases.size(); i++) {
-			System.out.println(diseases.get(i));
+			System.out.println("Id: " +diseases.get(i).getId()+ ". Name: "+diseases.get(i).getDiseaseName());
 		}
 		System.out.println("Introduce disease's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -948,7 +948,7 @@ public class Menu {
 	private static void searchAppointmentByID() throws NumberFormatException, IOException {
 		List<Appointment> appointments = dbman.searchAppointmentByType("");
 		for(int i = 0; i < appointments.size(); i++) {
-			System.out.println(appointments.get(i));
+			System.out.println("Id: "+appointments.get(i).getId()+ ". Type: "+ appointments.get(i).getType());
 		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -1047,7 +1047,7 @@ public class Menu {
 	private static void searchPatientByID() throws NumberFormatException, IOException {
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
-			System.out.println(patients.get(i));
+			System.out.println("id: " + patients.get(i).getId() + ". Name: " + patients.get(i).getName() );
 		}
 		System.out.print("Introduce patient's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -1169,7 +1169,7 @@ public class Menu {
 	private static void searchWorkerByID() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: " +workers.get(i).getId()+ ". Name: "+ workers.get(i).getName());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
