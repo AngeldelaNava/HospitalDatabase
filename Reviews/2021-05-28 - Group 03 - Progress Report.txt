@@ -1,0 +1,5 @@
+This week we expected to implement the two password new methods, fix some code to make the application be tidier, fix the diagram mistakes and make the presentation.
+==================================================
+This week we implemented the two password methods (still have to try them) and we fixed errors and iproved functionality.
+==============================================
+Next weeks we will finish the implement of the two password new methods, fix the diagram mistakes and make the presentation.
