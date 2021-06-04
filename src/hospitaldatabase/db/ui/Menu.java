@@ -348,7 +348,8 @@ public class Menu {
 
 	private static void getPersonalWorkerData(int userId) {
 		// TODO Auto-generated method stub
-		System.out.println(dbman.getWorkerByUserId(userId));
+		//System.out.println(dbman.getWorkerByUserId(userId));
+		System.out.println(dbman.getContractByWorker(dbman.getWorkerByUserId(userId).getId()));
 	}
 
 	private static void biomedicalEngineerMenu(User user) {
