@@ -598,10 +598,10 @@ public class Menu {
 		// TODO Auto-generated method stub
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
-		System.out.print("Please write your password: ");
-		String password = reader.readLine();
-		//String password = generatePassword();
-		//System.out.println("Password generated: " + password);
+		//System.out.print("Please write your password: ");
+		//String password = reader.readLine();
+		String password = generatePassword();
+		System.out.println("Password generated: " + password);
 		int number = 0;
 		do {
 			System.out.println("Introduce '1' for a hospital staff and a '2' for a biomedical engineer: ");
@@ -1226,7 +1226,7 @@ public class Menu {
 			}
 		}
 		if(numbers < 1 || lowercase < 1 || uppercase < 1) {
-			System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
+			//System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
 			return false;
 		}
 		System.out.println("Password valid");
