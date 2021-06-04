@@ -19,17 +19,6 @@ public class XMLtoJava {
 	private static final String PERSISTENCE_PROVIDER = "company-provider";
 	private static EntityManagerFactory factory;
 
-	public void PatientXMLToJava() {
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			File file = new File("./XML/MedicalHistory.xml");
-			Patient patient = (Patient) unmarshaller.unmarshal(file);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	
 	public static void main(String[] args) throws JAXBException {
 
