@@ -1154,7 +1154,7 @@ public class Menu {
 		if (project.equals("")) {
 			project = null;
 		}
-		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
+		Worker w = new Worker(1, name, type, job, externCompany, project, null, null, null, null);
 		dbman.setWorker(w, id);
 	}
 
@@ -1186,11 +1186,6 @@ public class Menu {
 		if (job.equals("")) {
 			job = null;
 		}
-		System.out.print("Insert disease: ");
-		String disease = reader.readLine();
-		if (disease.equals("")) {
-			disease = null;
-		}
 		System.out.print("Insert extern company: ");
 		String externCompany = reader.readLine();
 		if (externCompany.equals("")) {
@@ -1201,7 +1196,7 @@ public class Menu {
 		if (project.equals("")) {
 			project = null;
 		}
-		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
+		Worker w = new Worker(1, name, type, job, externCompany, project, null, null, null, null);
 		dbman.addWorker(w, userId);
 	}
 	

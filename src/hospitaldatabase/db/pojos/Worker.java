@@ -13,14 +13,13 @@ public class Worker implements Serializable{
 	private String name;
 	private String type;
 	private String job;
-	private String disease;
 	private String externCompany;
 	private String project;
 	private Contract contract;
 	private List<Appointment> appointments;
 	private List<Patient> patients;
 	private List<Disease> diseases;
-	public Worker(int id, String name, String type, String jobInTheHospital, String diseaseThatInvestigates,
+	public Worker(int id, String name, String type, String jobInTheHospital,
 			String externCompany, String project, Contract contract, List<Appointment> appointments,
 			List<Patient> patients, List<Disease> diseases) {
 		super();
@@ -28,7 +27,6 @@ public class Worker implements Serializable{
 		this.name = name;
 		this.type = type;
 		this.job = jobInTheHospital;
-		this.disease = diseaseThatInvestigates;
 		this.externCompany = externCompany;
 		this.project = project;
 		this.contract = contract;
@@ -36,43 +34,7 @@ public class Worker implements Serializable{
 		this.patients = patients;
 		this.diseases = diseases;
 	}
-	public Worker(int id, String name, String type, String diseaseThatInvestigates, Contract contract,
-			List<Appointment> appointments, List<Patient> patients, List<Disease> diseases) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.type = type;
-		this.disease = diseaseThatInvestigates;
-		this.contract = contract;
-		this.appointments = appointments;
-		this.patients = patients;
-		this.diseases = diseases;
-	}
-	public Worker(int id, String name, String type, String jobInTheHospital, String externCompany, String project,
-			Contract contract, List<Appointment> appointments, List<Patient> patients, List<Disease> diseases) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.type = type;
-		this.job = jobInTheHospital;
-		this.externCompany = externCompany;
-		this.project = project;
-		this.contract = contract;
-		this.appointments = appointments;
-		this.patients = patients;
-		this.diseases = diseases;
-	}
-	public Worker(int id, String name, String type, Contract contract, List<Appointment> appointments,
-			List<Patient> patients, List<Disease> diseases) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.type = type;
-		this.contract = contract;
-		this.appointments = appointments;
-		this.patients = patients;
-		this.diseases = diseases;
-	}
+
 	public int getId() {
 		return id;
 	}
@@ -96,12 +58,6 @@ public class Worker implements Serializable{
 	}
 	public void setJob(String job) {
 		this.job = job;
-	}
-	public String getDisease() {
-		return disease;
-	}
-	public void setDisease(String disease) {
-		this.disease = disease;
 	}
 	public String getExternCompany() {
 		return externCompany;
@@ -142,7 +98,7 @@ public class Worker implements Serializable{
 	@Override
 	public String toString() {
 		String vuelta = "Worker [id=" + id + ", name=" + name + ", type=" + type + ", job=" + job
-				+ ", disease=" + disease + ", externCompany=" + externCompany
+				+ ", externCompany=" + externCompany
 				+ ", project=" + project + ", appointments=\n";
 		for(int i = 0; i < appointments.size(); i++) {
 			vuelta += appointments.get(i) + "\n";
