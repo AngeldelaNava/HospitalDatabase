@@ -20,6 +20,20 @@ public class JavaToXML {
 	private static EntityManager em;
 	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		
+	public void getXMLPatient() {
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(Patient.class);
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file = new File("./XML/MedicalHistory.xml");
+			patientList listPats = new patientList	
+			marshaller.marshall(listPats, file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	
+	
 	private static void printPatients() {
 		Query q1 = em.createNativeQuery("SELECT * FROM patients", Patient.class);
 		List<Patient> listPats = (List<Patient>) q1.getResultList();
