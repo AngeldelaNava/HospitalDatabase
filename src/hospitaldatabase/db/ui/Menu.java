@@ -943,7 +943,7 @@ public class Menu {
 	private static void searchAppointmentByID() throws NumberFormatException, IOException {
 		List<Appointment> appointments = dbman.searchAppointmentByType("");
 		for(int i = 0; i < appointments.size(); i++) {
-			System.out.println("Id: "+appointments.get(i).getId()+ ". Type: "+ appointments.get(i).getType());
+			System.out.println("Id: "+appointments.get(i).getId()+ ". Type: "+ appointments.get(i).getType() + ". Date start: " + appointments.get(i).getDateStart());
 		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
