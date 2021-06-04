@@ -10,7 +10,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -598,8 +597,6 @@ public class Menu {
 		// TODO Auto-generated method stub
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
-		//System.out.print("Please write your password: ");
-		//String password = reader.readLine();
 		String password = generatePassword();
 		System.out.println("Password generated: " + password);
 		int number = 0;
@@ -634,10 +631,8 @@ public class Menu {
 	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
-		System.out.print("Please write your password: ");
-		String password = reader.readLine();
-		//String password = generatePassword();
-		//System.out.println("Password generated: " + password);
+		String password = generatePassword();
+		System.out.println("Password generated: " + password);
 		Role role = userman.getRole(4);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
