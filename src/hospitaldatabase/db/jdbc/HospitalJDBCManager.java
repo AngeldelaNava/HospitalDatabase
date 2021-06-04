@@ -885,9 +885,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public List<Contract> listAllContracts() {
 		// TODO Auto-generated method stub
+		List<Contract> contracts = new ArrayList<Contract>();
 		try {
 			String sql = "SELECT * FROM Contract";
-			List<Contract> contracts = new ArrayList<Contract>();
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
@@ -896,7 +896,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return contracts;
 	}
 
 	@Override
