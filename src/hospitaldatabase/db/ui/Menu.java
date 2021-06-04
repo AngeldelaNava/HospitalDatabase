@@ -1074,7 +1074,7 @@ public class Menu {
 	private static void searchContractByID() throws NumberFormatException, IOException {
 		List<Contract> contracts = dbman.listAllContracts();
 		for(int i = 0; i < contracts.size(); i++) {
-			System.out.println(contracts.get(i));
+			System.out.println("Id: " + contracts.get(i).getId() + ". Salary: " + contracts.get(i).getSalary() + ". Hire date: " + contracts.get(i).getHireDate());
 		}
 		System.out.print("Introduce contract's id: ");
 		int id = Integer.parseInt(reader.readLine());
