@@ -10,7 +10,6 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -349,7 +348,8 @@ public class Menu {
 
 	private static void getPersonalWorkerData(int userId) {
 		// TODO Auto-generated method stub
-		System.out.println(dbman.getWorkerByUserId(userId));
+		//System.out.println(dbman.getWorkerByUserId(userId));
+		System.out.println(dbman.getContractByWorker(dbman.getWorkerByUserId(userId).getId()));
 	}
 
 	private static void biomedicalEngineerMenu(User user) {
@@ -598,10 +598,8 @@ public class Menu {
 		// TODO Auto-generated method stub
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
-		System.out.print("Please write your password: ");
-		String password = reader.readLine();
-		//String password = generatePassword();
-		//System.out.println("Password generated: " + password);
+		String password = generatePassword();
+		System.out.println("Password generated: " + password);
 		int number = 0;
 		do {
 			System.out.println("Introduce '1' for a hospital staff and a '2' for a biomedical engineer: ");
@@ -634,10 +632,8 @@ public class Menu {
 	private static void registerPatient() throws IOException, NoSuchAlgorithmException {
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
-		System.out.print("Please write your password: ");
-		String password = reader.readLine();
-		//String password = generatePassword();
-		//System.out.println("Password generated: " + password);
+		String password = generatePassword();
+		System.out.println("Password generated: " + password);
 		Role role = userman.getRole(4);
 		MessageDigest md = MessageDigest.getInstance("MD5");
 		md.update(password.getBytes());
@@ -804,7 +800,7 @@ public class Menu {
 		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
-			System.out.println(patients.get(i));
+			System.out.println("Id: " +patients.get(i).getId()+ ". Name: "+ patients.get(i).getName()+ ". Project: "+ patients.get(i).getDiseases());
 		}
 		System.out.print("Introduce patient id: ");
 		int patientId = Integer.parseInt(reader.readLine());
@@ -841,7 +837,7 @@ public class Menu {
 	private static void deleteProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: " +workers.get(i).getId()+ ". Name: "+ workers.get(i).getName()+ ". Project: "+ workers.get(i).getProject());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -851,7 +847,7 @@ public class Menu {
 	private static void setProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: " +workers.get(i).getId()+ ". Name: "+ workers.get(i).getName()+ ". Project: "+ workers.get(i).getProject());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -863,7 +859,7 @@ public class Menu {
 	private static void searchProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: "+workers.get(i).getId()+ ". Name: "+ workers.get(i).getName());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -948,7 +944,7 @@ public class Menu {
 	private static void searchAppointmentByID() throws NumberFormatException, IOException {
 		List<Appointment> appointments = dbman.searchAppointmentByType("");
 		for(int i = 0; i < appointments.size(); i++) {
-			System.out.println("Id: "+appointments.get(i).getId()+ ". Type: "+ appointments.get(i).getType());
+			System.out.println("Id: "+appointments.get(i).getId()+ ". Type: "+ appointments.get(i).getType() + ". Date start: " + appointments.get(i).getDateStart());
 		}
 		System.out.print("Introduce the appointment id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -964,7 +960,7 @@ public class Menu {
 		if (intervention.equals("")) {
 			intervention = null;
 		}
-		System.out.print("Introduce the start date (yy-mm-dd): ");
+		System.out.print("Introduce the start date (yyyy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
 		LocalTime startTime = LocalTime.parse(reader.readLine());
@@ -1079,7 +1075,7 @@ public class Menu {
 	private static void searchContractByID() throws NumberFormatException, IOException {
 		List<Contract> contracts = dbman.listAllContracts();
 		for(int i = 0; i < contracts.size(); i++) {
-			System.out.println(contracts.get(i));
+			System.out.println("Id: " + contracts.get(i).getId() + ". Salary: " + contracts.get(i).getSalary() + ". Hire date: " + contracts.get(i).getHireDate());
 		}
 		System.out.print("Introduce contract's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -1095,7 +1091,10 @@ public class Menu {
 		LocalDate hireDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Insert contract's date of end: ");
 		LocalDate dateOfEnd = LocalDate.parse(reader.readLine(), formatter);
-		System.out.println(dbman.searchWorkerByName(""));
+		List<Worker> workers = dbman.searchWorkerByName("");
+		for(int i = 0; i < workers.size(); i++) {
+			System.out.println("Id: " + workers.get(i).getId() + ", Name: " + workers.get(i).getName());
+		}
 		System.out.print("Insert worker's id of this contract: ");
 		String reading = reader.readLine();
 		Worker w;
@@ -1155,7 +1154,7 @@ public class Menu {
 		if (project.equals("")) {
 			project = null;
 		}
-		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
+		Worker w = new Worker(1, name, type, job, externCompany, project, null, null, null, null);
 		dbman.setWorker(w, id);
 	}
 
@@ -1187,11 +1186,6 @@ public class Menu {
 		if (job.equals("")) {
 			job = null;
 		}
-		System.out.print("Insert disease: ");
-		String disease = reader.readLine();
-		if (disease.equals("")) {
-			disease = null;
-		}
 		System.out.print("Insert extern company: ");
 		String externCompany = reader.readLine();
 		if (externCompany.equals("")) {
@@ -1202,7 +1196,7 @@ public class Menu {
 		if (project.equals("")) {
 			project = null;
 		}
-		Worker w = new Worker(1, name, type, job, disease, externCompany, project, null, null, null, null);
+		Worker w = new Worker(1, name, type, job, externCompany, project, null, null, null, null);
 		dbman.addWorker(w, userId);
 	}
 	
@@ -1226,7 +1220,7 @@ public class Menu {
 			}
 		}
 		if(numbers < 1 || lowercase < 1 || uppercase < 1) {
-			System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
+			//System.out.println("You need an 8 characters password with at least a number, a lowercase and an uppercase");
 			return false;
 		}
 		System.out.println("Password valid");

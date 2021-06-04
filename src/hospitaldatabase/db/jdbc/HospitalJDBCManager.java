@@ -11,8 +11,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.persistence.internal.libraries.asm.tree.TryCatchBlockNode;
-
 import hospitaldatabase.db.ifaces.HospitalDBManager;
 import hospitaldatabase.db.pojos.Appointment;
 import hospitaldatabase.db.pojos.Contract;
@@ -51,10 +49,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " name TEXT NOT NULL, "
 					+ " type TEXT NOT NULL, "
 					+ " job TEXT, "
-					+ " disease TEXT, "
 					+ " externCompany TEXT, "
 					+ " project TEXT, "
-					+ " userId REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE) ";
+					+ " userId INTEGER REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE) ";
 			stmnt.executeUpdate(sql);
 			sql = "CREATE TABLE Contract( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -69,7 +66,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 					+ " gender TEXT NOT NULL, "
 					+ " bloodType TEXT NOT NULL, "
 					+ " roomNumber INTEGER, "
-					+ " userId REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE)";
+					+ " userId INTEGER REFERENCES User(ID) ON UPDATE CASCADE ON DELETE CASCADE)";
 			stmnt.executeUpdate(sql);
 			sql = "CREATE TABLE Disease( "
 					+ " id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -124,15 +121,14 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void addWorker(Worker w, int userId) {
 		try {
-			String sql = "INSERT INTO Worker (name, type, job, disease, externCompany, project, userId) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Worker (name, type, job, externCompany, project, userId) VALUES (?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
 			prep.setString(3, w.getJob());
-			prep.setString(4, w.getDisease());
-			prep.setString(5, w.getExternCompany());
-			prep.setString(6, w.getProject());
-			prep.setInt(7, userId);
+			prep.setString(4, w.getExternCompany());
+			prep.setString(5, w.getProject());
+			prep.setInt(6, userId);
 			prep.executeUpdate();
 			prep.close();
 		} catch(SQLException e) {
@@ -152,7 +148,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String name = rs.getString("name");
 				String type = rs.getString("type");
 				String job = rs.getString("job");
-				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
 				List<Appointment> appointments = new ArrayList<Appointment>();
@@ -179,7 +174,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				while(rs2.next()) {
 					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
 				}
-				w = new Worker(id, name, type, job, disease, externCompany, project, null, appointments, patients, diseases);
+				w = new Worker(id, name, type, job, externCompany, project, null, appointments, patients, diseases);
 			
 			}
 			rs.close();
@@ -203,7 +198,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				Integer id = rs.getInt("id");
 				String type = rs.getString("type");
 				String job = rs.getString("job");
-				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
 				List<Appointment> appointments = new ArrayList<Appointment>();
@@ -230,7 +224,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				while(rs2.next()) {
 					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
 				}
-				w.add(new Worker(id, rs.getString("name"), type, job, disease, externCompany, project, null, appointments, patients, diseases));
+				w.add(new Worker(id, rs.getString("name"), type, job, externCompany, project, null, appointments, patients, diseases));
 			}
 			rs.close();
 			prep.close();
@@ -430,15 +424,14 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public void setWorker(Worker w, int id) {
 		try {
-			String sql = "UPDATE Worker SET name = ?, type = ?, job = ?, disease = ?, externCompany = ?, project = ? WHERE id = ?";
+			String sql = "UPDATE Worker SET name = ?, type = ?, job = ?, externCompany = ?, project = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setString(1, w.getName());
 			prep.setString(2, w.getType());
 			prep.setString(3, w.getJob());
-			prep.setString(4, w.getDisease());
-			prep.setString(5, w.getExternCompany());
-			prep.setString(6, w.getProject());
-			prep.setInt(7, id);
+			prep.setString(4, w.getExternCompany());
+			prep.setString(5, w.getProject());
+			prep.setInt(6, id);
 			prep.executeUpdate();
 			prep.close();
 	}catch(SQLException e) {
@@ -885,9 +878,9 @@ public class HospitalJDBCManager implements HospitalDBManager {
 	@Override
 	public List<Contract> listAllContracts() {
 		// TODO Auto-generated method stub
+		List<Contract> contracts = new ArrayList<Contract>();
 		try {
 			String sql = "SELECT * FROM Contract";
-			List<Contract> contracts = new ArrayList<Contract>();
 			PreparedStatement prep = c.prepareStatement(sql);
 			ResultSet rs = prep.executeQuery();
 			while(rs.next()) {
@@ -896,7 +889,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return contracts;
 	}
 
 	@Override
@@ -980,7 +973,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				String name = rs.getString("name");
 				String type = rs.getString("type");
 				String job = rs.getString("job");
-				String disease = rs.getString("disease");
 				String externCompany = rs.getString("externCompany");
 				String project = rs.getString("project");
 				List<Appointment> appointments = new ArrayList<Appointment>();
@@ -1007,7 +999,7 @@ public class HospitalJDBCManager implements HospitalDBManager {
 				while(rs2.next()) {
 					diseases.add(new Disease(rs2.getInt("id"), rs2.getString("diseasename"), rs2.getString("prescription")));
 				}
-				w = new Worker(rs.getInt("id"), name, type, job, disease, externCompany, project, null, appointments, patients, diseases);
+				w = new Worker(rs.getInt("id"), name, type, job, externCompany, project, null, appointments, patients, diseases);
 			
 			}
 			rs.close();
