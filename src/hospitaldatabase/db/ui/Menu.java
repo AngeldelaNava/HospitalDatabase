@@ -799,7 +799,7 @@ public class Menu {
 		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
-			System.out.println(patients.get(i));
+			System.out.println("Id: " +patients.get(i).getId()+ ". Name: "+ patients.get(i).getName()+ ". Project: "+ patients.get(i).getDiseases());
 		}
 		System.out.print("Introduce patient id: ");
 		int patientId = Integer.parseInt(reader.readLine());
@@ -836,7 +836,7 @@ public class Menu {
 	private static void deleteProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: " +workers.get(i).getId()+ ". Name: "+ workers.get(i).getName()+ ". Project: "+ workers.get(i).getProject());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -846,7 +846,7 @@ public class Menu {
 	private static void setProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: " +workers.get(i).getId()+ ". Name: "+ workers.get(i).getName()+ ". Project: "+ workers.get(i).getProject());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -858,7 +858,7 @@ public class Menu {
 	private static void searchProject() throws NumberFormatException, IOException {
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
-			System.out.println(workers.get(i));
+			System.out.println("Id: "+workers.get(i).getId()+ ". Name: "+ workers.get(i).getName());
 		}
 		System.out.print("Introduce worker's id: ");
 		int id = Integer.parseInt(reader.readLine());
@@ -959,7 +959,7 @@ public class Menu {
 		if (intervention.equals("")) {
 			intervention = null;
 		}
-		System.out.print("Introduce the start date (yy-mm-dd): ");
+		System.out.print("Introduce the start date (yyyy-mm-dd): ");
 		LocalDate startDate = LocalDate.parse(reader.readLine(), formatter);
 		System.out.print("Introduce the start time (hh:mm:ss): ");
 		LocalTime startTime = LocalTime.parse(reader.readLine());
