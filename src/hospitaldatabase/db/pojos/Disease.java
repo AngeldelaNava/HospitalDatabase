@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -19,12 +21,11 @@ import javax.xml.bind.annotation.XmlType;
 
 public class Disease implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1077803972062837560L;
 	private Integer id;
+	@XmlAttribute
 	private String diseaseName;
+	@XmlElement
 	private String prescripition;
 	public Disease(int id, String diseaseName, String prescripition) {
 		super();

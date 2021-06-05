@@ -4,9 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -15,21 +19,24 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "patients")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Patient")
-@XmlType(propOrder = { "name", "gender", "bloodType","roomNumber","workers","diseases","appointment"})
+@XmlType(propOrder = {"id", "name", "gender", "bloodType","roomNumber","workers","diseases","appointment"})
 
 public class Patient implements Serializable{
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1077803972062837560L;
+	@Id
+	@XmlAttribute
 	private Integer id;
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String gender;
+	@XmlElement
 	private String bloodType;
 	private Integer roomNumber;
 	private List<Worker> workers;
+	@XmlElement(name="PatientDisease")
+	@XmlElementWrapper(name="Disease")
 	private List<Disease> diseases;
 	private Appointment appointment;
 	public Patient(int id, String name, String gender, String bloodGroup, Integer roomNumber, List<Worker> workers,
