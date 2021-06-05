@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Patient SYSTEM "MedicalHistory.dtd">
-    <Patient id="03">
+    <Patient id="1">
 	<name>Marta Bañon</name>
 	<gender>female</gender>
 	<bloodType>A+</bloodType>
