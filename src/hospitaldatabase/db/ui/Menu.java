@@ -287,10 +287,11 @@ public class Menu {
 				System.out.println("7. Delete appointment");
 				System.out.println("8. Add a disease");
 				System.out.println("9. Search disease by name");
-				System.out.println("10. Modify disease data");
-				System.out.println("11. Delete disease");
-				System.out.println("12. Check contract");
-				System.out.println("13. Change password");
+				System.out.println("10. Check patient medical history");
+				System.out.println("11. Modify disease data");
+				System.out.println("12. Delete disease");
+				System.out.println("13. Check contract");
+				System.out.println("14. Change password");
 				System.out.println("0. Log out");
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
@@ -322,15 +323,18 @@ public class Menu {
 					searchDiseaseByName();
 					break;
 				case 10:
-					setDisease();
+					checkPatientMedicalHistory();
 					break;
 				case 11:
-					deleteDisease();
+					setDisease();
 					break;
 				case 12:
-					getPersonalWorkerData(user.getId());
+					deleteDisease();
 					break;
 				case 13:
+					getPersonalWorkerData(user.getId());
+					break;
+				case 14:
 					user = changePassword(user);
 					break;
 				case 0:
@@ -436,38 +440,39 @@ public class Menu {
 				System.out.println("2. Search worker by id");
 				System.out.println("3. Search worker by name");
 				System.out.println("4. Edit worker information and data");
-				System.out.println("5. Delete worker");
-				System.out.println("6. Add a contract");
-				System.out.println("7. Search contract by id");
-				System.out.println("8. Add a patient");
-				System.out.println("9. Search patient by id");
-				System.out.println("10. Search patient by name");
-				System.out.println("11. Read all patients data");
-				System.out.println("12. Edit patient data");
-				System.out.println("13. Delete patient");
-				System.out.println("14. Add an appointment");
-				System.out.println("15. Search appointment by id");
-				System.out.println("16. Search appointment by date and time");
-				System.out.println("17. Search appointment by date");
-				System.out.println("18. Search appointment by type");
-				System.out.println("19. Edit appointment data");
-				System.out.println("20. Delete appointment");
-				System.out.println("21. Search the project from a worker");
-				System.out.println("22. Add/edit a worker's project");
-				System.out.println("23. Delete a worker's project");
-				System.out.println("24. Add a disease");
-				System.out.println("25. Search disease by id");
-				System.out.println("26. Search disease by name");
-				System.out.println("27. Search disease by patient");
-				System.out.println("28. Edit disease data");
-				System.out.println("29. Delete disease");
-				System.out.println("30. Relate a patient with a worker");
-				System.out.println("31. Relate a disease with a worker");
-				System.out.println("32. Relate an appointment with a worker");
-				System.out.println("33. Relate a patient with a disease");
-				System.out.println("34. Relate a worker with a contract");
-				System.out.println("35. Relate a patient with an appointment");
-				System.out.println("36. Change password");
+				System.out.println("5. Check list of workers");
+				System.out.println("6. Delete worker");
+				System.out.println("7. Add a contract");
+				System.out.println("8. Search contract by id");
+				System.out.println("9. Add a patient");
+				System.out.println("10. Search patient by id");
+				System.out.println("11. Search patient by name");
+				System.out.println("12. Read all patients data");
+				System.out.println("13. Edit patient data");
+				System.out.println("14. Delete patient");
+				System.out.println("15. Add an appointment");
+				System.out.println("16. Search appointment by id");
+				System.out.println("17. Search appointment by date and time");
+				System.out.println("18. Search appointment by date");
+				System.out.println("19. Search appointment by type");
+				System.out.println("20. Edit appointment data");
+				System.out.println("21. Delete appointment");
+				System.out.println("22. Search the project from a worker");
+				System.out.println("23. Add/edit a worker's project");
+				System.out.println("24. Delete a worker's project");
+				System.out.println("25. Add a disease");
+				System.out.println("26. Search disease by id");
+				System.out.println("27. Search disease by name");
+				System.out.println("28. Check patient medical history");
+				System.out.println("29. Edit disease data");
+				System.out.println("30. Delete disease");
+				System.out.println("31. Relate a patient with a worker");
+				System.out.println("32. Relate a disease with a worker");
+				System.out.println("33. Relate an appointment with a worker");
+				System.out.println("34. Relate a patient with a disease");
+				System.out.println("35. Relate a worker with a contract");
+				System.out.println("36. Relate a patient with an appointment");
+				System.out.println("37. Change password");
 				System.out.println("0. Log out");
 				choice = Integer.parseInt(reader.readLine());
 				switch (choice) {
@@ -484,99 +489,101 @@ public class Menu {
 					setWorker();
 					break;
 				case 5:
+					listWorkers();
+				case 6:
 					deleteWorker();
 					break;
-				case 6:
+				case 7:
 					addContract();
 					break;
-				case 7:
+				case 8:
 					searchContractByID();
 					break;
-				case 8:
+				case 9:
 					registerPatient();
 					break;
-				case 9:
+				case 10:
 					searchPatientByID();
 					break;
-				case 10:
+				case 11:
 					searchPatientByName();
 					break;
-				case 11:
+				case 12:
 					readAllPatientsData();
 					break;
-				case 12:
+				case 13:
 					setPatient();
 					break;
-				case 13:
+				case 14:
 					deletePatient();
 					break;
-				case 14:
+				case 15:
 					addAppointment();
 					break;
-				case 15:
+				case 16:
 					searchAppointmentByID();
 					break;
-				case 16:
+				case 17:
 					searchAppointmentByDateAndTime();
 					break;
-				case 17:
+				case 18:
 					searchAppointmentByDate();
 					break;
-				case 18:
+				case 19:
 					searchAppointmentByType();
 					break;
-				case 19:
+				case 20:
 					setAppointment();
 					break;
-				case 20:
+				case 21:
 					deleteAppointment();
 					break;
-				case 21:
+				case 22:
 					searchProject();
 					break;
-				case 22:
+				case 23:
 					setProject();
 					break;
-				case 23:
+				case 24:
 					deleteProject();
 					break;
-				case 24:
+				case 25:
 					addDisease();
 					break;
-				case 25:
+				case 26:
 					searchDiseaseByID();
 					break;
-				case 26:
+				case 27:
 					searchDiseaseByName();
 					break;
-				case 27:
-					searchDiseaseByPatient();
-					break;
 				case 28:
-					setDisease();
+					checkPatientMedicalHistory();
 					break;
 				case 29:
-					deleteDisease();
+					setDisease();
 					break;
 				case 30:
-					relationPatientWorker();
+					deleteDisease();
 					break;
 				case 31:
-					relationDiseaseWorker();
+					relationPatientWorker();
 					break;
 				case 32:
-					relationAppointmentWorker();
+					relationDiseaseWorker();
 					break;
 				case 33:
-					relationPatientDisease();
+					relationAppointmentWorker();
 					break;
 				case 34:
-					relationWorkerContract();
+					relationPatientDisease();
 					break;
 				case 35:
-					relationPatientAppointment();
+					relationWorkerContract();
 					break;
 				case 36:
+					relationPatientAppointment();
+					break;
+				case 37:
 					user = changePassword(user);
 					break;
 				case 0:
@@ -594,6 +601,12 @@ public class Menu {
 		} while(true);
 	}
 	
+	private static void listWorkers() {
+		// TODO Auto-generated method stub
+		List <Worker> workers = dbman.searchWorkerByName("");
+		System.out.println(workers);
+	}
+
 	private static void registerWorker() throws IOException, NoSuchAlgorithmException {
 		// TODO Auto-generated method stub
 		System.out.print("Please write your email address: ");
@@ -796,7 +809,7 @@ public class Menu {
 		dbman.setDisease(d, id);
 	}
 
-	private static void searchDiseaseByPatient() throws NumberFormatException, IOException {
+	private static void checkPatientMedicalHistory() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
@@ -997,9 +1010,7 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		int userId = dbman.getUserFromPatient(id);
 		dbman.deletePatient(id);
-		dbman.disconnect();
 		userman.deleteUser(userId);
-		dbman.connect();
 	}
 
 	private static void setPatient() throws NumberFormatException, IOException {
@@ -1120,9 +1131,7 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		int userId = dbman.getUserFromWorker(id);
 		dbman.deleteWorker(id);
-		dbman.disconnect();
 		userman.deleteUser(userId);
-		dbman.connect();
 	}
 
 	private static void setWorker() throws NumberFormatException, IOException {
@@ -1189,6 +1198,11 @@ public class Menu {
 		String job = reader.readLine();
 		if (job.equals("")) {
 			job = null;
+		}
+		System.out.print("Insert disease: ");
+		String disease = reader.readLine();
+		if (disease.equals("")) {
+			disease = null;
 		}
 		System.out.print("Insert extern company: ");
 		String externCompany = reader.readLine();
