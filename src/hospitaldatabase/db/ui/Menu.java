@@ -997,7 +997,9 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		int userId = dbman.getUserFromPatient(id);
 		dbman.deletePatient(id);
+		dbman.disconnect();
 		userman.deleteUser(userId);
+		dbman.connect();
 	}
 
 	private static void setPatient() throws NumberFormatException, IOException {
@@ -1118,7 +1120,9 @@ public class Menu {
 		int id = Integer.parseInt(reader.readLine());
 		int userId = dbman.getUserFromWorker(id);
 		dbman.deleteWorker(id);
+		dbman.disconnect();
 		userman.deleteUser(userId);
+		dbman.connect();
 	}
 
 	private static void setWorker() throws NumberFormatException, IOException {

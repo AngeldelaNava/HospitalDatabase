@@ -1,0 +1,5 @@
+This week we expected to finish the implement of the two password new methods, fix the diagram mistakes and make the presentation.
+======================================
+This week we finished the application.
+======================================
+Next 4 days we will fix the diagrams and make the final presentation.
