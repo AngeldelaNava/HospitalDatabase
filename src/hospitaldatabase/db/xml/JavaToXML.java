@@ -27,16 +27,21 @@ public class JavaToXML {
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file = new File("./XML/MedicalHistory.xml");
 			file.createNewFile();
+			Patient paciente = manager.getPatient(1);
+			marshaller.marshal(paciente, file);
+			/*
+			File file = new File("./XML/MedicalHistory.xml");
+			file.createNewFile();
 			//List<Patient> listPats = new List<Patient>(manager.checkListOfPatients());
 			Query q1 = em.createNativeQuery("SELECT * FROM patients", Patient.class);
 			List<Patient> resultList = (List<Patient>) q1.getResultList();
 			List<Patient> listPats = resultList;
-			marshaller.marshal(listPats, file);
+			marshaller.marshal(listPats, file); 
+			*/
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	}
-		
+	}	
 	
 	/*private static void printPatients() {
 		Query q1 = em.createNativeQuery("SELECT * FROM patients", Patient.class);
