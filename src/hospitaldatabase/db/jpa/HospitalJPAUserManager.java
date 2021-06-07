@@ -95,7 +95,6 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 
 	@Override
 	public List<User> getAdmins() {
-		// TODO Auto-generated method stub
 		Query q = em.createNativeQuery("SELECT u.* FROM User AS u JOIN Role AS r ON u.role_id = r.id WHERE r.name LIKE ?", User.class);
 		q.setParameter(1, "administrator");
 		return (List<User>) q.getResultList();
@@ -104,7 +103,6 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 
 	@Override
 	public User changePassword(int id, String password) {
-		// TODO Auto-generated method stub
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(password.getBytes());
@@ -125,7 +123,6 @@ public class HospitalJPAUserManager implements HospitalUserManager {
 
 	@Override
 	public void deleteUser(int userId) {
-		// TODO Auto-generated method stub
 		Query q = em.createNativeQuery("SELECT * FROM User WHERE ID = ?", User.class);
 		q.setParameter(1, userId);
 		User u = (User) q.getSingleResult();

@@ -53,165 +53,11 @@ public class Menu {
 			}
 		}while(true);
 		
-		/*do {
-			System.out.println("Choose an option:");
-			System.out.println("1. Add a worker");
-			System.out.println("2. Search worker by id");
-			System.out.println("3. Search worker by name");
-			System.out.println("4. Edit worker information and data");
-			System.out.println("5. Delete worker");
-			System.out.println("6. Add a contract");
-			System.out.println("7. Search contract by id");
-			System.out.println("8. Add a patient");
-			System.out.println("9. Search patient by id");
-			System.out.println("10. Search patient by name");
-			System.out.println("11. Read all patients data");
-			System.out.println("12. Edit patient data");
-			System.out.println("13. Delete patient");
-			System.out.println("14. Add an appointment");
-			System.out.println("15. Search appointment by id");
-			System.out.println("16. Search appointment by date and time");
-			System.out.println("17. Search appointment by date");
-			System.out.println("18. Search appointment by type");
-			System.out.println("19. Edit appointment data");
-			System.out.println("20. Delete appointment");
-			System.out.println("21. Search the project from a worker");
-			System.out.println("22. Add/edit a worker's project");
-			System.out.println("23. Delete a worker's project");
-			System.out.println("24. Add a disease");
-			System.out.println("25. Search disease by id");
-			System.out.println("26. Search disease by name");
-			System.out.println("27. Search disease by patient");
-			System.out.println("28. Edit disease data");
-			System.out.println("29. Delete disease");
-			System.out.println("30. Relate a patient with a worker");
-			System.out.println("31. Relate a disease with a worker");
-			System.out.println("32. Relate an appointment with a worker");
-			System.out.println("33. Relate a patient with a disease");
-			System.out.println("34. Relate a worker with a contract");
-			System.out.println("35. Relate a patient with an appointment");
-			System.out.println("0. Exit");
-			int choice = Integer.parseInt(reader.readLine());
-			switch (choice) {
-			case 1:
-				addWorker();
-				break;
-			case 2:
-				searchWorkerByID();
-				break;
-			case 3:
-				searchWorkerByName();
-				break;
-			case 4:
-				setWorker();
-				break;
-			case 5:
-				deleteWorker();
-				break;
-			case 6:
-				addContract();
-				break;
-			case 7:
-				searchContractByID();
-				break;
-			case 8:
-				addPatient();
-				break;
-			case 9:
-				searchPatientByID();
-				break;
-			case 10:
-				searchPatientByName();
-				break;
-			case 11:
-				readAllPatientsData();
-				break;
-			case 12:
-				setPatient();
-				break;
-			case 13:
-				deletePatient();
-				break;
-			case 14:
-				addAppointment();
-				break;
-			case 15:
-				searchAppointmentByID();
-				break;
-			case 16:
-				searchAppointmentByDateAndTime();
-				break;
-			case 17:
-				searchAppointmentByDate();
-				break;
-			case 18:
-				searchAppointmentByType();
-				break;
-			case 19:
-				setAppointment();
-				break;
-			case 20:
-				deleteAppointment();
-				break;
-			case 21:
-				searchProject();
-				break;
-			case 22:
-				setProject();
-				break;
-			case 23:
-				deleteProject();
-				break;
-			case 24:
-				addDisease();
-				break;
-			case 25:
-				searchDiseaseByID();
-				break;
-			case 26:
-				searchDiseaseByName();
-				break;
-			case 27:
-				searchDiseaseByPatient();
-				break;
-			case 28:
-				setDisease();
-				break;
-			case 29:
-				deleteDisease();
-				break;
-			case 30:
-				relationPatientWorker();
-				break;
-			case 31:
-				relationDiseaseWorker();
-				break;
-			case 32:
-				relationAppointmentWorker();
-				break;
-			case 33:
-				relationPatientDisease();
-				break;
-			case 34:
-				relationWorkerContract();
-				break;
-			case 35:
-				relationPatientAppointment();
-				break;
-			case 0:
-				dbman.disconnect();
-				userman.disconnect();
-				System.exit(0);
-				break;
-			default:
-				break;
-			}
-		} while(true);*/
+		
 
 	}
 
 	private static void login() throws IOException {
-		// TODO Auto-generated method stub
 		System.out.print("Please, introduce your email address: ");
 		String email = reader.readLine();
 		System.out.print("Please, introduce your password: ");
@@ -231,7 +77,6 @@ public class Menu {
 	}
 
 	private static void patientMenu(User user) throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		do {
 			System.out.println("Choose an option:");
 			System.out.println("1. Check my data");
@@ -262,18 +107,15 @@ public class Menu {
 	}
 
 	private static void checkMyMedicalHistory(Integer userId) {
-		// TODO Auto-generated method stub
 		Patient p= dbman.getPatientByUserId(userId);
 		System.out.println(p.getDiseases());
 		}
 
 	private static void checkPersonalPatientData(Integer userId) {
-		// TODO Auto-generated method stub
 		System.out.println(dbman.getPatientByUserId(userId));
 	}
 
 	private static void hospitalStaffMenu(User user) {
-		// TODO Auto-generated method stub
 		int choice = -1;
 		do {
 			try {
@@ -351,13 +193,11 @@ public class Menu {
 	}
 
 	private static void getPersonalWorkerData(int userId) {
-		// TODO Auto-generated method stub
 		//System.out.println(dbman.getWorkerByUserId(userId));
 		System.out.println(dbman.getContractByWorker(dbman.getWorkerByUserId(userId).getId()));
 	}
 
 	private static void biomedicalEngineerMenu(User user) {
-		// TODO Auto-generated method stub
 		int choice = -1;
 		do {
 			try {
@@ -411,19 +251,16 @@ public class Menu {
 	}
 
 	private static void deleteMyProject(Integer userId) {
-		// TODO Auto-generated method stub
 		Worker w = dbman.getWorkerByUserId(userId);
 		dbman.deleteProject(w.getId());
 	}
 
 	private static void checkMyProject(Integer userId) {
-		// TODO Auto-generated method stub
 		Worker w = dbman.getWorkerByUserId(userId);
 		System.out.println(dbman.getProject(w.getId()));
 	}
 
 	private static void addPersonalProject(Integer userId) throws IOException {
-		// TODO Auto-generated method stub
 		Worker w = dbman.getWorkerByUserId(userId);
 		System.out.print("Introduce new project: ");
 		String project = reader.readLine();
@@ -431,7 +268,6 @@ public class Menu {
 	}
 
 	private static void adminMenu(User user) {
-		// TODO Auto-generated method stub
 		int choice = -1;
 		do {
 			try {
@@ -603,13 +439,11 @@ public class Menu {
 	}
 	
 	private static void listWorkers() {
-		// TODO Auto-generated method stub
 		List <Worker> workers = dbman.searchWorkerByName("");
 		System.out.println(workers);
 	}
 
 	private static void registerWorker() throws IOException, NoSuchAlgorithmException {
-		// TODO Auto-generated method stub
 		System.out.print("Please write your email address: ");
 		String email = reader.readLine();
 		String password = generatePassword();
@@ -658,7 +492,6 @@ public class Menu {
 	}
 
 	private static User changePassword(User user) throws IOException {
-		// TODO Auto-generated method stub
 		String password, passwordAgain;
 		do {
 			System.out.print("Introduce the new password: ");
@@ -679,7 +512,6 @@ public class Menu {
 	}
 
 	private static void relationPatientAppointment() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
 			System.out.println(patients.get(i));
@@ -696,7 +528,6 @@ public class Menu {
 	}
 
 	private static void relationWorkerContract() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Worker> workers = dbman.searchWorkerByName("");
 		for(int i = 0; i < workers.size(); i++) {
 			System.out.println(workers.get(i));
@@ -713,7 +544,6 @@ public class Menu {
 	}
 
 	private static void relationPatientDisease() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
 			System.out.println(patients.get(i));
@@ -730,7 +560,6 @@ public class Menu {
 	}
 
 	private static void relationAppointmentWorker() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Appointment> appointments = dbman.searchAppointmentByType("");
 		for(int i = 0; i < appointments.size(); i++) {
 			System.out.println(appointments.get(i));
@@ -747,7 +576,6 @@ public class Menu {
 	}
 
 	private static void relationDiseaseWorker() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Disease> diseases = dbman.searchDiseaseByName("");
 		for(int i = 0; i < diseases.size(); i++) {
 			System.out.println(diseases.get(i));
@@ -764,7 +592,6 @@ public class Menu {
 	}
 
 	private static void relationPatientWorker() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
 			System.out.println(patients.get(i));
@@ -811,7 +638,6 @@ public class Menu {
 	}
 
 	private static void checkPatientMedicalHistory() throws NumberFormatException, IOException {
-		// TODO Auto-generated method stub
 		List<Patient> patients = dbman.checkListOfPatients();
 		for(int i = 0; i < patients.size(); i++) {
 			System.out.println("Id: " +patients.get(i).getId()+ ". Name: "+ patients.get(i).getName()+ ". Project: "+ patients.get(i).getDiseases());

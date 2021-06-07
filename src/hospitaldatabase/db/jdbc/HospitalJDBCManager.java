@@ -787,7 +787,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationPatientWorker(int patientId, int workerId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "INSERT INTO PatientWorker (patientId, workerId) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -802,7 +801,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationDiseaseWorker(int diseaseId, int workerId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "INSERT INTO DiseaseWorker (diseaseId, workerId) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -817,7 +815,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationAppointentWorker(int appointmentId, int workerId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "INSERT INTO AppointmentWorker (appointmentId, workerId) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -832,7 +829,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationPatientDisease(int patientId, int diseaseId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "INSERT INTO PatientDisease (patientId, diseaseId) VALUES (?, ?)";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -847,7 +843,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationWorkerContract(int workerId, int contractId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "UPDATE Contract SET staffId = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -862,7 +857,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public void relationPatientAppointment(int patientId, int appointmentId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "UPDATE Appointment SET patientId = ? WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -877,7 +871,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public List<Contract> listAllContracts() {
-		// TODO Auto-generated method stub
 		List<Contract> contracts = new ArrayList<Contract>();
 		try {
 			String sql = "SELECT * FROM Contract";
@@ -894,7 +887,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public int getUserFromWorker(int workerId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "SELECT userId FROM Worker WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -912,7 +904,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public Integer getUserFromPatient(int patientId) {
-		// TODO Auto-generated method stub
 		try {
 			String sql = "SELECT userId FROM Patient WHERE id = ?";
 			PreparedStatement prep = c.prepareStatement(sql);
@@ -929,7 +920,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public Patient getPatientByUserId(int userId) {
-		// TODO Auto-generated method stub
 		Patient p= null;
 		try {
 			String sql = "SELECT * FROM Patient WHERE userId = ?";
@@ -962,7 +952,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public Worker getWorkerByUserId(int userId) {
-		// TODO Auto-generated method stub
 		Worker w = null;
 		try {
 			String sql = "SELECT * FROM Worker WHERE userId = ?";
@@ -1012,7 +1001,6 @@ public class HospitalJDBCManager implements HospitalDBManager {
 
 	@Override
 	public Contract getContractByWorker(int workerId) {
-		// TODO Auto-generated method stub
 		Contract ct = null;
 		try {
 			String sql = "SELECT * FROM Contract WHERE staffId = ?";
