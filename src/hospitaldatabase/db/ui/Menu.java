@@ -1204,11 +1204,7 @@ public class Menu {
 		if (job.equals("")) {
 			job = null;
 		}
-		System.out.print("Insert disease: ");
-		String disease = reader.readLine();
-		if (disease.equals("")) {
-			disease = null;
-		}
+
 		System.out.print("Insert extern company: ");
 		String externCompany = reader.readLine();
 		if (externCompany.equals("")) {
